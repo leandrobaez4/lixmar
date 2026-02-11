@@ -90,6 +90,7 @@ body {
 
 .nav-main {
     display: flex;
+    align-items: center;
     gap: 40px;
     flex: 1;
     margin-left: 40px;
@@ -117,6 +118,8 @@ body {
 /* Dropdown Menu Styles */
 .nav-item {
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .nav-dropdown {
