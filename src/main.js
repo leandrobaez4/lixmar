@@ -3,7 +3,58 @@
 document.addEventListener('DOMContentLoaded', function() {
     initializeEventListeners();
     initializeCart();
+    initializeMobileMenu();
 });
+
+// Inicializar menú móvil
+function initializeMobileMenu() {
+    const mobileToggle = document.querySelector('.mobile-menu-toggle');
+    const navMain = document.querySelector('.nav-main');
+    const navItems = document.querySelectorAll('.nav-item');
+
+    if (mobileToggle && navMain) {
+        // Toggle menú móvil
+        mobileToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            this.classList.toggle('active');
+            navMain.classList.toggle('mobile-open');
+            document.body.style.overflow = navMain.classList.contains('mobile-open') ? 'hidden' : '';
+        });
+
+        // Toggle submenús en móvil
+        navItems.forEach(item => {
+            const dropdownLink = item.querySelector('.nav-link.dropdown');
+            if (dropdownLink) {
+                dropdownLink.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        item.classList.toggle('submenu-open');
+                    }
+                });
+            }
+        });
+
+        // Cerrar menú al hacer click fuera
+        document.addEventListener('click', function(e) {
+            if (navMain.classList.contains('mobile-open') && 
+                !navMain.contains(e.target) && 
+                !mobileToggle.contains(e.target)) {
+                mobileToggle.classList.remove('active');
+                navMain.classList.remove('mobile-open');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Cerrar menú al redimensionar ventana
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768 && navMain.classList.contains('mobile-open')) {
+                mobileToggle.classList.remove('active');
+                navMain.classList.remove('mobile-open');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+}
 
 // Inicializar event listeners
 function initializeEventListeners() {
@@ -65,12 +116,18 @@ function initializeCart() {
 function updateCartCount() {
     const cart = JSON.parse(localStorage.getItem('lixmarCart')) || [];
     const cartButton = document.querySelector('.btn-cart');
+    const cartCount = document.querySelector('.cart-count');
     
-    if (cart.length > 0) {
-        let count = cart.length;
-        cartButton.textContent = `🛒 (${count})`;
-    } else {
-        cartButton.textContent = '🛒';
+    if (cartCount) {
+        cartCount.textContent = cart.length;
+    }
+    
+    if (cartButton) {
+        if (cart.length > 0) {
+            cartButton.textContent = `🛒 (${cart.length})`;
+        } else {
+            cartButton.textContent = '🛒';
+        }
     }
 }
 
