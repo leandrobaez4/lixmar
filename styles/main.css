@@ -285,14 +285,7 @@ body {
     }
     
     .search-bar-section.search-bar-section--figma .nav-style3-benefits {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
-    
-    .search-bar-section.search-bar-section--figma .nav-style3-benefit {
-        font-size: 10px;
-        text-align: center;
+        display: none;
     }
 }
 
