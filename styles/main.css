@@ -245,6 +245,25 @@ body {
     content: ' ▼';
 }
 
+/* Tablet: benefits debajo del search */
+@media (max-width: 1260px) and (min-width: 769px) {
+    .search-bar-section.search-bar-section--figma .nav-style3-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .search-bar-section.search-bar-section--figma .nav-style3-search {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .search-bar-section.search-bar-section--figma .nav-style3-benefits,
+    .benefits-row.nav-style3-benefits {
+        justify-content: center;
+        width: 100%;
+    }
+}
+
 @media (max-width: 768px) {
     .mobile-menu-toggle {
         display: block;
@@ -285,8 +304,43 @@ body {
     }
     
     .search-bar-section.search-bar-section--figma .nav-style3-benefits,
+    .benefits-row.nav-style3-benefits,
     .benefits-row {
+        display: none !important;
+    }
+}
+
+/* Extra small: search más compacto */
+@media (max-width: 615px) {
+    .search-bar-section.search-bar-section--figma {
+        margin: 5px;
+        padding: 8px;
+    }
+    
+    .search-bar-section.search-bar-section--figma .nav-style3-search {
+        min-width: 0;
+        width: 100%;
+        height: 38px;
+        flex-wrap: nowrap;
+    }
+    
+    .search-bar-section.search-bar-section--figma .nav-style3-dropdown {
         display: none;
+    }
+    
+    .search-bar-section.search-bar-section--figma .nav-style3-input {
+        flex: 1;
+        min-width: 0;
+        height: 38px;
+        font-size: 12px;
+        padding: 0 10px;
+        border-radius: 30px 0 0 30px;
+    }
+    
+    .search-bar-section.search-bar-section--figma .nav-style3-searchbtn {
+        height: 38px;
+        padding: 0 15px;
+        border-radius: 0 30px 30px 0;
     }
 }
 
@@ -414,7 +468,7 @@ body {
     overflow: hidden;
     background: white;
     flex: 0 0 auto;
-    min-width: 520px;
+
 }
 
 .search-bar-section.search-bar-section--figma .nav-style3-dropdown {
