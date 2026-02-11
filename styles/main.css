@@ -284,7 +284,8 @@ body {
         padding: 0 12px;
     }
     
-    .search-bar-section.search-bar-section--figma .nav-style3-benefits {
+    .search-bar-section.search-bar-section--figma .nav-style3-benefits,
+    .benefits-row {
         display: none;
     }
 }
@@ -3715,7 +3716,7 @@ body {
     }
 
     .benefits-row {
-        grid-template-columns: 1fr;
+        display: none;
     }
 
     .newsletter-form {
