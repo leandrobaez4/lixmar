@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>LIXMAR - Header Demo</title>
+	<link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+	<!-- Opciones adicionales -->
+	<div class="header-container" style="margin-top:10px;align-items:center;gap:20px;background:#ffffff;">
+		<div style="background:#ffffff;border-radius:6px;padding:4px 16px;display:flex;align-items:center;gap:8px;font-size:12px;">
+			<span style="font-weight:bold;font-size:14px;">🎤</span> OFERTAS 24/7
+		</div>
+		<div style="font-size:14px;">Vender en Lixmar</div>
+		<div style="font-size:14px;">Orden de Seguimiento</div>
+		<div style="display:flex;align-items:center;gap:8px;">
+			<span style="font-size:14px;">💲ARG</span>
+			<img src="https://www.figma.com/api/mcp/asset/5f8d6a42-6063-48eb-ab75-2746a2c0e657" alt="ENG" style="width:15px;height:15px;">
+			<span style="font-size:14px;">Esp</span>
+		</div>
+	</div>
+
+	<!-- Header Principal -->
+	<header class="header">
+		<div class="header-container">
+			<!-- Logo -->
+			<div class="header-left">
+				<img src="https://www.figma.com/api/mcp/asset/77526e53-e478-499c-ab2b-389155dfcfa1" alt="Logo" style="width:45px;height:45px;border-radius:11px;margin-right:10px;">
+				<span class="logo"><span style="color:#ff6a00;">LIX</span>MAR</span>
+			</div>
+
+			<!-- Navegación principal -->
+			<nav class="nav-main">
+				<a href="#" class="nav-link dropdown">INICIO</a>
+				<a href="#" class="nav-link dropdown">PÁGINAS</a>
+				<a href="#" class="nav-link dropdown">PRODUCTOS</a>
+				<a href="#" class="nav-link">CONTACTO</a>
+			</nav>
+
+			<!-- Acciones y usuario -->
+			<div class="header-right">
+				<button class="btn-icon" title="Notificaciones" style="background:orange;color:#fff;">
+					<img src="https://www.figma.com/api/mcp/asset/12c3182a-7ede-4e75-8f0b-0d1e7c26dbfd" alt="Notificación" style="width:17px;height:17px;">
+				</button>
+				<button class="btn-icon" title="Icono especial" style="background:orange;">
+					<img src="https://www.figma.com/api/mcp/asset/56b63bf3-a6cf-4586-8932-809b0e773911" alt="Icon" style="width:22px;height:22px;">
+				</button>
+				<button class="btn-icon" title="Usuario" style="background:#fff;">
+					<img src="https://www.figma.com/api/mcp/asset/6c05cca3-68d9-46d9-9ef6-3df5ee267521" alt="Usuario" style="width:41px;height:41px;">
+				</button>
+				<div class="account-menu">
+					<span class="account-label">BIENVENIDO!</span>
+					<a href="#">Entrar / Registrarse</a>
+				</div>
+				<div class="cart-btn">
+					<button class="btn-icon" style="background:orange;position:relative;">
+						<img src="https://www.figma.com/api/mcp/asset/45ae75aa-0218-43d8-8494-bc41d257db10" alt="Carrito" style="width:23px;height:23px;">
+						<span class="cart-count">5</span>
+					</button>
+					<div class="cart-price">CARRITO<br><span class="cart-total">$1.689.000</span></div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<!-- Barra de búsqueda y beneficios (Figma: 1:348) -->
+	<section class="search-bar-section search-bar-section--figma" data-node-id="1:348">
+		<div class="header-container">
+			<div class="nav-style3-row">
+				<div class="nav-style3-search" data-node-id="1:349">
+					<button class="dropdown-btn nav-style3-dropdown" type="button" data-node-id="1:350">
+						<span>Categorías</span>
+						<img src="https://www.figma.com/api/mcp/asset/af391325-c6eb-4fe0-bd4d-547a3fab74f3" alt="" class="nav-style3-caret" data-node-id="1:352">
+					</button>
+					<input class="search-input nav-style3-input" type="text" placeholder="Buscar Productos, Marcas y Más!" data-node-id="1:356">
+					<button class="search-btn nav-style3-searchbtn" type="button" aria-label="Buscar" data-node-id="1:359">🔍</button>
+				</div>
+
+				<div class="benefits-row nav-style3-benefits">
+					<div class="benefit nav-style3-benefit" data-node-id="1:361"> ENVÍO GRATIS SUPERANDO LOS<br><strong>$50.000,00</strong></div>
+					<div class="benefit nav-style3-benefit" data-node-id="1:363"> 30 DÍAS DE DEVOLUCIÓN<br><strong>DE DINERO</strong></div>
+					<div class="benefit nav-style3-benefit" data-node-id="1:365">s PAGO<br><strong>100% SEGURO</strong></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<main class="container" style="padding: 20px 0 50px;">
+		<!-- Layout principal: Sidebar + Sliders (Figma: 1:366, 1:430, 1:445, 1:449, 1:454, 1:460) -->
+		<section class="lixmar-hero-grid">
+			<aside class="categories-sidebar categories-sidebar--figma" data-node-id="1:366" aria-label="Categorías">
+				<div class="sidebar-header sidebar-header--figma">
+					<h3>SALE 40% OFF</h3>
+				</div>
+				<ul class="categories-list categories-list--figma">
+					<li><a class="figma-cat-link" href="#"><span class="figma-cat-left">Laptops</span><span class="figma-cat-chevron" aria-hidden="true">›</span></a></li>
+					<li><a class="figma-cat-link" href="#"><span class="figma-cat-left">Computadoras</span><span class="figma-cat-chevron" aria-hidden="true">›</span></a></li>
+					<li><a class="figma-cat-link" href="#"><span class="figma-cat-left">Celulares</span><span class="figma-cat-chevron" aria-hidden="true">›</span></a></li>
+					<li><a class="figma-cat-link" href="#"><span class="figma-cat-left">Tablets</span><span class="figma-cat-chevron" aria-hidden="true">›</span></a></li>
+					<li><a class="figma-cat-link" href="#"><span class="figma-cat-left">Gaming &amp; VR</span><span class="figma-cat-chevron" aria-hidden="true">›</span></a></li>
+					<li><a class="figma-cat-link" href="#"><span class="figma-cat-left">Trabajo</span><span class="figma-cat-chevron" aria-hidden="true">›</span></a></li>
+					<li><a class="figma-cat-link" href="#"><span class="figma-cat-left">Cámaras</span><span class="figma-cat-chevron" aria-hidden="true">›</span></a></li>
+					<li><a class="figma-cat-link" href="#"><span class="figma-cat-left">Sonido</span><span class="figma-cat-chevron" aria-hidden="true">›</span></a></li>
+					<li><a class="figma-cat-link" href="#"><span class="figma-cat-left">Oficina</span><span class="figma-cat-chevron" aria-hidden="true">›</span></a></li>
+					<li><a class="figma-cat-link" href="#"><span class="figma-cat-left">Almacenamiento, USB</span><span class="figma-cat-chevron" aria-hidden="true">›</span></a></li>
+					<li><a class="figma-cat-link" href="#"><span class="figma-cat-left">Accesorios</span><span class="figma-cat-chevron" aria-hidden="true">›</span></a></li>
+					<li><a class="figma-cat-link" href="#"><span class="figma-cat-left">Hogar</span><span class="figma-cat-chevron" aria-hidden="true">›</span></a></li>
+				</ul>
+			</aside>
+
+			<div class="lixmar-hero-sliders" aria-label="Promociones">
+				<div class="lixmar-slider-card" data-node-id="1:430">
+					<img src="https://www.figma.com/api/mcp/asset/54475d35-881e-43ed-901a-dae62f2dc97c" alt="Promoción" loading="lazy">
+				</div>
+				<div class="lixmar-slider-thumb lixmar-slider-thumb--top" data-node-id="1:454">
+					<img src="https://www.figma.com/api/mcp/asset/013c35fb-526f-42ed-ad2d-ace5983be259" alt="Promoción" loading="lazy">
+				</div>
+				<div class="lixmar-slider-pair">
+					<div class="lixmar-slider-thumb" data-node-id="1:445"><img src="https://www.figma.com/api/mcp/asset/e08695ae-2b66-4cab-a570-43f3ac8b97ba" alt="Promoción" loading="lazy"></div>
+					<div class="lixmar-slider-thumb" data-node-id="1:449"><img src="https://www.figma.com/api/mcp/asset/d6cfe81c-8d1d-41c3-a8c7-6a06ba568e63" alt="Promoción" loading="lazy"></div>
+				</div>
+				<div class="lixmar-slider-thumb" data-node-id="1:460">
+					<img src="https://www.figma.com/api/mcp/asset/5ef87513-67e5-4eb7-980b-efe3a4f99d38" alt="Promoción" loading="lazy">
+				</div>
+			</div>
+		</section>
+
+		<div class="lixmar-two-col-sections">
+			<!-- Marcas destacadas (Figma: 1:464) -->
+			<section class="lixmar-section-card" data-node-id="1:464">
+				<div class="lixmar-section-head">
+					<h2 class="lixmar-section-title">MARCAS DESTACADAS</h2>
+					<a class="lixmar-section-link" href="#">VER TODO <span aria-hidden="true">›</span></a>
+				</div>
+				<div class="lixmar-brands-grid">
+					<a class="lixmar-brand" href="#" data-node-id="1:468"><img src="https://www.figma.com/api/mcp/asset/fbf36f92-a37a-4b49-b7db-7c469c5454ed" alt="Marca" loading="lazy"></a>
+					<a class="lixmar-brand" href="#" data-node-id="1:469"><img src="https://www.figma.com/api/mcp/asset/8f79acbb-7734-4c50-86b0-79707340f564" alt="Marca" loading="lazy"></a>
+					<a class="lixmar-brand" href="#" data-node-id="1:470"><img src="https://www.figma.com/api/mcp/asset/8d93e3d7-6035-4d03-94fd-10fbb7e2ae94" alt="Marca" loading="lazy"></a>
+					<a class="lixmar-brand" href="#" data-node-id="1:471"><img src="https://www.figma.com/api/mcp/asset/78304396-fad0-482f-9d8f-60bb18dd141f" alt="Marca" loading="lazy"></a>
+					<a class="lixmar-brand" href="#" data-node-id="1:472"><img src="https://www.figma.com/api/mcp/asset/3a3579a0-0a2c-4fd4-a5b2-8434e94cdc7a" alt="Marca" loading="lazy"></a>
+					<a class="lixmar-brand" href="#" data-node-id="1:473"><img src="https://www.figma.com/api/mcp/asset/c13bb39d-a067-4429-adff-1d665c118169" alt="Marca" loading="lazy"></a>
+					<a class="lixmar-brand" href="#" data-node-id="1:474"><img src="https://www.figma.com/api/mcp/asset/72453d7e-9fe8-4b34-aeb1-18b49093aecf" alt="Marca" loading="lazy"></a>
+					<a class="lixmar-brand" href="#" data-node-id="1:475"><img src="https://www.figma.com/api/mcp/asset/720444a4-2084-4c91-83ba-bad98fe40624" alt="Marca" loading="lazy"></a>
+					<a class="lixmar-brand" href="#" data-node-id="1:476"><img src="https://www.figma.com/api/mcp/asset/4bb66763-75c9-4a18-a4ab-1bf211d8ae01" alt="Marca" loading="lazy"></a>
+					<a class="lixmar-brand" href="#" data-node-id="1:477"><img src="https://www.figma.com/api/mcp/asset/2c4a88eb-3890-4f16-a6cc-56d33b3f4052" alt="Marca" loading="lazy"></a>
+				</div>
+			</section>
+            <!-- Categorías principales (Figma: 1:478) -->
+			<section class="lixmar-section-card" data-node-id="1:478">
+				<div class="lixmar-section-head">
+					<h2 class="lixmar-section-title">CATEGORÍAS PRINCIPALES</h2>
+					<a class="lixmar-section-link" href="#">VER TODO <span aria-hidden="true">›</span></a>
+				</div>
+				<div class="lixmar-main-categories">
+					<a class="lixmar-main-category" href="#" data-node-id="1:487">
+						<img src="https://www.figma.com/api/mcp/asset/66f5d771-9844-4a69-b629-0012405254ec" alt="Laptops" loading="lazy">
+						<span>Laptops</span>
+					</a>
+					<a class="lixmar-main-category" href="#" data-node-id="1:489">
+						<img src="https://www.figma.com/api/mcp/asset/d87838a1-c55a-4ac9-83eb-e5084994e401" alt="PC Gaming" loading="lazy">
+						<span>PC Gaming</span>
+					</a>
+					<a class="lixmar-main-category" href="#" data-node-id="1:491">
+						<img src="https://www.figma.com/api/mcp/asset/5516f4bb-aa4b-44b9-a9c9-fed59b22df03" alt="Auriculares" loading="lazy">
+						<span>Auriculares</span>
+					</a>
+					<a class="lixmar-main-category" href="#" data-node-id="1:493">
+						<img src="https://www.figma.com/api/mcp/asset/0e813832-0f6e-4503-a605-a649c57d8f49" alt="Monitores" loading="lazy">
+						<span>Monitores</span>
+					</a>
+				</div>
+			</section>
+		</div>
+
+		<!-- Ofertas del día (Figma: 1:495) -->
+		<section class="lixmar-offers-header" data-node-id="1:495" aria-label="Ofertas del día">
+			<h2 class="lixmar-offers-header__title" data-node-id="1:496">OFERTAS DEL DIA</h2>
+			<a class="lixmar-offers-header__link" href="#" aria-label="Ver todo" data-node-id="1:497">Ver Todo <span aria-hidden="true" data-node-id="1:498">›</span></a>
+		</section>
+
+		<!-- Card oferta (Figma: 1:499) -->
+		<section class="lixmar-offer-card" data-node-id="1:499" aria-label="Oferta destacada">
+			<div class="lixmar-offer-layout">
+				<div class="lixmar-offer-main">
+					<div class="lixmar-offer-media" data-node-id="1:500">
+						<div class="lixmar-offer-thumbs" data-node-id="1:501" aria-label="Miniaturas">
+							<button class="lixmar-offer-thumb is-active" type="button" aria-label="Imagen 1" data-node-id="1:502">
+								<img src="https://www.figma.com/api/mcp/asset/523f49f5-e31f-475a-8567-57a1ff15c31e" alt="" loading="lazy">
+							</button>
+							<button class="lixmar-offer-thumb" type="button" aria-label="Imagen 2" data-node-id="1:503">
+								<img src="https://www.figma.com/api/mcp/asset/5a6a26b5-41ac-46b5-8967-ed42e864084d" alt="" loading="lazy">
+							</button>
+							<button class="lixmar-offer-thumb" type="button" aria-label="Imagen 3" data-node-id="1:504">
+								<img src="https://www.figma.com/api/mcp/asset/d39222b4-e77f-4efe-93d0-a17ed81b64a4" alt="" loading="lazy">
+							</button>
+							<button class="lixmar-offer-thumb" type="button" aria-label="Imagen 4" data-node-id="1:505">
+								<img src="https://www.figma.com/api/mcp/asset/68b29efb-483d-4123-8b63-2794d45c64f5" alt="" loading="lazy">
+							</button>
+						</div>
+
+						<div class="lixmar-offer-mainimg" data-node-id="1:506">
+							<img src="https://www.figma.com/api/mcp/asset/523f49f5-e31f-475a-8567-57a1ff15c31e" alt="Producto" loading="lazy" data-node-id="1:507">
+						</div>
+
+						<div class="lixmar-offer-save" data-node-id="1:508">
+							<div class="lixmar-offer-save__label" data-node-id="1:509">AHORRA</div>
+							<div class="lixmar-offer-save__value" data-node-id="1:510">$199.000</div>
+						</div>
+					</div>
+
+					<div class="lixmar-offer-details">
+						<div class="lixmar-offer-rating" data-node-id="1:513" aria-label="5 estrellas">★★★★★</div>
+						<h3 class="lixmar-offer-title" data-node-id="1:515">Xiaomi Redmi Note 11 Pro 256GB 2026, Black</h3>
+						<div class="lixmar-offer-price-row">
+							<span class="lixmar-offer-price" data-node-id="1:516">$569.000</span>
+							<span class="lixmar-offer-price-old" data-node-id="1:517">$759.000</span>
+						</div>
+
+						<ul class="lixmar-offer-features" aria-label="Características">
+							<li data-node-id="1:519">Intel LGA 1700 Socket: Soporta 13th &amp; 12th Gen Intel Core</li>
+							<li data-node-id="1:521">DDR5 Compatible: 4*SMD DIMMs con memoria XMP 3.0</li>
+							<li data-node-id="1:523">Diseño de potencia dominante: Twin 16+1+2 fases Digital VRM</li>
+						</ul>
+
+						<div class="lixmar-offer-badges">
+							<span class="lixmar-badge lixmar-badge--green" data-node-id="1:524">ENVÍO GRATIS</span>
+							<span class="lixmar-badge lixmar-badge--red" data-node-id="1:526">REGALO GRATIS</span>
+						</div>
+
+						<div class="lixmar-offer-timer-row">
+							<div class="lixmar-offer-timer-label" data-node-id="1:528">PROMOCIÓN<br>EXPIRA EN</div>
+							<div class="lixmar-offer-timer" aria-label="Cuenta regresiva">
+								<div class="lixmar-timer-box" data-node-id="1:529"><span class="lixmar-timer-num" data-node-id="1:530">7</span><span class="lixmar-timer-unit" data-node-id="1:531">d</span></div>
+								<div class="lixmar-timer-box" data-node-id="1:532"><span class="lixmar-timer-num" data-node-id="1:533">3</span><span class="lixmar-timer-unit" data-node-id="1:534">h</span></div>
+								<div class="lixmar-timer-box" data-node-id="1:535"><span class="lixmar-timer-num" data-node-id="1:536">11</span><span class="lixmar-timer-unit" data-node-id="1:537">m</span></div>
+								<div class="lixmar-timer-box" data-node-id="1:538"><span class="lixmar-timer-num" data-node-id="1:539">37</span><span class="lixmar-timer-unit" data-node-id="1:540">s</span></div>
+							</div>
+						</div>
+
+						<div class="lixmar-offer-progress" data-node-id="1:541">
+							<div class="lixmar-progress-bar" data-node-id="1:542" role="progressbar" aria-valuemin="0" aria-valuemax="75" aria-valuenow="26">
+								<div class="lixmar-progress-fill" data-node-id="1:543" style="width: 34.7%;"></div>
+							</div>
+							<div class="lixmar-offer-sold" data-node-id="1:544">Vendido: <strong>26/75</strong></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="lixmar-offers-banners" aria-label="Banners">
+					<a class="lixmar-offer-banner" href="#" data-node-id="9:3221" aria-label="Banner 1">
+						<img src="https://www.figma.com/api/mcp/asset/6d5aea42-9910-4318-84ef-5bfbf904b93a" alt="" loading="lazy">
+					</a>
+					<a class="lixmar-offer-banner" href="#" data-node-id="9:3222" aria-label="Banner 2">
+						<img src="https://www.figma.com/api/mcp/asset/66d8b616-625b-467d-b7fd-f1308d39c7af" alt="" loading="lazy">
+					</a>
+					<a class="lixmar-offer-banner" href="#" data-node-id="9:3223" aria-label="Banner 3">
+						<img src="https://www.figma.com/api/mcp/asset/a84219cc-c7d5-48e5-b304-6c6db0a23dfb" alt="" loading="lazy">
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- Banner miembros (Figma: 1:545) -->
+		<section class="lixmar-members-banner" data-node-id="1:545" aria-label="Beneficio de miembros">
+			<div class="lixmar-members-banner__inner" data-node-id="2004:11">
+				<img class="lixmar-members-banner__icon" src="https://www.figma.com/api/mcp/asset/4b6901a4-f05a-4992-a01c-ecef96a0ec0f" alt="" loading="lazy" data-node-id="1:546">
+				<span class="lixmar-members-banner__text" data-node-id="1:547">Miembros Regalo</span>
+				<span class="lixmar-members-banner__text lixmar-members-banner__text--upper" data-node-id="1:548">ENVÍO GRATIS</span>
+				<span class="lixmar-members-banner__text" data-node-id="1:549">¡sin pedido mínimo!.</span>
+			</div>
+		</section>
+
+		<!-- Carrusel productos (Figma: 1:551) -->
+		<section class="lixmar-prodstrip" data-node-id="1:551" aria-label="Productos destacados">
+			<div class="lixmar-prodstrip__head">
+				<div class="lixmar-prodstrip__tabs" role="tablist" aria-label="Pestañas">
+					<button class="lixmar-prodstrip__tab is-active" type="button" role="tab" aria-selected="true" data-node-id="1:552">MAS VENDIDO</button>
+					<button class="lixmar-prodstrip__tab" type="button" role="tab" aria-selected="false" data-node-id="1:553">NUEVO</button>
+					<button class="lixmar-prodstrip__tab" type="button" role="tab" aria-selected="false" data-node-id="1:554">POPULAR</button>
+				</div>
+				<a class="lixmar-prodstrip__all" href="#" aria-label="Ver todos" data-node-id="1:555">Ver Todos <span aria-hidden="true" data-node-id="1:556">›</span></a>
+			</div>
+
+			<div class="lixmar-prodstrip__viewport" data-node-id="1:557" aria-label="Carrusel">
+				<button class="lixmar-prodstrip__nav lixmar-prodstrip__nav--prev" type="button" aria-label="Volver" data-node-id="1:638">
+					<span class="lixmar-prodstrip__navtext" data-node-id="1:639">Volver</span>
+				</button>
+				<button class="lixmar-prodstrip__nav lixmar-prodstrip__nav--next" type="button" aria-label="Siguiente" data-node-id="1:636">
+					<span class="lixmar-prodstrip__navtext" data-node-id="1:637">Siguiente</span>
+				</button>
+
+				<div class="lixmar-prodstrip__track">
+					<article class="lixmar-prodstrip__card" data-node-id="1:558" aria-label="Producto 1">
+						<a class="lixmar-prodstrip__media" href="#" data-node-id="1:559" aria-label="Ver producto">
+							<img src="https://www.figma.com/api/mcp/asset/2a375bf1-a519-4cc8-8719-9ad0815584b9" alt="" loading="lazy" data-node-id="1:560">
+						</a>
+						<div class="lixmar-prodstrip__meta">
+							<div class="lixmar-prodstrip__ratingrow">
+								<span class="lixmar-prodstrip__stars" data-node-id="1:561" aria-label="4 de 5">★★★★<span class="lixmar-prodstrip__star--muted">★</span></span>
+								<span class="lixmar-prodstrip__reviews" data-node-id="1:562">(152)</span>
+							</div>
+							<h3 class="lixmar-prodstrip__title" data-node-id="1:563">BOSO 2 Auriculares On Ear inalambricos</h3>
+							<div class="lixmar-prodstrip__price" data-node-id="1:564">$359.000</div>
+							<div class="lixmar-prodstrip__tags">
+								<span class="lixmar-prodstrip__tag lixmar-prodstrip__tag--green" data-node-id="1:565">ENVIO GRATIS</span>
+								<span class="lixmar-prodstrip__tag lixmar-prodstrip__tag--red" data-node-id="1:567">REGALO GRATIS</span>
+							</div>
+							<div class="lixmar-prodstrip__status" data-node-id="1:570"><span class="lixmar-prodstrip__statusicon lixmar-prodstrip__statusicon--ok" data-node-id="1:569">✓</span> En stock</div>
+							<div class="lixmar-prodstrip__thumbs">
+								<a class="lixmar-prodstrip__thumb is-active" href="#" aria-label="Miniatura 1" data-node-id="1:571"><img src="https://www.figma.com/api/mcp/asset/2a375bf1-a519-4cc8-8719-9ad0815584b9" alt="" loading="lazy"></a>
+								<a class="lixmar-prodstrip__thumb" href="#" aria-label="Miniatura 2" data-node-id="1:572"><img src="https://www.figma.com/api/mcp/asset/36b8a508-7e5c-4e6e-af8c-604a1e7bb8f3" alt="" loading="lazy"></a>
+							</div>
+						</div>
+					</article>
+
+					<article class="lixmar-prodstrip__card" data-node-id="1:575" aria-label="Producto 2">
+						<a class="lixmar-prodstrip__media" href="#" data-node-id="1:576" aria-label="Ver producto">
+							<span class="lixmar-prodstrip__discount" data-node-id="1:587"><span class="lixmar-prodstrip__discountlabel" data-node-id="1:588">AHORRA</span><span class="lixmar-prodstrip__discountvalue" data-node-id="1:589">$199.000</span></span>
+							<img src="https://www.figma.com/api/mcp/asset/20bc712c-d3b3-4ef4-a7f2-cbdfdddc0bb0" alt="" loading="lazy" data-node-id="1:577">
+						</a>
+						<div class="lixmar-prodstrip__meta">
+							<div class="lixmar-prodstrip__ratingrow">
+								<span class="lixmar-prodstrip__stars" data-node-id="1:578" aria-label="5 de 5">★★★★★</span>
+								<span class="lixmar-prodstrip__reviews" data-node-id="1:579">(152)</span>
+							</div>
+							<h3 class="lixmar-prodstrip__title" data-node-id="1:580">OPod Pro 12.9 Inch M1 2023, 64GB + Wifi, GPS</h3>
+							<div class="lixmar-prodstrip__pricerow">
+								<span class="lixmar-prodstrip__price lixmar-prodstrip__price--hot" data-node-id="1:581">$569.000</span>
+								<span class="lixmar-prodstrip__priceold" data-node-id="1:582">$759.000</span>
+							</div>
+							<div class="lixmar-prodstrip__tags">
+								<span class="lixmar-prodstrip__tag lixmar-prodstrip__tag--green" data-node-id="1:583">ENVIO GRATIS</span>
+							</div>
+							<div class="lixmar-prodstrip__status" data-node-id="1:586"><span class="lixmar-prodstrip__statusicon lixmar-prodstrip__statusicon--ok" data-node-id="1:585">✓</span> En stock</div>
+						</div>
+					</article>
+
+					<article class="lixmar-prodstrip__card" data-node-id="1:592" aria-label="Producto 3">
+						<a class="lixmar-prodstrip__media" href="#" data-node-id="1:593" aria-label="Ver producto">
+							<span class="lixmar-prodstrip__discount" data-node-id="1:604"><span class="lixmar-prodstrip__discountlabel" data-node-id="1:605">AHORRA</span><span class="lixmar-prodstrip__discountvalue" data-node-id="1:606">$59.000</span></span>
+							<img src="https://www.figma.com/api/mcp/asset/734dd0ec-2d6c-4c5d-8828-dcaf0d459e6c" alt="" loading="lazy" data-node-id="1:594">
+						</a>
+						<div class="lixmar-prodstrip__meta">
+							<div class="lixmar-prodstrip__ratingrow">
+								<span class="lixmar-prodstrip__stars" data-node-id="1:595" aria-label="4 de 5">★★★★<span class="lixmar-prodstrip__star--muted">★</span></span>
+								<span class="lixmar-prodstrip__reviews" data-node-id="1:596">(8)</span>
+							</div>
+							<h3 class="lixmar-prodstrip__title" data-node-id="1:597">uLosk Mini case 2.0, Xenon i10 / 32GB / SSD 512GB / VGA 8GB</h3>
+							<div class="lixmar-prodstrip__pricerow">
+								<span class="lixmar-prodstrip__price lixmar-prodstrip__price--hot" data-node-id="1:598">$1.729.000</span>
+								<span class="lixmar-prodstrip__priceold" data-node-id="1:599">$2.119.000</span>
+							</div>
+							<div class="lixmar-prodstrip__tags">
+								<span class="lixmar-prodstrip__tag lixmar-prodstrip__tag--green" data-node-id="1:600">ENVIO GRATIS</span>
+							</div>
+							<div class="lixmar-prodstrip__status" data-node-id="1:603"><span class="lixmar-prodstrip__statusicon lixmar-prodstrip__statusicon--bad" data-node-id="1:602">✕</span> Fuera de stock</div>
+						</div>
+					</article>
+
+					<article class="lixmar-prodstrip__card" data-node-id="1:609" aria-label="Producto 4">
+						<a class="lixmar-prodstrip__media" href="#" data-node-id="1:610" aria-label="Ver producto">
+							<img src="https://www.figma.com/api/mcp/asset/6018a1f4-f4be-4bcd-a78a-a3789774524c" alt="" loading="lazy" data-node-id="1:611">
+						</a>
+						<div class="lixmar-prodstrip__meta">
+							<h3 class="lixmar-prodstrip__title" data-node-id="1:612">Opplo Watch Series 8 GPS + Caja de acero inoxidable con correa milanesa</h3>
+							<div class="lixmar-prodstrip__price" data-node-id="1:613">$979.000 - $1.259.000</div>
+							<div class="lixmar-prodstrip__ship" data-node-id="1:614"><span class="lixmar-prodstrip__shipbadge" data-node-id="1:615">$2.980 envio</span></div>
+							<div class="lixmar-prodstrip__note" data-node-id="1:616">COMPRA ANTICIPADA</div>
+						</div>
+					</article>
+
+					<article class="lixmar-prodstrip__card" data-node-id="1:619" aria-label="Producto 5">
+						<a class="lixmar-prodstrip__media" href="#" data-node-id="1:620" aria-label="Ver producto">
+							<span class="lixmar-prodstrip__discount" data-node-id="1:631"><span class="lixmar-prodstrip__discountlabel" data-node-id="1:632">AHORRA</span><span class="lixmar-prodstrip__discountvalue" data-node-id="1:633">$3.000</span></span>
+							<img src="https://www.figma.com/api/mcp/asset/a7b8054b-9502-43b8-8913-b27230ddc881" alt="" loading="lazy" data-node-id="1:621">
+						</a>
+						<div class="lixmar-prodstrip__meta">
+							<div class="lixmar-prodstrip__ratingrow">
+								<span class="lixmar-prodstrip__stars" data-node-id="1:622" aria-label="5 de 5">★★★★★</span>
+								<span class="lixmar-prodstrip__reviews" data-node-id="1:623">(9)</span>
+							</div>
+							<h3 class="lixmar-prodstrip__title" data-node-id="1:624">Cargador iSmart 24V</h3>
+							<div class="lixmar-prodstrip__pricerow">
+								<span class="lixmar-prodstrip__price lixmar-prodstrip__price--hot" data-node-id="1:625">$9.000</span>
+								<span class="lixmar-prodstrip__priceold" data-node-id="1:626">$12.000</span>
+							</div>
+							<div class="lixmar-prodstrip__ship" data-node-id="1:627"><span class="lixmar-prodstrip__shipbadge" data-node-id="1:628">$3.980 envio</span></div>
+							<div class="lixmar-prodstrip__note" data-node-id="1:630">Contacto</div>
+						</div>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<!-- Marcas nuevas para ti (Figma: 1:640) -->
+		<section class="lixmar-newbrands" data-node-id="1:640" aria-label="Marcas nuevas para ti">
+			<h2 class="lixmar-newbrands__title" data-node-id="1:641">MARCAS NUEVAS PARA TI</h2>
+			<div class="lixmar-newbrands__grid" data-node-id="1:645">
+				<article class="lixmar-newbrands__item" aria-label="Promo 1">
+					<a class="lixmar-newbrands__image" href="#" data-node-id="1:646" aria-label="Ver promo">
+						<img src="https://www.figma.com/api/mcp/asset/c4c82546-df7f-4f27-8a3c-a0df049ffc3f" alt="" loading="lazy">
+					</a>
+					<h3 class="lixmar-newbrands__itemtitle" data-node-id="1:648">Computadora acero Zumac</h3>
+					<p class="lixmar-newbrands__desc" data-node-id="1:649">Y una opción de actualización cada tres años.</p>
+					<a class="lixmar-newbrands__btn" href="#" data-node-id="1:650"><span data-node-id="1:651">COMPRAR</span></a>
+				</article>
+
+				<article class="lixmar-newbrands__item" aria-label="Promo 2">
+					<a class="lixmar-newbrands__image" href="#" data-node-id="1:652" aria-label="Ver promo">
+						<img src="https://www.figma.com/api/mcp/asset/517fe115-a8a9-4f2d-87c1-5cd496d4984a" alt="" loading="lazy">
+					</a>
+					<h3 class="lixmar-newbrands__itemtitle" data-node-id="1:654">Oferta de verano con ofertas de hasta<br><strong>un 50 % de descuento<br>para monitores gamers</strong></h3>
+					<p class="lixmar-newbrands__desc" data-node-id="1:655">Oferta por tiempo limitado. Apresúrate</p>
+					<a class="lixmar-newbrands__btn" href="#" data-node-id="1:656"><span data-node-id="1:657">COMPRAR</span></a>
+				</article>
+
+				<article class="lixmar-newbrands__item" aria-label="Promo 3">
+					<a class="lixmar-newbrands__image" href="#" data-node-id="1:658" aria-label="Ver promo">
+						<img src="https://www.figma.com/api/mcp/asset/c4b34c7c-7722-4253-a11c-b15a8df81923" alt="" loading="lazy">
+					</a>
+					<h3 class="lixmar-newbrands__itemtitle" data-node-id="1:660">Oferta de verano con ofertas de hasta<br><strong>un 50 % de descuento<br>para sillas gamers</strong></h3>
+					<p class="lixmar-newbrands__desc" data-node-id="1:661">Oferta por tiempo limitado. Apresúrate</p>
+					<a class="lixmar-newbrands__btn" href="#" data-node-id="1:662"><span data-node-id="1:663">COMPRAR</span></a>
+				</article>
+
+				<article class="lixmar-newbrands__item" aria-label="Promo 4">
+					<a class="lixmar-newbrands__image" href="#" data-node-id="1:664" aria-label="Ver promo">
+						<img src="https://www.figma.com/api/mcp/asset/e0aa7c36-c80e-4740-8ebb-83876dff91c6" alt="" loading="lazy">
+					</a>
+					<h3 class="lixmar-newbrands__itemtitle" data-node-id="1:666">iPad mini PRO 6</h3>
+					<p class="lixmar-newbrands__desc" data-node-id="1:667">Desde $19.990/mes durante 36 meses.<br>$280.350 finales pago vencido en el mes 37</p>
+					<a class="lixmar-newbrands__btn" href="#" data-node-id="1:668"><span data-node-id="1:669">COMPRAR</span></a>
+				</article>
+			</div>
+		</section>
+
+		<!-- Mejores celulares y tablets (Figma: 1:670) -->
+		<section class="lixmar-mobiles" data-node-id="1:670" aria-label="Mejores celulares y tablets">
+			<div class="lixmar-mobiles__head">
+				<h2 class="lixmar-mobiles__title" data-node-id="1:671">MEJORES CELULARES Y TABLETS</h2>
+				<a class="lixmar-mobiles__all" href="#" aria-label="Ver todos" data-node-id="1:672">
+					<span data-node-id="1:672">Ver todos</span>
+					<span class="lixmar-mobiles__chev" aria-hidden="true" data-node-id="1:673">›</span>
+				</a>
+			</div>
+
+			<div class="lixmar-mobiles__top" data-node-id="1:674" aria-label="Promos y categorías">
+				<div class="lixmar-mobiles__hero" aria-label="Promo Redmi Note">
+					<a class="lixmar-mobiles__heroimg" href="#" aria-label="Redmi Note 12 Pro+ 5G" data-node-id="1:675">
+						<img src="https://www.figma.com/api/mcp/asset/21993621-e511-4496-b1c7-561f39103e73" alt="" loading="lazy">
+					</a>
+					<div class="lixmar-mobiles__heroinfo" data-node-id="1:677">
+						<h3 class="lixmar-mobiles__herotitle" data-node-id="1:678">REDMI NOTE<br>12 PRO+ 5G</h3>
+						<p class="lixmar-mobiles__herodesc" data-node-id="1:679">Acepte el desafío</p>
+						<a class="lixmar-mobiles__herobtn" href="#" data-node-id="1:680"><span data-node-id="1:681">COMPRAR</span></a>
+					</div>
+				</div>
+
+				<div class="lixmar-mobiles__cats" aria-label="Categorías destacadas">
+					<a class="lixmar-mobiles__cat" href="#" aria-label="iPhone (iOS)" data-node-id="1:682">
+						<img class="lixmar-mobiles__caticon" src="https://www.figma.com/api/mcp/asset/8e199653-d30c-435d-b7df-dc33e17e8401" alt="" loading="lazy" data-node-id="1:684">
+						<div class="lixmar-mobiles__cattext">
+							<div class="lixmar-mobiles__catname" data-node-id="1:682">iPhone (iOS)</div>
+							<div class="lixmar-mobiles__catcount" data-node-id="1:683">74 productos</div>
+						</div>
+					</a>
+					<a class="lixmar-mobiles__cat" href="#" aria-label="Android" data-node-id="1:685">
+						<img class="lixmar-mobiles__caticon" src="https://www.figma.com/api/mcp/asset/bfb18361-95d4-4669-9356-6d7f0504a4b5" alt="" loading="lazy" data-node-id="1:687">
+						<div class="lixmar-mobiles__cattext">
+							<div class="lixmar-mobiles__catname" data-node-id="1:685">Android</div>
+							<div class="lixmar-mobiles__catcount" data-node-id="1:686">35 productos</div>
+						</div>
+					</a>
+					<a class="lixmar-mobiles__cat" href="#" aria-label="5g Soporte" data-node-id="1:688">
+						<img class="lixmar-mobiles__caticon" src="https://www.figma.com/api/mcp/asset/7d2ba635-91b4-4b1d-9a2e-5a829d6ec47b" alt="" loading="lazy" data-node-id="1:690">
+						<div class="lixmar-mobiles__cattext">
+							<div class="lixmar-mobiles__catname" data-node-id="1:688">5g Soporte</div>
+							<div class="lixmar-mobiles__catcount" data-node-id="1:689">12 productos</div>
+						</div>
+					</a>
+					<a class="lixmar-mobiles__cat" href="#" aria-label="Gaming" data-node-id="1:691">
+						<img class="lixmar-mobiles__caticon" src="https://www.figma.com/api/mcp/asset/a9b65794-33a1-4bae-a161-f4b9804597d3" alt="" loading="lazy" data-node-id="1:693">
+						<div class="lixmar-mobiles__cattext">
+							<div class="lixmar-mobiles__catname" data-node-id="1:691">Gaming</div>
+							<div class="lixmar-mobiles__catcount" data-node-id="1:692">9 productos</div>
+						</div>
+					</a>
+					<a class="lixmar-mobiles__cat" href="#" aria-label="Xiaomi" data-node-id="1:694">
+						<img class="lixmar-mobiles__caticon" src="https://www.figma.com/api/mcp/asset/8f7e057c-a9ab-4d60-9f0c-081035ab82f6" alt="" loading="lazy" data-node-id="1:696">
+						<div class="lixmar-mobiles__cattext">
+							<div class="lixmar-mobiles__catname" data-node-id="1:694">Xiaomi</div>
+							<div class="lixmar-mobiles__catcount" data-node-id="1:695">52 productos</div>
+						</div>
+					</a>
+					<a class="lixmar-mobiles__cat" href="#" aria-label="Accesorios" data-node-id="1:697">
+						<img class="lixmar-mobiles__caticon" src="https://www.figma.com/api/mcp/asset/75762b1b-fb4b-4836-9797-5a6acdbaf908" alt="" loading="lazy" data-node-id="1:699">
+						<div class="lixmar-mobiles__cattext">
+							<div class="lixmar-mobiles__catname" data-node-id="1:697">Accessorios</div>
+							<div class="lixmar-mobiles__catcount" data-node-id="1:698">29 productos</div>
+						</div>
+					</a>
+				</div>
+			</div>
+
+			<div class="lixmar-mobiles__carousel" data-node-id="1:700" aria-label="Productos móviles">
+				<button class="lixmar-mobiles__nav lixmar-mobiles__nav--prev" type="button" aria-label="Volver">
+					<span class="lixmar-mobiles__navtext">Volver</span>
+				</button>
+				<button class="lixmar-mobiles__nav lixmar-mobiles__nav--next" type="button" aria-label="Siguiente">
+					<span class="lixmar-mobiles__navtext">Siguiente</span>
+				</button>
+
+				<div class="lixmar-mobiles__track">
+					<article class="lixmar-mobiles__card" data-node-id="1:701" aria-label="Producto 1">
+						<a class="lixmar-mobiles__media" href="#" data-node-id="1:702" aria-label="Ver producto">
+							<span class="lixmar-mobiles__discount" data-node-id="1:713"><span class="lixmar-mobiles__discountlabel" data-node-id="1:714">AHORRA</span><span class="lixmar-mobiles__discountvalue" data-node-id="1:715">$199.000</span></span>
+							<img src="https://www.figma.com/api/mcp/asset/6dda524f-1f43-48c5-9839-40210ba3f557" alt="" loading="lazy" data-node-id="1:702">
+						</a>
+						<div class="lixmar-mobiles__meta">
+							<div class="lixmar-mobiles__ratingrow">
+								<span class="lixmar-mobiles__stars" data-node-id="1:704" aria-label="5 de 5">★★★★★</span>
+								<span class="lixmar-mobiles__reviews" data-node-id="1:705">(152)</span>
+							</div>
+							<h3 class="lixmar-mobiles__cardtitle" data-node-id="1:706">SROK Celular 128GB,<br>Oled Retina</h3>
+							<div class="lixmar-mobiles__pricerow">
+								<span class="lixmar-mobiles__price lixmar-mobiles__price--hot" data-node-id="1:707">$579.000</span>
+								<span class="lixmar-mobiles__priceold" data-node-id="1:708">$859.00</span>
+							</div>
+							<div class="lixmar-mobiles__tags">
+								<span class="lixmar-mobiles__tag lixmar-mobiles__tag--green" data-node-id="1:709">ENVÍO GRATIS</span>
+							</div>
+							<div class="lixmar-mobiles__status" data-node-id="1:712"><span class="lixmar-mobiles__statusicon" aria-hidden="true" data-node-id="1:711">✓</span> En stock</div>
+						</div>
+					</article>
+
+					<article class="lixmar-mobiles__card" data-node-id="1:718" aria-label="Producto 2">
+						<a class="lixmar-mobiles__media" href="#" data-node-id="1:719" aria-label="Ver producto">
+							<span class="lixmar-mobiles__badge lixmar-mobiles__badge--dark" data-node-id="1:727"><span data-node-id="1:728">NUEVO</span></span>
+							<img src="https://www.figma.com/api/mcp/asset/79768102-96f5-4dc6-b5ee-2908187c3412" alt="" loading="lazy" data-node-id="1:719">
+						</a>
+						<div class="lixmar-mobiles__meta">
+							<h3 class="lixmar-mobiles__cardtitle" data-node-id="1:721">aPod Pro Tablet 2025 LTE +<br>Wifi, GPS Celular 12.9´,<br>512GB</h3>
+							<div class="lixmar-mobiles__price" data-node-id="1:722">$979.000 - $1.259.000</div>
+							<div class="lixmar-mobiles__ship" data-node-id="1:723"><span class="lixmar-mobiles__shipbadge">$2.000 ENVÍO</span></div>
+							<div class="lixmar-mobiles__status" data-node-id="1:726"><span class="lixmar-mobiles__statusicon" aria-hidden="true" data-node-id="1:725">✓</span> En stock</div>
+						</div>
+					</article>
+
+					<article class="lixmar-mobiles__card" data-node-id="1:731" aria-label="Producto 3">
+						<a class="lixmar-mobiles__media" href="#" data-node-id="1:732" aria-label="Ver producto">
+							<img src="https://www.figma.com/api/mcp/asset/072e9a04-ddd4-41f3-8592-d57d8280f0b5" alt="" loading="lazy" data-node-id="1:732">
+						</a>
+						<div class="lixmar-mobiles__meta">
+							<div class="lixmar-mobiles__ratingrow">
+								<span class="lixmar-mobiles__stars" data-node-id="1:734" aria-label="4 de 5">★★★★<span class="lixmar-mobiles__star--muted">★</span></span>
+								<span class="lixmar-mobiles__reviews" data-node-id="1:735">(5)</span>
+							</div>
+							<h3 class="lixmar-mobiles__cardtitle" data-node-id="1:736">OPod Pro 12.9´ M1 2025,<br>64GB + Wifi, GPS</h3>
+							<div class="lixmar-mobiles__price" data-node-id="1:737">$659.000</div>
+							<div class="lixmar-mobiles__tags">
+								<span class="lixmar-mobiles__tag lixmar-mobiles__tag--green" data-node-id="1:738">ENVÍO GRATIS</span>
+								<span class="lixmar-mobiles__tag lixmar-mobiles__tag--red" data-node-id="1:740">FREE GIFT</span>
+							</div>
+							<div class="lixmar-mobiles__status" data-node-id="1:743"><span class="lixmar-mobiles__statusicon" aria-hidden="true" data-node-id="1:742">✓</span> En stock</div>
+							<div class="lixmar-mobiles__thumbs" aria-label="Miniaturas">
+								<a class="lixmar-mobiles__thumb" href="#" aria-label="Miniatura 1" data-node-id="1:744"><img src="https://www.figma.com/api/mcp/asset/072e9a04-ddd4-41f3-8592-d57d8280f0b5" alt="" loading="lazy"></a>
+								<a class="lixmar-mobiles__thumb" href="#" aria-label="Miniatura 2" data-node-id="1:745"><img src="https://www.figma.com/api/mcp/asset/6dda524f-1f43-48c5-9839-40210ba3f557" alt="" loading="lazy"></a>
+								<a class="lixmar-mobiles__thumb" href="#" aria-label="Miniatura 3" data-node-id="1:746"><img src="https://www.figma.com/api/mcp/asset/ad5eb376-c342-46b5-a6f1-d09f0c4940fe" alt="" loading="lazy"></a>
+							</div>
+						</div>
+					</article>
+
+					<article class="lixmar-mobiles__card" data-node-id="1:749" aria-label="Producto 4">
+						<a class="lixmar-mobiles__media" href="#" data-node-id="1:750" aria-label="Ver producto">
+							<span class="lixmar-mobiles__discount" data-node-id="1:761"><span class="lixmar-mobiles__discountlabel" data-node-id="1:762">AHORRA</span><span class="lixmar-mobiles__discountvalue" data-node-id="1:763">$59.000</span></span>
+							<img src="https://www.figma.com/api/mcp/asset/ad5eb376-c342-46b5-a6f1-d09f0c4940fe" alt="" loading="lazy" data-node-id="1:750">
+						</a>
+						<div class="lixmar-mobiles__meta">
+							<div class="lixmar-mobiles__ratingrow">
+								<span class="lixmar-mobiles__stars" data-node-id="1:752" aria-label="5 de 5">★★★★★</span>
+								<span class="lixmar-mobiles__reviews" data-node-id="1:753">(9)</span>
+							</div>
+							<h3 class="lixmar-mobiles__cardtitle" data-node-id="1:754">Xiamoi Redmi Note 5, 64GB</h3>
+							<div class="lixmar-mobiles__pricerow">
+								<span class="lixmar-mobiles__price lixmar-mobiles__price--hot" data-node-id="1:755">$1.239.000</span>
+								<span class="lixmar-mobiles__priceold" data-node-id="1:756">$1.619.000</span>
+							</div>
+							<div class="lixmar-mobiles__tags">
+								<span class="lixmar-mobiles__tag lixmar-mobiles__tag--green" data-node-id="1:757">ENVÍO GRATIS</span>
+							</div>
+							<div class="lixmar-mobiles__status" data-node-id="1:760"><span class="lixmar-mobiles__phone" aria-hidden="true" data-node-id="1:759">☎</span> Contacto</div>
+						</div>
+					</article>
+
+					<article class="lixmar-mobiles__card" data-node-id="1:766" aria-label="Producto 5">
+						<a class="lixmar-mobiles__media" href="#" data-node-id="1:767" aria-label="Ver producto">
+							<img src="https://www.figma.com/api/mcp/asset/e946c4a7-aa05-4d84-8e46-c7a14a2d95bf" alt="" loading="lazy" data-node-id="1:767">
+						</a>
+						<div class="lixmar-mobiles__meta">
+							<div class="lixmar-mobiles__ratingrow">
+								<span class="lixmar-mobiles__stars" data-node-id="1:769" aria-label="4 de 5">★★★★<span class="lixmar-mobiles__star--muted">★</span></span>
+								<span class="lixmar-mobiles__reviews" data-node-id="1:770">(8)</span>
+							</div>
+							<h3 class="lixmar-mobiles__cardtitle" data-node-id="1:771">Microsute Alpha Ultra S5<br>128GB 2025</h3>
+							<div class="lixmar-mobiles__price" data-node-id="1:772">$1.729.000</div>
+							<div class="lixmar-mobiles__tags">
+								<span class="lixmar-mobiles__tag lixmar-mobiles__tag--green" data-node-id="1:773">ENVÍO GRATIS</span>
+							</div>
+							<div class="lixmar-mobiles__status" data-node-id="1:776"><span class="lixmar-mobiles__phone" aria-hidden="true" data-node-id="1:775">☎</span> Contacto</div>
+							<div class="lixmar-mobiles__thumbs" aria-label="Miniaturas">
+								<a class="lixmar-mobiles__thumb" href="#" aria-label="Miniatura 1" data-node-id="1:777"><img src="https://www.figma.com/api/mcp/asset/e946c4a7-aa05-4d84-8e46-c7a14a2d95bf" alt="" loading="lazy"></a>
+								<a class="lixmar-mobiles__thumb" href="#" aria-label="Miniatura 2" data-node-id="1:778"><img src="https://www.figma.com/api/mcp/asset/4973611b-4f5c-4e1f-925d-828235a8ef40" alt="" loading="lazy"></a>
+							</div>
+						</div>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<!-- 3 columnas de categorías (Figma: 1:893, 1:917, 1:941) -->
+		<section class="lixmar-catcols" aria-label="Categorías destacadas">
+			<!-- Columna 1: Audio y Cámaras (1:893) -->
+			<article class="lixmar-catcols__col" data-node-id="1:893">
+				<div class="lixmar-catcols__head">
+					<h2 class="lixmar-catcols__title" data-node-id="1:894">AUDIO Y CAMARAS</h2>
+					<a class="lixmar-catcols__all" href="#" data-node-id="1:895">Ver todos <span aria-hidden="true" data-node-id="1:896">›</span></a>
+				</div>
+				<a class="lixmar-catcols__banner" href="#" data-node-id="1:914" aria-label="Mejor Parlante 2025">
+					<img src="https://www.figma.com/api/mcp/asset/8c4ad48c-fbcf-40c6-88fd-7996f2d4b3d0" alt="" loading="lazy">
+					<span class="lixmar-catcols__bannertxt lixmar-catcols__bannertxt--left" data-node-id="1:916">Mejor Parlante 2025</span>
+				</a>
+				<div class="lixmar-catcols__grid" data-node-id="1:897">
+					<a class="lixmar-catcols__item" href="#" data-node-id="1:898">
+						<span class="lixmar-catcols__icon"><img src="https://www.figma.com/api/mcp/asset/c454dffa-d6db-499b-8ddb-84ad290a0695" alt="" loading="lazy"></span>
+						<span class="lixmar-catcols__name" data-node-id="1:900">Altavoces</span>
+						<span class="lixmar-catcols__count" data-node-id="1:901">12 productos</span>
+					</a>
+					<a class="lixmar-catcols__item" href="#" data-node-id="1:902">
+						<span class="lixmar-catcols__icon"><img src="https://www.figma.com/api/mcp/asset/f017fee5-0e87-4a78-a2a8-df89c571c321" alt="" loading="lazy"></span>
+						<span class="lixmar-catcols__name" data-node-id="1:904">DSLR Camara</span>
+						<span class="lixmar-catcols__count" data-node-id="1:905">9 productos</span>
+					</a>
+					<a class="lixmar-catcols__item" href="#" data-node-id="1:906">
+						<span class="lixmar-catcols__icon"><img src="https://www.figma.com/api/mcp/asset/0d8fbeb2-8de3-4347-966d-9d093f36c8d0" alt="" loading="lazy"></span>
+						<span class="lixmar-catcols__name" data-node-id="1:908">Earbuds</span>
+						<span class="lixmar-catcols__count" data-node-id="1:909">5 productos</span>
+					</a>
+					<a class="lixmar-catcols__item" href="#" data-node-id="1:910">
+						<span class="lixmar-catcols__icon"><img src="https://www.figma.com/api/mcp/asset/65639dec-9010-47c3-8a2a-7f8ec3d2a360" alt="" loading="lazy"></span>
+						<span class="lixmar-catcols__name" data-node-id="1:912">Microfono</span>
+						<span class="lixmar-catcols__count" data-node-id="1:913">12 productos</span>
+					</a>
+				</div>
+			</article>
+
+			<!-- Columna 2: Gaming (1:917) -->
+			<article class="lixmar-catcols__col" data-node-id="1:917">
+				<div class="lixmar-catcols__head">
+					<h2 class="lixmar-catcols__title" data-node-id="1:918">GAMING</h2>
+					<a class="lixmar-catcols__all" href="#" data-node-id="1:919">Ver todos <span aria-hidden="true" data-node-id="1:920">›</span></a>
+				</div>
+				<a class="lixmar-catcols__banner" href="#" data-node-id="1:938" aria-label="Mouse RGB Gaming Inalambrico">
+					<img src="https://www.figma.com/api/mcp/asset/0ba57652-3e06-4bac-91d5-2786d4c09c47" alt="" loading="lazy">
+					<span class="lixmar-catcols__bannertxt lixmar-catcols__bannertxt--left lixmar-catcols__bannertxt--dark" data-node-id="1:940">MOUSE<br>RGB GAMING<br>INALAMBRICO</span>
+				</a>
+				<div class="lixmar-catcols__grid" data-node-id="1:921">
+					<a class="lixmar-catcols__item" href="#" data-node-id="1:922">
+						<span class="lixmar-catcols__icon"><img src="https://www.figma.com/api/mcp/asset/7e6fbae0-7f3e-43f7-99c7-f17392b3e521" alt="" loading="lazy"></span>
+						<span class="lixmar-catcols__name" data-node-id="1:924">Monitores</span>
+						<span class="lixmar-catcols__count" data-node-id="1:925">28 productos</span>
+					</a>
+					<a class="lixmar-catcols__item" href="#" data-node-id="1:926">
+						<span class="lixmar-catcols__icon"><img src="https://www.figma.com/api/mcp/asset/279fac03-1b06-4ffb-95ee-d1254b0a7e23" alt="" loading="lazy"></span>
+						<span class="lixmar-catcols__name" data-node-id="1:928">Silla Gamer</span>
+						<span class="lixmar-catcols__count" data-node-id="1:929">12 productos</span>
+					</a>
+					<a class="lixmar-catcols__item" href="#" data-node-id="1:930">
+						<span class="lixmar-catcols__icon"><img src="https://www.figma.com/api/mcp/asset/6331fdc6-7d6e-4080-8e22-ba90b7d1998a" alt="" loading="lazy"></span>
+						<span class="lixmar-catcols__name" data-node-id="1:932">Control</span>
+						<span class="lixmar-catcols__count" data-node-id="1:933">9 productos</span>
+					</a>
+					<a class="lixmar-catcols__item" href="#" data-node-id="1:934">
+						<span class="lixmar-catcols__icon"><img src="https://www.figma.com/api/mcp/asset/195446ce-66c9-4f7a-805c-d609bc5397f0" alt="" loading="lazy"></span>
+						<span class="lixmar-catcols__name" data-node-id="1:936">Teclados</span>
+						<span class="lixmar-catcols__count" data-node-id="1:937">30 productos</span>
+					</a>
+				</div>
+			</article>
+
+			<!-- Columna 3: Equipamiento Oficina (1:941) -->
+			<article class="lixmar-catcols__col" data-node-id="1:941">
+				<div class="lixmar-catcols__head">
+					<h2 class="lixmar-catcols__title" data-node-id="1:942">EQUIPAMIENTO OFICINA</h2>
+					<a class="lixmar-catcols__all" href="#" data-node-id="1:943">ver todos <span aria-hidden="true" data-node-id="1:944">›</span></a>
+				</div>
+				<a class="lixmar-catcols__banner lixmar-catcols__banner--center" href="#" data-node-id="1:962" aria-label="Proyector Laser">
+					<img src="https://www.figma.com/api/mcp/asset/554e6e14-6d57-4284-b657-9e4c38c6c5f3" alt="" loading="lazy">
+					<span class="lixmar-catcols__bannersub" data-node-id="1:964">Inicio Teatro 4k</span>
+					<span class="lixmar-catcols__bannertitle" data-node-id="1:965">Proyector Laser</span>
+				</a>
+				<div class="lixmar-catcols__grid" data-node-id="1:945">
+					<a class="lixmar-catcols__item" href="#" data-node-id="1:946">
+						<span class="lixmar-catcols__icon"><img src="https://www.figma.com/api/mcp/asset/862ad645-f22f-4ef8-b045-5f5a22ee09d7" alt="" loading="lazy"></span>
+						<span class="lixmar-catcols__name" data-node-id="1:948">Impresoras</span>
+						<span class="lixmar-catcols__count" data-node-id="1:949">9 productos</span>
+					</a>
+					<a class="lixmar-catcols__item" href="#" data-node-id="1:950">
+						<span class="lixmar-catcols__icon"><img src="https://www.figma.com/api/mcp/asset/403ee893-d209-4a5b-b29d-1ad7b5afa3f8" alt="" loading="lazy"></span>
+						<span class="lixmar-catcols__name" data-node-id="1:952">Routers</span>
+						<span class="lixmar-catcols__count" data-node-id="1:953">90 productos</span>
+					</a>
+					<a class="lixmar-catcols__item" href="#" data-node-id="1:954">
+						<span class="lixmar-catcols__icon"><img src="https://www.figma.com/api/mcp/asset/68d02425-200f-4624-b111-2b5d63c1f4b5" alt="" loading="lazy"></span>
+						<span class="lixmar-catcols__name" data-node-id="1:956">Seguridad</span>
+						<span class="lixmar-catcols__count" data-node-id="1:957">12 productos</span>
+					</a>
+					<a class="lixmar-catcols__item" href="#" data-node-id="1:958">
+						<span class="lixmar-catcols__icon"><img src="https://www.figma.com/api/mcp/asset/62d3dd5e-0a4d-4bdf-8993-ea1ea520bc14" alt="" loading="lazy"></span>
+						<span class="lixmar-catcols__name" data-node-id="1:960">Proyectores</span>
+						<span class="lixmar-catcols__count" data-node-id="1:961">12 productos</span>
+					</a>
+				</div>
+			</article>
+		</section>
+
+		<!-- 2 Banners en columnas flexbox (Figma: 1:967, 1:971) -->
+		<section class="lixmar-twobanners" aria-label="Banners promocionales">
+			<a class="lixmar-twobanners__item" href="#" data-node-id="1:967" aria-label="Swatek Card">
+				<img src="https://www.figma.com/api/mcp/asset/13701e8b-2150-4db6-b83f-2e94b821ac12" alt="Swatek promoción" loading="lazy">
+			</a>
+			<a class="lixmar-twobanners__item" href="#" data-node-id="1:971" aria-label="Mobile promo">
+				<img src="https://www.figma.com/api/mcp/asset/2889bf1e-822c-4796-9a1c-fe7c297aabd9" alt="Mobile promoción" loading="lazy">
+			</a>
+		</section>
+
+		<!-- Tus vistos recientemente (Figma: 1:980) -->
+		<section class="lixmar-recent" data-node-id="1:980" aria-label="Tus vistos recientemente">
+			<header class="lixmar-recent__header">
+				<h2 class="lixmar-recent__title">Tus vistos recientemente</h2>
+				<a class="lixmar-recent__viewall" href="#">Ver todos <span class="lixmar-recent__arrow">›</span></a>
+			</header>
+			<div class="lixmar-recent__grid">
+				<!-- Producto 1 -->
+				<article class="lixmar-recent__card" data-node-id="1:989">
+					<div class="lixmar-recent__badge lixmar-recent__badge--new">NUEVO</div>
+					<a class="lixmar-recent__imglink" href="#">
+						<img src="https://www.figma.com/api/mcp/asset/137a765f-b210-4210-815a-1ff5edfd1554" alt="Reloj Xomie Remid 8 Sport" loading="lazy">
+					</a>
+					<div class="lixmar-recent__info">
+						<div class="lixmar-recent__rating">
+							<span class="lixmar-recent__stars">★★★★★</span>
+							<span class="lixmar-recent__count">(152)</span>
+						</div>
+						<h3 class="lixmar-recent__name">Reloj Xomie Remid 8 Sport Resistente al agua</h3>
+						<p class="lixmar-recent__price">$579.000</p>
+					</div>
+				</article>
+				<!-- Producto 2 -->
+				<article class="lixmar-recent__card" data-node-id="1:999">
+					<div class="lixmar-recent__badge lixmar-recent__badge--new">NUEVO</div>
+					<a class="lixmar-recent__imglink" href="#">
+						<img src="https://www.figma.com/api/mcp/asset/5397a782-7bf7-4f4c-a11e-89679b7d160b" alt="Microte Surface 2.0 Laptop" loading="lazy">
+					</a>
+					<div class="lixmar-recent__info">
+						<h3 class="lixmar-recent__name">Microte Surface 2.0 Laptop</h3>
+						<p class="lixmar-recent__price">$979.000</p>
+					</div>
+				</article>
+				<!-- Producto 3 -->
+				<article class="lixmar-recent__card" data-node-id="1:1007">
+					<a class="lixmar-recent__imglink" href="#">
+						<img src="https://www.figma.com/api/mcp/asset/270584e8-c7c7-48b1-8485-30dfdb87ae1e" alt="aPod Pro Tablet 2023" loading="lazy">
+					</a>
+					<div class="lixmar-recent__info">
+						<h3 class="lixmar-recent__name">aPod Pro Tablet 2023 LTE + Wifi, GPS Cellular 12.9 Inch, 512GB</h3>
+						<p class="lixmar-recent__price">$979.000 - $1.259.000</p>
+					</div>
+				</article>
+				<!-- Producto 4 -->
+				<article class="lixmar-recent__card" data-node-id="1:1013">
+					<div class="lixmar-recent__badge lixmar-recent__badge--discount">
+						<span class="lixmar-recent__badge-label">AHORRA</span>
+						<span class="lixmar-recent__badge-amount">$192.000</span>
+					</div>
+					<a class="lixmar-recent__imglink" href="#">
+						<img src="https://www.figma.com/api/mcp/asset/818d858c-397d-43a5-b6d3-09dcb281c6ed" alt="Celular SROK Smart 128GB" loading="lazy">
+					</a>
+					<div class="lixmar-recent__info">
+						<div class="lixmar-recent__rating">
+							<span class="lixmar-recent__stars">★★★★★</span>
+							<span class="lixmar-recent__count">(152)</span>
+						</div>
+						<h3 class="lixmar-recent__name">Celular SROK Smart 128GB, Oled Retina</h3>
+						<p class="lixmar-recent__price">
+							<span class="lixmar-recent__price--sale">$579.000</span>
+							<span class="lixmar-recent__price--old">$779.000</span>
+						</p>
+					</div>
+				</article>
+			</div>
+		</section>
+	</main>
+
+	<!-- Footer (Figma: 8:2638) -->
+	<footer class="lixmar-footer" data-node-id="8:2638">
+		<div class="lixmar-footer__container">
+			<!-- Columna 1: Info de contacto -->
+			<div class="lixmar-footer__col lixmar-footer__col--contact">
+				<h3 class="lixmar-footer__brand">Lixmar</h3>
+				<p class="lixmar-footer__slogan">DESCUENTOS 24/7</p>
+				<p class="lixmar-footer__phone">(+54) xxxxxxxx</p>
+				<p class="lixmar-footer__address">CABA, Argentina</p>
+				<p class="lixmar-footer__email">contact@lixmar.com</p>
+				<div class="lixmar-footer__social">
+					<a href="#" class="lixmar-footer__social-link" aria-label="Twitter">🐦</a>
+					<a href="#" class="lixmar-footer__social-link" aria-label="Facebook">f</a>
+					<a href="#" class="lixmar-footer__social-link" aria-label="Google">G</a>
+					<a href="#" class="lixmar-footer__social-link" aria-label="YouTube">▶</a>
+					<a href="#" class="lixmar-footer__social-link" aria-label="Pinterest">P</a>
+				</div>
+				<div class="lixmar-footer__selectors">
+					<button class="lixmar-footer__selector">
+						<span>🇦🇷</span> ARG <span class="lixmar-footer__arrow">▼</span>
+					</button>
+					<button class="lixmar-footer__selector">
+						<img src="https://www.figma.com/api/mcp/asset/7c758971-9b63-4e7e-aa50-6a99ddb341b7" alt="" class="lixmar-footer__flag"> Esp <span class="lixmar-footer__arrow">▼</span>
+					</button>
+				</div>
+			</div>
+
+			<!-- Columna 2: Categorías -->
+			<div class="lixmar-footer__col">
+				<h4 class="lixmar-footer__title">Categorías</h4>
+				<ul class="lixmar-footer__list">
+					<li><a href="#">Laptops</a></li>
+					<li><a href="#">PC y Computadoras</a></li>
+					<li><a href="#">Celulares</a></li>
+					<li><a href="#">Tablets</a></li>
+					<li><a href="#">Gaming & VR</a></li>
+					<li><a href="#">Oficina</a></li>
+					<li><a href="#">Cámaras</a></li>
+					<li><a href="#">Sonido</a></li>
+					<li><a href="#">Hogar</a></li>
+				</ul>
+			</div>
+
+			<!-- Columna 3: Compañía -->
+			<div class="lixmar-footer__col">
+				<h4 class="lixmar-footer__title">Compañía</h4>
+				<ul class="lixmar-footer__list">
+					<li><a href="#">Sobre Lixmar</a></li>
+					<li><a href="#">Contacto</a></li>
+					<li><a href="#">Carrera</a></li>
+					<li><a href="#">Blog</a></li>
+					<li><a href="#">Mapa</a></li>
+					<li><a href="#">Ubicación</a></li>
+				</ul>
+			</div>
+
+			<!-- Columna 4: Ayuda -->
+			<div class="lixmar-footer__col">
+				<h4 class="lixmar-footer__title">Ayuda</h4>
+				<ul class="lixmar-footer__list">
+					<li><a href="#">Servicios</a></li>
+					<li><a href="#">Políticas</a></li>
+					<li><a href="#">Términos</a></li>
+					<li><a href="#">Ordenes</a></li>
+					<li><a href="#">FAQs</a></li>
+					<li><a href="#">Mi Cuenta</a></li>
+					<li><a href="#">Soporte</a></li>
+				</ul>
+			</div>
+
+			<!-- Columna 5: Marcas -->
+			<div class="lixmar-footer__col">
+				<h4 class="lixmar-footer__title">Marcas</h4>
+				<ul class="lixmar-footer__list">
+					<li><a href="#">Mejores Vendedores</a></li>
+					<li><a href="#">Afiliados</a></li>
+					<li><a href="#">Advertencias</a></li>
+					<li><a href="#">Socios</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Subscripción -->
+		<div class="lixmar-footer__subscribe">
+			<h4 class="lixmar-footer__subscribe-title">
+				Suscríbete y obtén un <span class="lixmar-footer__highlight">10%</span> de descuento en tu primer pedido
+			</h4>
+			<form class="lixmar-footer__form">
+				<span class="lixmar-footer__form-icon">✉</span>
+				<input type="email" class="lixmar-footer__input" placeholder="Introduce tu dirección de correo electrónico">
+				<button type="submit" class="lixmar-footer__submit">SUSCRIBIRSE →</button>
+			</form>
+			<p class="lixmar-footer__disclaimer">Al suscribirte, aceptas nuestra Política.</p>
+		</div>
+
+		<!-- Bottom bar -->
+		<div class="lixmar-footer__bottom">
+			<div class="lixmar-footer__payments">
+				<img src="https://www.figma.com/api/mcp/asset/7919ed33-755a-4b4b-bde3-094918c2081e" alt="PayPal" class="lixmar-footer__pay">
+				<img src="https://www.figma.com/api/mcp/asset/23be0821-3805-4738-8050-bd8a3171d923" alt="Visa" class="lixmar-footer__pay">
+				<img src="https://www.figma.com/api/mcp/asset/463c7028-2f19-4e4d-9130-a02fd32074e4" alt="Stripe" class="lixmar-footer__pay">
+				<img src="https://www.figma.com/api/mcp/asset/e2cdf869-5050-4c6e-8bc6-0b77c0edfe73" alt="MasterCard" class="lixmar-footer__pay">
+				<img src="https://www.figma.com/api/mcp/asset/ebd318eb-2c53-4207-a2b3-6e781c38b5ed" alt="Klarna" class="lixmar-footer__pay">
+			</div>
+			<a href="#" class="lixmar-footer__app">📱 App celular</a>
+		</div>
+	</footer>
+</body>
+</html>

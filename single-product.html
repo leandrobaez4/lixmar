@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>LIXMAR - Header Demo</title>
+	<link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+	<!-- Opciones adicionales -->
+	<div class="header-container" style="margin-top:10px;align-items:center;gap:20px;background:#ffffff;">
+		<div style="background:#ffffff;border-radius:6px;padding:4px 16px;display:flex;align-items:center;gap:8px;font-size:12px;">
+			<span style="font-weight:bold;font-size:14px;">🎤</span> OFERTAS 24/7
+		</div>
+		<div style="font-size:14px;">Vender en Lixmar</div>
+		<div style="font-size:14px;">Orden de Seguimiento</div>
+		<div style="display:flex;align-items:center;gap:8px;">
+			<span style="font-size:14px;">💲ARG</span>
+			<img src="https://www.figma.com/api/mcp/asset/5f8d6a42-6063-48eb-ab75-2746a2c0e657" alt="ENG" style="width:15px;height:15px;">
+			<span style="font-size:14px;">Esp</span>
+		</div>
+	</div>
+
+	<!-- Header Principal -->
+	<header class="header">
+		<div class="header-container">
+			<!-- Logo -->
+			<div class="header-left">
+				<img src="https://www.figma.com/api/mcp/asset/77526e53-e478-499c-ab2b-389155dfcfa1" alt="Logo" style="width:45px;height:45px;border-radius:11px;margin-right:10px;">
+				<span class="logo"><span style="color:#ff6a00;">LIX</span>MAR</span>
+			</div>
+
+			<!-- Navegación principal -->
+			<nav class="nav-main">
+				<a href="#" class="nav-link dropdown">INICIO</a>
+				<a href="#" class="nav-link dropdown">PÁGINAS</a>
+				<a href="#" class="nav-link dropdown">PRODUCTOS</a>
+				<a href="#" class="nav-link">CONTACTO</a>
+			</nav>
+
+			<!-- Acciones y usuario -->
+			<div class="header-right">
+				<button class="btn-icon" title="Notificaciones" style="background:orange;color:#fff;">
+					<img src="https://www.figma.com/api/mcp/asset/12c3182a-7ede-4e75-8f0b-0d1e7c26dbfd" alt="Notificación" style="width:17px;height:17px;">
+				</button>
+				<button class="btn-icon" title="Icono especial" style="background:orange;">
+					<img src="https://www.figma.com/api/mcp/asset/56b63bf3-a6cf-4586-8932-809b0e773911" alt="Icon" style="width:22px;height:22px;">
+				</button>
+				<button class="btn-icon" title="Usuario" style="background:#fff;">
+					<img src="https://www.figma.com/api/mcp/asset/6c05cca3-68d9-46d9-9ef6-3df5ee267521" alt="Usuario" style="width:41px;height:41px;">
+				</button>
+				<div class="account-menu">
+					<span class="account-label">BIENVENIDO!</span>
+					<a href="#">Entrar / Registrarse</a>
+				</div>
+				<div class="cart-btn">
+					<button class="btn-icon" style="background:orange;position:relative;">
+						<img src="https://www.figma.com/api/mcp/asset/45ae75aa-0218-43d8-8494-bc41d257db10" alt="Carrito" style="width:23px;height:23px;">
+						<span class="cart-count">5</span>
+					</button>
+					<div class="cart-price">CARRITO<br><span class="cart-total">$1.689.000</span></div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<!-- Barra de búsqueda y beneficios (Figma: 1:348) -->
+	<section class="search-bar-section search-bar-section--figma" data-node-id="1:348">
+		<div class="header-container">
+			<div class="nav-style3-row">
+				<div class="nav-style3-search" data-node-id="1:349">
+					<button class="dropdown-btn nav-style3-dropdown" type="button" data-node-id="1:350">
+						<span>Categorías</span>
+						<img src="https://www.figma.com/api/mcp/asset/af391325-c6eb-4fe0-bd4d-547a3fab74f3" alt="" class="nav-style3-caret" data-node-id="1:352">
+					</button>
+					<input class="search-input nav-style3-input" type="text" placeholder="Buscar Productos, Marcas y Más!" data-node-id="1:356">
+					<button class="search-btn nav-style3-searchbtn" type="button" aria-label="Buscar" data-node-id="1:359">🔍</button>
+				</div>
+
+				<div class="benefits-row nav-style3-benefits">
+					<div class="benefit nav-style3-benefit" data-node-id="1:361"> ENVÍO GRATIS SUPERANDO LOS<br><strong>$50.000,00</strong></div>
+					<div class="benefit nav-style3-benefit" data-node-id="1:363"> 30 DÍAS DE DEVOLUCIÓN<br><strong>DE DINERO</strong></div>
+					<div class="benefit nav-style3-benefit" data-node-id="1:365">s PAGO<br><strong>100% SEGURO</strong></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<main class="container" >
+		<!-- Breadcrumb (Figma: 1:3431) -->
+		<nav class="lixmar-breadcrumb" data-node-id="1:3431" aria-label="Breadcrumb">
+			<a href="#" class="lixmar-breadcrumb__link">Inicio</a>
+			<span class="lixmar-breadcrumb__sep">/</span>
+			<a href="#" class="lixmar-breadcrumb__link">pagina</a>
+			<span class="lixmar-breadcrumb__sep">/</span>
+			<span class="lixmar-breadcrumb__current">sobre nosotros</span>
+		</nav>
+
+		<!-- Single Product Section (Figma: 1:3810) -->
+		<section class="lixmar-product" data-node-id="1:3810">
+			<div class="lixmar-product__layout">
+
+				<!-- Left: Image Slider -->
+				<div class="lixmar-product__gallery">
+					<div class="lixmar-product__main-img">
+						<span class="lixmar-product__badge">NUEVA</span>
+						<button class="lixmar-product__fav" title="Favorito">♡</button>
+						<img src="https://www.figma.com/api/mcp/asset/cff26f72-8c85-43c8-a270-5f48f40bb93c" alt="Somseng Galatero X6 Ultra" class="lixmar-product__img-active" id="mainProductImg">
+					</div>
+					<div class="lixmar-product__thumbs">
+						<div class="lixmar-product__thumb lixmar-product__thumb--active">
+							<img src="https://www.figma.com/api/mcp/asset/cff26f72-8c85-43c8-a270-5f48f40bb93c" alt="Vista 1">
+						</div>
+						<div class="lixmar-product__thumb">
+							<img src="https://www.figma.com/api/mcp/asset/85850b9a-f3bf-4406-84b9-75d803cc1d90" alt="Vista 2">
+						</div>
+						<div class="lixmar-product__thumb">
+							<img src="https://www.figma.com/api/mcp/asset/06fcde76-1b60-40bc-95da-a26e7389e2f8" alt="Vista 3">
+						</div>
+					</div>
+				</div>
+
+				<!-- Center: Product Info -->
+				<div class="lixmar-product__info">
+					<!-- Rating -->
+					<div class="lixmar-product__rating">
+						<span class="lixmar-product__stars">★★★★<span class="lixmar-product__star-empty">★</span></span>
+						<span class="lixmar-product__reviews">(5)</span>
+					</div>
+
+					<!-- Title -->
+					<h2 class="lixmar-product__title">Somseng Galatero X6 Ultra LTE 4G/128GB, Black Smartphone</h2>
+
+					<!-- Price -->
+					<p class="lixmar-product__price">$569.000 - $609.000</p>
+
+					<!-- Specs List -->
+					<ul class="lixmar-product__specs">
+						<li>Intel LGA 1700 Socket: Soporta 13th &amp; 12th Gen Intel Core</li>
+						<li>DDR5 Compatible: 4*SMD DIMMs with XMP 3.0 Memory</li>
+						<li>Diseño de potencia dominante: Fases Twin 16+1+2 Digital VRM</li>
+					</ul>
+
+					<!-- Tags -->
+					<div class="lixmar-product__tags">
+						<span class="lixmar-product__tag lixmar-product__tag--green">ENVIO GRATIS</span>
+						<span class="lixmar-product__tag lixmar-product__tag--red">REGALO GRATIS</span>
+					</div>
+
+					<!-- Color Selector -->
+					<div class="lixmar-product__colors">
+						<p class="lixmar-product__option-label"><strong>Color:</strong> Azul Medianoche</p>
+						<div class="lixmar-product__color-opts">
+							<div class="lixmar-product__color-card lixmar-product__color-card--active">
+								<div class="lixmar-product__color-img">
+									<img src="https://www.figma.com/api/mcp/asset/cff26f72-8c85-43c8-a270-5f48f40bb93c" alt="Azul Medianoche">
+								</div>
+								<div class="lixmar-product__color-info">
+									<span class="lixmar-product__color-name">Azul Medianoche</span>
+									<span class="lixmar-product__color-price">$569.00</span>
+								</div>
+							</div>
+							<div class="lixmar-product__color-card">
+								<div class="lixmar-product__color-img">
+									<img src="https://www.figma.com/api/mcp/asset/0465aebc-b778-4bd2-ba24-0df60e4f06a4" alt="Purpura Profundo">
+								</div>
+								<div class="lixmar-product__color-info">
+									<span class="lixmar-product__color-name">Purpura Profundo</span>
+									<span class="lixmar-product__color-price">$569.00</span>
+								</div>
+							</div>
+							<div class="lixmar-product__color-card">
+								<div class="lixmar-product__color-img">
+									<img src="https://www.figma.com/api/mcp/asset/ea697527-51ed-4632-9038-04210af67ddd" alt="Negro Espacial">
+								</div>
+								<div class="lixmar-product__color-info">
+									<span class="lixmar-product__color-name">Negro Espacial</span>
+									<span class="lixmar-product__color-price">$569.00</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Memory Selector -->
+					<div class="lixmar-product__memory">
+						<p class="lixmar-product__option-label"><strong>Tamaño de memoria:</strong> 128GB</p>
+						<div class="lixmar-product__memory-opts">
+							<button class="lixmar-product__mem-btn lixmar-product__mem-btn--disabled">64GB</button>
+							<button class="lixmar-product__mem-btn lixmar-product__mem-btn--active">128GB</button>
+							<button class="lixmar-product__mem-btn">256GB</button>
+							<button class="lixmar-product__mem-btn">512GB</button>
+						</div>
+					</div>
+
+					<!-- Gift Card -->
+					<div class="lixmar-product__gift">
+						<div class="lixmar-product__gift-img">
+							<img src="https://www.figma.com/api/mcp/asset/d33ac0a5-cd73-46c3-8f7f-b9ff2e7ed665" alt="Regalo">
+						</div>
+						<div class="lixmar-product__gift-info">
+							<p>• Compra <strong class="lixmar-product__gift-qty">02</strong> cajas y obtiene <strong>Bandeja De Aperitivos</strong></p>
+							<p>• Compra <strong class="lixmar-product__gift-qty">04</strong> cajas y obtiene <strong>Juguetes De Bloques</strong></p>
+							<p class="lixmar-product__gift-exp"><em>La promoción expirará en: 9h00pm del 25/12/2025</em></p>
+						</div>
+					</div>
+
+					<!-- Meta info -->
+					<div class="lixmar-product__meta">
+						<p><strong>SKU:</strong> <span>ABC025168</span></p>
+						<p><strong>CATEGORIA:</strong> <span>Celulares y Tablets</span></p>
+						<p><strong>BRAND:</strong> <a href="#" class="lixmar-product__brand-link">Somseng</a></p>
+					</div>
+
+					<!-- Social Share -->
+					<div class="lixmar-product__social">
+						<a href="#" class="lixmar-product__social-btn" title="Twitter">🐦</a>
+						<a href="#" class="lixmar-product__social-btn" title="Facebook">f</a>
+						<a href="#" class="lixmar-product__social-btn" title="Instagram">📷</a>
+						<a href="#" class="lixmar-product__social-btn" title="YouTube">▶</a>
+						<a href="#" class="lixmar-product__social-btn" title="Dribbble">⚽</a>
+					</div>
+				</div>
+
+				<!-- Right: Payment Sidebar -->
+				<div class="lixmar-product__sidebar">
+					<!-- Payment Card -->
+					<div class="lixmar-product__payment-card">
+						<p class="lixmar-product__total-label">PRECIO TOTAL:</p>
+						<p class="lixmar-product__total-price">$609.000</p>
+
+						<div class="lixmar-product__affirm">
+							<img src="https://www.figma.com/api/mcp/asset/db692714-9fe2-43ba-911e-7a76dac8f294" alt="Affirm" class="lixmar-product__affirm-logo">
+							<span class="lixmar-product__affirm-price">$490/m</span>
+							<span class="lixmar-product__affirm-text">en 12 meses.<a href="#">Ver mas</a></span>
+						</div>
+
+						<p class="lixmar-product__stock">● En Stock</p>
+
+						<!-- Quantity -->
+						<div class="lixmar-product__qty">
+							<button class="lixmar-product__qty-btn" id="qtyMinus">−</button>
+							<input type="text" class="lixmar-product__qty-input" value="1" id="qtyInput" readonly>
+							<button class="lixmar-product__qty-btn" id="qtyPlus">+</button>
+						</div>
+
+						<!-- CTA Buttons -->
+						<a href="#" class="lixmar-product__btn-cart">AGREGAR AL CARRITO</a>
+						<a href="#" class="lixmar-product__btn-paypal">
+							COMPRAR CON <img src="https://www.figma.com/api/mcp/asset/4a337080-4387-4641-99d4-e01e84ef9072" alt="PayPal" class="lixmar-product__paypal-logo">
+						</a>
+
+						<!-- Wishlist & Compare -->
+						<div class="lixmar-product__actions">
+							<a href="#" class="lixmar-product__action-link">
+								<span class="lixmar-product__action-icon" style="color:#ff6a00;">♥</span> Lista de deseos añadida
+							</a>
+							<a href="#" class="lixmar-product__action-link">
+								<span class="lixmar-product__action-icon">⟲</span> Comparar
+							</a>
+						</div>
+
+						<!-- Secure Payment -->
+						<p class="lixmar-product__secure-text">Pago seguro garantizado</p>
+						<div class="lixmar-product__pay-methods">
+							<img src="https://www.figma.com/api/mcp/asset/a9c27933-ad04-4453-b21d-85d4dbeb955e" alt="Métodos de pago">
+						</div>
+					</div>
+
+					<!-- Quick Order -->
+					<div class="lixmar-product__quick-order">
+						<span class="lixmar-product__qo-badge">📞 Pedido rápido 24/7</span>
+						<p class="lixmar-product__qo-phone">(011) 3886 2516</p>
+					</div>
+
+					<!-- Shipping -->
+					<div class="lixmar-product__shipping">
+						<span class="lixmar-product__shipping-icon">🚚</span>
+						<span>Envios desde <strong>Argentina</strong></span>
+					</div>
+				</div>
+
+			</div>
+		</section>
+
+		<!-- Frequently Bought Together + Banners (Figma: 1:3929, 1:3954, 1:3955) -->
+		<section class="lixmar-bundle" data-node-id="1:3929">
+			<div class="lixmar-bundle__layout">
+
+				<!-- Left: Frequently Bought Together -->
+				<div class="lixmar-bundle__main">
+					<h3 class="lixmar-bundle__title">Frecuentemente Comprados Juntos</h3>
+
+					<div class="lixmar-bundle__content">
+						<!-- Products Row -->
+						<div class="lixmar-bundle__products">
+							<div class="lixmar-bundle__product-imgs">
+								<div class="lixmar-bundle__prod-img">
+									<img src="https://www.figma.com/api/mcp/asset/16e788b8-87f5-48aa-bff1-8c2639c6a686" alt="Somseng Galatero X6">
+								</div>
+								<span class="lixmar-bundle__plus">+</span>
+								<div class="lixmar-bundle__prod-img">
+									<img src="https://www.figma.com/api/mcp/asset/0bc100a7-9db1-45cc-85fd-385f4e08f4ab" alt="Auriculares BOSO 2">
+								</div>
+								<span class="lixmar-bundle__plus">+</span>
+								<div class="lixmar-bundle__prod-img lixmar-bundle__prod-img--faded">
+									<img src="https://www.figma.com/api/mcp/asset/96898434-9b3c-46bd-ab65-c85a29df245f" alt="Opplo Watch Series 8">
+								</div>
+							</div>
+
+							<!-- Summary -->
+							<div class="lixmar-bundle__summary">
+								<p class="lixmar-bundle__total-label">PRECIO TOTAL:</p>
+								<p class="lixmar-bundle__total-price">$609.000</p>
+								<a href="#" class="lixmar-bundle__btn-cart">AGREGAR AL CARRITO</a>
+								<p class="lixmar-bundle__wishlist">♥ Añadir todo a la lista de deseos</p>
+							</div>
+						</div>
+
+						<!-- Checklist -->
+						<div class="lixmar-bundle__checklist">
+							<label class="lixmar-bundle__check">
+								<input type="checkbox" checked>
+								<span><strong>Este artículo:</strong> Somseng Galatero X6 Ultra LTE 4G/128 Gb, Negro ( <strong class="lixmar-bundle__check-price">$569.000</strong> )</span>
+							</label>
+							<label class="lixmar-bundle__check">
+								<input type="checkbox">
+								<span>Auriculares BOSO 2 Inalambricos On Ear (<strong class="lixmar-bundle__check-price">$369.000</strong> )</span>
+							</label>
+							<label class="lixmar-bundle__check">
+								<input type="checkbox">
+								<span>Opplo Watch Series 8 GPS + Caja de acero inoxidable celular con correa milanesa ( <strong class="lixmar-bundle__check-price">$129.000</strong> )</span>
+							</label>
+						</div>
+					</div>
+				</div>
+
+				<!-- Right: Banners -->
+				<div class="lixmar-bundle__banners">
+					<a href="#" class="lixmar-bundle__banner" data-node-id="1:3954">
+						<img src="https://www.figma.com/api/mcp/asset/5cafce61-5b46-41ad-a702-9414916285a7" alt="Sale 50%">
+					</a>
+					<a href="#" class="lixmar-bundle__banner" data-node-id="1:3955">
+						<img src="https://www.figma.com/api/mcp/asset/8696c35a-9dfe-43fe-888d-fd8b287a16b6" alt="Tablets">
+					</a>
+				</div>
+
+			</div>
+		</section>
+
+		<!-- Product Description Tabs (Figma: 1:3959) -->
+		<section class="lixmar-desc" data-node-id="1:3959">
+			<!-- Tabs -->
+			<div class="lixmar-desc__tabs">
+				<button class="lixmar-desc__tab lixmar-desc__tab--active">DESCRIPCION</button>
+				<button class="lixmar-desc__tab">RESEÑAS (5)</button>
+				<button class="lixmar-desc__tab">INFORMACION ADICIONAL</button>
+			</div>
+
+			<hr class="lixmar-desc__divider">
+
+			<!-- Tab Content: Description -->
+			<div class="lixmar-desc__body">
+				<p class="lixmar-desc__intro">Diseñado para un rendimiento ultrarrápido, la delgada y ligera Samsung Galaxy Tab S2 te acompaña a todas partes. Fotos, películas y documentos se muestran en una pantalla Super AMOLED nítida y clara. La memoria expandible te permite disfrutar más de tu contenido favorito. Y conectar y compartir entre todos tus dispositivos Samsung es más fácil que nunca. Bienvenido a la vida con la Samsung Galaxy Tab S2 renovada. Observa cómo el mundo cobra vida en la pantalla Super AMOLED de tu tableta*. Con un contraste profundo, colores intensos y detalles nítidos, no te perderás nada.</p>
+
+				<div class="lixmar-desc__hero-img">
+					<img src="https://www.figma.com/api/mcp/asset/5ab33422-ed80-4691-9715-620d0a73df4d" alt="Galaxy Tab S2">
+				</div>
+
+				<p class="lixmar-desc__caption">* La pantalla con relación de aspecto 4:3 de la Galaxy Tab S2 le proporciona un entorno ideal para realizar tareas de oficina.</p>
+
+				<h4 class="lixmar-desc__subtitle">Del fabricante</h4>
+
+				<p class="lixmar-desc__text">Sumérgete en los éxitos de taquilla que anhelas ver. Cambia entre tus apps favoritas rápida y fácilmente. El nuevo y mejorado procesador de ocho núcleos te ofrece la potencia y la velocidad que necesitas para ver y hacer más. Amplía la memoria de tu tableta de 32 GB a 128 GB adicionales y disfruta de tu música, fotos, películas y juegos favoritos dondequiera que estés con una tarjeta microSD. Con Quick Connect, inicia un programa en tu Smart TV y, con solo tocar un botón, llévalo contigo transfiriéndolo a tu Galaxy Tab S2.</p>
+
+				<p class="lixmar-desc__text">O envía videos y fotos desde la pantalla de tu tableta a la pantalla de tu televisor para compartirlos con todos en la sala. Trabaja sin esfuerzo entre tu tableta y tu smartphone Samsung con SideSync. Arrastra y suelta fotos rápidamente entre dispositivos. Incluso responde una llamada desde tu smartphone directamente en la pantalla de tu tableta.</p>
+
+				<div class="lixmar-desc__images-row">
+					<div class="lixmar-desc__img-half">
+						<img src="https://www.figma.com/api/mcp/asset/81c0cc39-18dc-4ffe-abf3-072807a953ae" alt="Galaxy Tab S2 detalle">
+					</div>
+					<div class="lixmar-desc__img-half">
+						<img src="https://www.figma.com/api/mcp/asset/75cc7985-5c8c-4bc9-8a55-72c94f670740" alt="Galaxy Tab S2 apps">
+					</div>
+				</div>
+
+				<h4 class="lixmar-desc__subtitle">Semsong Galaxy Tab S2, 8-Inch, Blanco</h4>
+
+				<div class="lixmar-desc__more-text">
+					<div class="lixmar-desc__more-content">
+						<p>La Samsung Galaxy Tab S2 ofrece dos cámaras: una trasera de 8 megapíxeles con enfoque automático y una frontal de 2,1 megapíxeles. Toma fotos y vídeos de alta calidad o chatea por vídeo con amigos, familiares y compañeros. Personaliza tu Galaxy Tab S2 con las apps que más usas. El widget Samsung Galaxy Essentials ofrece una colección de apps premium gratuitas, optimizadas para la pantalla de tu tablet. Selecciona y descarga las apps que quieras para mejorar al instante tu experiencia con la tablet.</p>
+						<p>The Samsung Galaxy Tab S2 offers dual cameras: a rear-facing 8-megapixel camera with Auto Focus and a 2.1-megapixel camera on the front. Take high-quality pictures and video or video chat</p>
+					</div>
+					<div class="lixmar-desc__overlay"></div>
+					<a href="#" class="lixmar-desc__show-more">MOSTRAR MAS ▾</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- Related Products (Figma: 1:3978) -->
+		<section class="lixmar-related" data-node-id="1:3978">
+			<h3 class="lixmar-related__title">RELATED PRODUCTS</h3>
+
+			<div class="lixmar-related__slider">
+				<button class="lixmar-related__nav lixmar-related__nav--prev" aria-label="Anterior">‹</button>
+
+				<div class="lixmar-related__track">
+					<!-- Card 1 -->
+					<div class="lixmar-related__card" data-node-id="1:3981">
+						<div class="lixmar-related__img-wrap">
+							<div class="lixmar-related__badge lixmar-related__badge--orange">
+								<span class="lixmar-related__badge-label">AHORRA</span>
+								<span class="lixmar-related__badge-value">$199.000</span>
+							</div>
+							<button class="lixmar-related__fav" title="Favorito">♡</button>
+							<img src="https://www.figma.com/api/mcp/asset/ac9179ac-a9b4-4cc0-aec8-9c48d5779aca" alt="SROK Smart Phone 128GB" class="lixmar-related__img">
+						</div>
+						<div class="lixmar-related__info">
+							<div class="lixmar-related__rating">
+								<span class="lixmar-related__stars">★★★★★</span>
+								<span class="lixmar-related__reviews">(152)</span>
+							</div>
+							<h4 class="lixmar-related__name">SROK Smart Phone 128GB, Oled Retina</h4>
+							<div class="lixmar-related__prices">
+								<span class="lixmar-related__price lixmar-related__price--sale">$579.000</span>
+								<span class="lixmar-related__price lixmar-related__price--old">$859.000</span>
+							</div>
+							<div class="lixmar-related__tags">
+								<span class="lixmar-related__tag lixmar-related__tag--green">ENVIO GRATIS</span>
+							</div>
+							<p class="lixmar-related__stock lixmar-related__stock--available">✔ En stock</p>
+						</div>
+					</div>
+
+					<!-- Card 2 -->
+					<div class="lixmar-related__card" data-node-id="1:3997">
+						<div class="lixmar-related__img-wrap">
+							<div class="lixmar-related__badge lixmar-related__badge--dark">
+								<span class="lixmar-related__badge-label">NUEVO</span>
+							</div>
+							<button class="lixmar-related__fav" title="Favorito">♡</button>
+							<img src="https://www.figma.com/api/mcp/asset/8cb56cff-c2a1-4bb9-9da7-23e3c2f5a4be" alt="aPod Pro Tablet 2023" class="lixmar-related__img">
+						</div>
+						<div class="lixmar-related__info">
+							<div class="lixmar-related__rating" style="visibility:hidden;">
+								<span class="lixmar-related__stars">★★★★★</span>
+								<span class="lixmar-related__reviews">(0)</span>
+							</div>
+							<h4 class="lixmar-related__name">aPod Pro Tablet 2023 LTE + Wifi, GPS Cellular 12.9 Inch, 512GB</h4>
+							<div class="lixmar-related__prices">
+								<span class="lixmar-related__price">$979.000 - $1.259.000</span>
+							</div>
+							<div class="lixmar-related__tags">
+								<span class="lixmar-related__tag lixmar-related__tag--dark">$2.980 ENVIO</span>
+							</div>
+							<p class="lixmar-related__stock lixmar-related__stock--available">✔ En stock</p>
+						</div>
+					</div>
+
+					<!-- Card 3 -->
+					<div class="lixmar-related__card" data-node-id="1:4009">
+						<div class="lixmar-related__img-wrap">
+							<button class="lixmar-related__fav" title="Favorito">♡</button>
+							<img src="https://www.figma.com/api/mcp/asset/671c3e3e-e5f1-47f1-a618-ac7aeee4897e" alt="OPod Pro 12.9 Inch M1" class="lixmar-related__img">
+						</div>
+						<div class="lixmar-related__info">
+							<div class="lixmar-related__rating">
+								<span class="lixmar-related__stars">★★★★<span class="lixmar-related__star-empty">★</span></span>
+								<span class="lixmar-related__reviews">(5)</span>
+							</div>
+							<h4 class="lixmar-related__name">OPod Pro 12.9 Inch M1 2023, 64GB + Wifi, GPS</h4>
+							<div class="lixmar-related__prices">
+								<span class="lixmar-related__price">$659.000</span>
+							</div>
+							<div class="lixmar-related__tags">
+								<span class="lixmar-related__tag lixmar-related__tag--green">ENVIO GRATIS</span>
+								<span class="lixmar-related__tag lixmar-related__tag--red">REGALO GRATIS</span>
+							</div>
+							<p class="lixmar-related__stock lixmar-related__stock--available">✔ En stock</p>
+							<div class="lixmar-related__variants">
+								<img src="https://www.figma.com/api/mcp/asset/671c3e3e-e5f1-47f1-a618-ac7aeee4897e" alt="Variante 1" class="lixmar-related__variant-thumb">
+								<img src="https://www.figma.com/api/mcp/asset/ac9179ac-a9b4-4cc0-aec8-9c48d5779aca" alt="Variante 2" class="lixmar-related__variant-thumb">
+								<img src="https://www.figma.com/api/mcp/asset/96df7514-99d1-47a2-a017-86418a3b708c" alt="Variante 3" class="lixmar-related__variant-thumb">
+							</div>
+						</div>
+					</div>
+
+					<!-- Card 4 -->
+					<div class="lixmar-related__card" data-node-id="1:4026">
+						<div class="lixmar-related__img-wrap">
+							<div class="lixmar-related__badge lixmar-related__badge--orange">
+								<span class="lixmar-related__badge-label">SAVE</span>
+								<span class="lixmar-related__badge-value">$59.00</span>
+							</div>
+							<button class="lixmar-related__fav" title="Favorito">♡</button>
+							<img src="https://www.figma.com/api/mcp/asset/96df7514-99d1-47a2-a017-86418a3b708c" alt="Xiamoi Redmi Note 5" class="lixmar-related__img">
+						</div>
+						<div class="lixmar-related__info">
+							<div class="lixmar-related__rating">
+								<span class="lixmar-related__stars">★★★★★</span>
+								<span class="lixmar-related__reviews">(9)</span>
+							</div>
+							<h4 class="lixmar-related__name">Xiamoi Redmi Note 5, 64GB</h4>
+							<div class="lixmar-related__prices">
+								<span class="lixmar-related__price lixmar-related__price--sale">$1.239.000</span>
+								<span class="lixmar-related__price lixmar-related__price--old">$1.619.000</span>
+							</div>
+							<div class="lixmar-related__tags">
+								<span class="lixmar-related__tag lixmar-related__tag--green">ENVIO GRATIS</span>
+							</div>
+							<p class="lixmar-related__stock">📞 Contacto</p>
+						</div>
+					</div>
+
+					<!-- Card 5 -->
+					<div class="lixmar-related__card" data-node-id="1:4042">
+						<div class="lixmar-related__img-wrap">
+							<button class="lixmar-related__fav" title="Favorito">♡</button>
+							<img src="https://www.figma.com/api/mcp/asset/d35b8ac0-3f32-4d1a-8004-7afcfd3a83cb" alt="Microsute Alpha Ultra S5" class="lixmar-related__img">
+						</div>
+						<div class="lixmar-related__info">
+							<div class="lixmar-related__rating">
+								<span class="lixmar-related__stars">★★★★★</span>
+								<span class="lixmar-related__reviews">(8)</span>
+							</div>
+							<h4 class="lixmar-related__name">Microsute Alpha Ultra S5 Surface 128GB 2022, Sliver</h4>
+							<div class="lixmar-related__prices">
+								<span class="lixmar-related__price">$1.729.000</span>
+							</div>
+							<div class="lixmar-related__tags">
+								<span class="lixmar-related__tag lixmar-related__tag--green">ENVIO GRATIS</span>
+							</div>
+							<p class="lixmar-related__stock">📞 Contacto</p>
+							<div class="lixmar-related__variants">
+								<img src="https://www.figma.com/api/mcp/asset/d35b8ac0-3f32-4d1a-8004-7afcfd3a83cb" alt="Variante 1" class="lixmar-related__variant-thumb">
+								<img src="https://www.figma.com/api/mcp/asset/9c6edd1f-67a3-41d4-8eed-b32a7b344a89" alt="Variante 2" class="lixmar-related__variant-thumb">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<button class="lixmar-related__nav lixmar-related__nav--next" aria-label="Siguiente">›</button>
+			</div>
+		</section>
+
+		<!-- Recently Viewed (Figma: 1:4060) -->
+		<section class="lixmar-recent" data-node-id="1:4060">
+			<div class="lixmar-recent__header">
+				<div class="lixmar-recent__header-left">
+					<h3 class="lixmar-recent__title">TUS VISTOS RECIENTEMENTE</h3>
+					<a href="#" class="lixmar-recent__view-all">Ver Todo →</a>
+				</div>
+				<div class="lixmar-recent__arrows">
+					<button class="lixmar-recent__arrow lixmar-recent__arrow--prev" aria-label="Anterior">←</button>
+					<button class="lixmar-recent__arrow lixmar-recent__arrow--next" aria-label="Siguiente">→</button>
+				</div>
+			</div>
+
+			<div class="lixmar-recent__track">
+				<!-- Card 1 -->
+				<div class="lixmar-recent__card" data-node-id="1:4069">
+					<div class="lixmar-recent__img-wrap">
+						<div class="lixmar-recent__badge lixmar-recent__badge--dark">NUEVO</div>
+						<button class="lixmar-recent__fav" title="Favorito">♡</button>
+						<img src="https://www.figma.com/api/mcp/asset/03b49d3f-f896-42db-8fb5-0ec26049d31c" alt="Xomie Remid 8 Sport" class="lixmar-recent__img">
+					</div>
+					<div class="lixmar-recent__info">
+						<div class="lixmar-recent__rating">
+							<span class="lixmar-recent__stars">★★★★<span class="lixmar-recent__star-empty">★</span></span>
+							<span class="lixmar-recent__reviews">(152)</span>
+						</div>
+						<h4 class="lixmar-recent__name">Xomie Remid 8 Sport Resistente al agua</h4>
+						<p class="lixmar-recent__price">$579.000</p>
+					</div>
+				</div>
+
+				<!-- Card 2 -->
+				<div class="lixmar-recent__card" data-node-id="1:4079">
+					<div class="lixmar-recent__img-wrap">
+						<div class="lixmar-recent__badge lixmar-recent__badge--dark">NUEVO</div>
+						<button class="lixmar-recent__fav" title="Favorito">♡</button>
+						<img src="https://www.figma.com/api/mcp/asset/e7636651-2454-4ed7-8096-8c2e2a762015" alt="Microte Surface 2.0 Laptop" class="lixmar-recent__img">
+					</div>
+					<div class="lixmar-recent__info">
+						<h4 class="lixmar-recent__name">Microte Surface 2.0 Laptop</h4>
+						<p class="lixmar-recent__price">$979.000</p>
+					</div>
+				</div>
+
+				<!-- Card 3 -->
+				<div class="lixmar-recent__card" data-node-id="1:4087">
+					<div class="lixmar-recent__img-wrap">
+						<button class="lixmar-recent__fav" title="Favorito">♡</button>
+						<img src="https://www.figma.com/api/mcp/asset/953d73c4-560e-4c2a-966d-d8ba225b7782" alt="aPod Pro Tablet 2023" class="lixmar-recent__img">
+					</div>
+					<div class="lixmar-recent__info">
+						<h4 class="lixmar-recent__name">aPod Pro Tablet 2023 LTE + Wifi, GPS Cellular 12.9 Inch, 512GB</h4>
+						<p class="lixmar-recent__price">$979.009 - $1.259.000</p>
+					</div>
+				</div>
+
+				<!-- Card 4 -->
+				<div class="lixmar-recent__card" data-node-id="1:4093">
+					<div class="lixmar-recent__img-wrap">
+						<div class="lixmar-recent__badge lixmar-recent__badge--orange">
+							<span class="lixmar-recent__badge-label">AHORRA</span>
+							<span class="lixmar-recent__badge-value">$192.000</span>
+						</div>
+						<button class="lixmar-recent__fav" title="Favorito">♡</button>
+						<img src="https://www.figma.com/api/mcp/asset/245d5439-0bf8-4483-848e-9cb7676ccb44" alt="SROK Smart Phone 128GB" class="lixmar-recent__img">
+					</div>
+					<div class="lixmar-recent__info">
+						<div class="lixmar-recent__rating">
+							<span class="lixmar-recent__stars">★★★★<span class="lixmar-recent__star-empty">★</span></span>
+							<span class="lixmar-recent__reviews">(152)</span>
+						</div>
+						<h4 class="lixmar-recent__name">SROK Smart Phone 128GB, Oled Retina</h4>
+						<div class="lixmar-recent__prices-row">
+							<span class="lixmar-recent__price lixmar-recent__price--sale">$579.000</span>
+							<span class="lixmar-recent__price lixmar-recent__price--old">$779.000</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</main>
+
+	<!-- Footer (Figma: 8:2638) -->
+	<footer class="lixmar-footer" data-node-id="8:2638">
+		<div class="lixmar-footer__container">
+			<!-- Columna 1: Info de contacto -->
+			<div class="lixmar-footer__col lixmar-footer__col--contact">
+				<h3 class="lixmar-footer__brand">Lixmar</h3>
+				<p class="lixmar-footer__slogan">DESCUENTOS 24/7</p>
+				<p class="lixmar-footer__phone">(+54) xxxxxxxx</p>
+				<p class="lixmar-footer__address">CABA, Argentina</p>
+				<p class="lixmar-footer__email">contact@lixmar.com</p>
+				<div class="lixmar-footer__social">
+					<a href="#" class="lixmar-footer__social-link" aria-label="Twitter">🐦</a>
+					<a href="#" class="lixmar-footer__social-link" aria-label="Facebook">f</a>
+					<a href="#" class="lixmar-footer__social-link" aria-label="Google">G</a>
+					<a href="#" class="lixmar-footer__social-link" aria-label="YouTube">▶</a>
+					<a href="#" class="lixmar-footer__social-link" aria-label="Pinterest">P</a>
+				</div>
+				<div class="lixmar-footer__selectors">
+					<button class="lixmar-footer__selector">
+						<span>🇦🇷</span> ARG <span class="lixmar-footer__arrow">▼</span>
+					</button>
+					<button class="lixmar-footer__selector">
+						<img src="https://www.figma.com/api/mcp/asset/7c758971-9b63-4e7e-aa50-6a99ddb341b7" alt="" class="lixmar-footer__flag"> Esp <span class="lixmar-footer__arrow">▼</span>
+					</button>
+				</div>
+			</div>
+
+			<!-- Columna 2: Categorías -->
+			<div class="lixmar-footer__col">
+				<h4 class="lixmar-footer__title">Categorías</h4>
+				<ul class="lixmar-footer__list">
+					<li><a href="#">Laptops</a></li>
+					<li><a href="#">PC y Computadoras</a></li>
+					<li><a href="#">Celulares</a></li>
+					<li><a href="#">Tablets</a></li>
+					<li><a href="#">Gaming & VR</a></li>
+					<li><a href="#">Oficina</a></li>
+					<li><a href="#">Cámaras</a></li>
+					<li><a href="#">Sonido</a></li>
+					<li><a href="#">Hogar</a></li>
+				</ul>
+			</div>
+
+			<!-- Columna 3: Compañía -->
+			<div class="lixmar-footer__col">
+				<h4 class="lixmar-footer__title">Compañía</h4>
+				<ul class="lixmar-footer__list">
+					<li><a href="#">Sobre Lixmar</a></li>
+					<li><a href="#">Contacto</a></li>
+					<li><a href="#">Carrera</a></li>
+					<li><a href="#">Blog</a></li>
+					<li><a href="#">Mapa</a></li>
+					<li><a href="#">Ubicación</a></li>
+				</ul>
+			</div>
+
+			<!-- Columna 4: Ayuda -->
+			<div class="lixmar-footer__col">
+				<h4 class="lixmar-footer__title">Ayuda</h4>
+				<ul class="lixmar-footer__list">
+					<li><a href="#">Servicios</a></li>
+					<li><a href="#">Políticas</a></li>
+					<li><a href="#">Términos</a></li>
+					<li><a href="#">Ordenes</a></li>
+					<li><a href="#">FAQs</a></li>
+					<li><a href="#">Mi Cuenta</a></li>
+					<li><a href="#">Soporte</a></li>
+				</ul>
+			</div>
+
+			<!-- Columna 5: Marcas -->
+			<div class="lixmar-footer__col">
+				<h4 class="lixmar-footer__title">Marcas</h4>
+				<ul class="lixmar-footer__list">
+					<li><a href="#">Mejores Vendedores</a></li>
+					<li><a href="#">Afiliados</a></li>
+					<li><a href="#">Advertencias</a></li>
+					<li><a href="#">Socios</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Subscripción -->
+		<div class="lixmar-footer__subscribe">
+			<h4 class="lixmar-footer__subscribe-title">
+				Suscríbete y obtén un <span class="lixmar-footer__highlight">10%</span> de descuento en tu primer pedido
+			</h4>
+			<form class="lixmar-footer__form">
+				<span class="lixmar-footer__form-icon">✉</span>
+				<input type="email" class="lixmar-footer__input" placeholder="Introduce tu dirección de correo electrónico">
+				<button type="submit" class="lixmar-footer__submit">SUSCRIBIRSE →</button>
+			</form>
+			<p class="lixmar-footer__disclaimer">Al suscribirte, aceptas nuestra Política.</p>
+		</div>
+
+		<!-- Bottom bar -->
+		<div class="lixmar-footer__bottom">
+			<div class="lixmar-footer__payments">
+				<img src="https://www.figma.com/api/mcp/asset/7919ed33-755a-4b4b-bde3-094918c2081e" alt="PayPal" class="lixmar-footer__pay">
+				<img src="https://www.figma.com/api/mcp/asset/23be0821-3805-4738-8050-bd8a3171d923" alt="Visa" class="lixmar-footer__pay">
+				<img src="https://www.figma.com/api/mcp/asset/463c7028-2f19-4e4d-9130-a02fd32074e4" alt="Stripe" class="lixmar-footer__pay">
+				<img src="https://www.figma.com/api/mcp/asset/e2cdf869-5050-4c6e-8bc6-0b77c0edfe73" alt="MasterCard" class="lixmar-footer__pay">
+				<img src="https://www.figma.com/api/mcp/asset/ebd318eb-2c53-4207-a2b3-6e781c38b5ed" alt="Klarna" class="lixmar-footer__pay">
+			</div>
+			<a href="#" class="lixmar-footer__app">📱 App celular</a>
+		</div>
+	</footer>
+	<script src="src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="80" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad_ffd94808a1fe5b9d941ae29df33e935e" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#212121;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#424242;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="80" fill="url(#grad_ffd94808a1fe5b9d941ae29df33e935e)"/>
+  <circle cx="200" cy="40" r="50" fill="rgba(255,255,255,0.3)"/>
+  <text x="200" y="46" font-size="18" fill="white" text-anchor="middle" font-weight="bold">Métodos de Pago</text>
+</svg>

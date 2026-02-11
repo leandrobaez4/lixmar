@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad_844d57c33d12347bedc0a9c0456ae631" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4caf50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#388e3c;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#grad_844d57c33d12347bedc0a9c0456ae631)"/>
+  <circle cx="200" cy="150" r="50" fill="rgba(255,255,255,0.3)"/>
+  <text x="200" y="156" font-size="18" fill="white" text-anchor="middle" font-weight="bold">Oferta 2</text>
+</svg>

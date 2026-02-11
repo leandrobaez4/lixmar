@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>LIXMAR - Header Demo</title>
+	<link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+	<!-- Opciones adicionales -->
+	<div class="header-container" style="margin-top:10px;align-items:center;gap:20px;background:#ffffff;">
+		<div style="background:#ffffff;border-radius:6px;padding:4px 16px;display:flex;align-items:center;gap:8px;font-size:12px;">
+			<span style="font-weight:bold;font-size:14px;">🎤</span> OFERTAS 24/7
+		</div>
+		<div style="font-size:14px;">Vender en Lixmar</div>
+		<div style="font-size:14px;">Orden de Seguimiento</div>
+		<div style="display:flex;align-items:center;gap:8px;">
+			<span style="font-size:14px;">💲ARG</span>
+			<img src="https://www.figma.com/api/mcp/asset/5f8d6a42-6063-48eb-ab75-2746a2c0e657" alt="ENG" style="width:15px;height:15px;">
+			<span style="font-size:14px;">Esp</span>
+		</div>
+	</div>
+
+	<!-- Header Principal -->
+	<header class="header">
+		<div class="header-container">
+			<!-- Logo -->
+			<div class="header-left">
+				<img src="https://www.figma.com/api/mcp/asset/77526e53-e478-499c-ab2b-389155dfcfa1" alt="Logo" style="width:45px;height:45px;border-radius:11px;margin-right:10px;">
+				<span class="logo"><span style="color:#ff6a00;">LIX</span>MAR</span>
+			</div>
+
+			<!-- Navegación principal -->
+			<nav class="nav-main">
+				<a href="#" class="nav-link dropdown">INICIO</a>
+				<a href="#" class="nav-link dropdown">PÁGINAS</a>
+				<a href="#" class="nav-link dropdown">PRODUCTOS</a>
+				<a href="#" class="nav-link">CONTACTO</a>
+			</nav>
+
+			<!-- Acciones y usuario -->
+			<div class="header-right">
+				<button class="btn-icon" title="Notificaciones" style="background:orange;color:#fff;">
+					<img src="https://www.figma.com/api/mcp/asset/12c3182a-7ede-4e75-8f0b-0d1e7c26dbfd" alt="Notificación" style="width:17px;height:17px;">
+				</button>
+				<button class="btn-icon" title="Icono especial" style="background:orange;">
+					<img src="https://www.figma.com/api/mcp/asset/56b63bf3-a6cf-4586-8932-809b0e773911" alt="Icon" style="width:22px;height:22px;">
+				</button>
+				<button class="btn-icon" title="Usuario" style="background:#fff;">
+					<img src="https://www.figma.com/api/mcp/asset/6c05cca3-68d9-46d9-9ef6-3df5ee267521" alt="Usuario" style="width:41px;height:41px;">
+				</button>
+				<div class="account-menu">
+					<span class="account-label">BIENVENIDO!</span>
+					<a href="#">Entrar / Registrarse</a>
+				</div>
+				<div class="cart-btn">
+					<button class="btn-icon" style="background:orange;position:relative;">
+						<img src="https://www.figma.com/api/mcp/asset/45ae75aa-0218-43d8-8494-bc41d257db10" alt="Carrito" style="width:23px;height:23px;">
+						<span class="cart-count">5</span>
+					</button>
+					<div class="cart-price">CARRITO<br><span class="cart-total">$1.689.000</span></div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<!-- Barra de búsqueda y beneficios (Figma: 1:348) -->
+	<section class="search-bar-section search-bar-section--figma" data-node-id="1:348">
+		<div class="header-container">
+			<div class="nav-style3-row">
+				<div class="nav-style3-search" data-node-id="1:349">
+					<button class="dropdown-btn nav-style3-dropdown" type="button" data-node-id="1:350">
+						<span>Categorías</span>
+						<img src="https://www.figma.com/api/mcp/asset/af391325-c6eb-4fe0-bd4d-547a3fab74f3" alt="" class="nav-style3-caret" data-node-id="1:352">
+					</button>
+					<input class="search-input nav-style3-input" type="text" placeholder="Buscar Productos, Marcas y Más!" data-node-id="1:356">
+					<button class="search-btn nav-style3-searchbtn" type="button" aria-label="Buscar" data-node-id="1:359">🔍</button>
+				</div>
+
+				<div class="benefits-row nav-style3-benefits">
+					<div class="benefit nav-style3-benefit" data-node-id="1:361"> ENVÍO GRATIS SUPERANDO LOS<br><strong>$50.000,00</strong></div>
+					<div class="benefit nav-style3-benefit" data-node-id="1:363"> 30 DÍAS DE DEVOLUCIÓN<br><strong>DE DINERO</strong></div>
+					<div class="benefit nav-style3-benefit" data-node-id="1:365">s PAGO<br><strong>100% SEGURO</strong></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<main class="container" >
+		<!-- Breadcrumb (Figma: 1:3431) -->
+		<nav class="lixmar-breadcrumb" data-node-id="1:3431" aria-label="Breadcrumb">
+			<a href="#" class="lixmar-breadcrumb__link">Inicio</a>
+			<span class="lixmar-breadcrumb__sep">/</span>
+			<a href="#" class="lixmar-breadcrumb__link">pagina</a>
+			<span class="lixmar-breadcrumb__sep">/</span>
+			<span class="lixmar-breadcrumb__current">sobre nosotros</span>
+		</nav>
+
+		<!-- About Section (Figma: 1:4233) -->
+		<section class="lixmar-about" data-node-id="1:4233">
+			<!-- Hero Card -->
+			<div class="lixmar-about__hero">
+				<div class="lixmar-about__banner" style="background-image: url('https://www.figma.com/api/mcp/asset/76872b2a-2abf-42a8-9c5d-ccbb2c98743a');">
+					<h2 class="lixmar-about__title">La mejor manera de vender sin perder ganancias</h2>
+					<div class="lixmar-about__subtitle">
+						<p class="lixmar-about__subtitle-bold">El único marketplace sin comisiones con plan fijo en Argentina.</p>
+						<p class="lixmar-about__subtitle-text">Un lugar donde vendedores y emprendedores pueden publicar sin límites, ganar el 100% de cada venta y crecer sin barreras.</p>
+					</div>
+				</div>
+
+				<div class="lixmar-about__stats">
+					<div class="lixmar-about__stat">
+						<p class="lixmar-about__stat-text">NUESTRA MISIÓN ES <span class="lixmar-about__highlight">TRANSFORMAR</span> EL COMERCIO DIGITAL EN <span class="lixmar-about__highlight">ARGENTINA</span></p>
+					</div>
+					<div class="lixmar-about__stat">
+						<p class="lixmar-about__stat-number">+3.200 <span>vendedores</span></p>
+						<p class="lixmar-about__stat-desc">Confiando en el modelo sin comisiones.</p>
+					</div>
+					<div class="lixmar-about__stat">
+						<p class="lixmar-about__stat-number">+15.000 <span>productos</span></p>
+						<p class="lixmar-about__stat-desc">En categorías generales, tecnología, hogar y más.</p>
+					</div>
+					<div class="lixmar-about__stat">
+						<p class="lixmar-about__stat-label">Modelo único en Argentina</p>
+						<p class="lixmar-about__stat-desc">Plan fijo mensual, sin costos ocultos.</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Mission Row -->
+			<div class="lixmar-about__mission">
+				<div class="lixmar-about__mission-img">
+					<img src="https://www.figma.com/api/mcp/asset/94814d72-be46-4aea-a7b3-1bed94c1999f" alt="Nuestra misión">
+				</div>
+				<div class="lixmar-about__mission-info">
+					<h3 class="lixmar-about__mission-title">NUESTRA MISIÓN Y VISIÓN</h3>
+					<p class="lixmar-about__mission-text"><strong>LIXMAR</strong> nació para ofrecer a todos los argentinos un marketplace justo, moderno y transparente.<br>Creemos en potenciar a los vendedores, acompañar a los emprendedores y simplificar el comercio digital con tecnología diseñada para todos.</p>
+					<p class="lixmar-about__mission-text">Nuestro objetivo es construir una plataforma sólida, segura y lista para escalar a miles de usuarios, manteniendo siempre la accesibilidad, la transparencia y la igualdad de oportunidades como pilares centrales de <strong>LIXMAR</strong>.</p>
+					<a href="#" class="lixmar-about__cta">CÓMO FUNCIONA LIXMAR</a>
+				</div>
+			</div>
+
+		</section>
+
+		<!-- Feature Boxes Section -->
+		<section class="lixmar-about-features">
+			<div class="lixmar-about-features__grid">
+				<div class="lixmar-about-features__card" data-node-id="1:4255">
+					<div class="lixmar-about-features__header">
+						<h4 class="lixmar-about-features__title">SIN COMISIONES POR VENTA</h4>
+						<span class="lixmar-about-features__icon">
+							<img src="https://www.figma.com/api/mcp/asset/fbde5d23-f465-4430-b41f-e1aedeb4b51d" alt="Contrato">
+						</span>
+					</div>
+					<p class="lixmar-about-features__text">En <strong>LIXMAR</strong> los vendedores se quedan con el 100% de sus ganancias. Solo pagan un plan mensual accesible, sin cargos ocultos ni sorpresas.</p>
+				</div>
+
+				<div class="lixmar-about-features__card" data-node-id="1:4260">
+					<div class="lixmar-about-features__header">
+						<h4 class="lixmar-about-features__title">PUBLICACIÓN EN MINUTOS</h4>
+						<span class="lixmar-about-features__icon">
+							<img src="https://www.figma.com/api/mcp/asset/eac67be8-767e-45e5-ac62-187ef1b1fe0d" alt="Entrega rápida">
+						</span>
+					</div>
+					<p class="lixmar-about-features__text">Subí tus productos de manera simple y rápida. Fotos, precio y descripción… ¡y listo! Diseñado para que cualquiera pueda empezar a vender sin complicaciones.</p>
+				</div>
+
+				<div class="lixmar-about-features__card" data-node-id="1:4265">
+					<div class="lixmar-about-features__header">
+						<h4 class="lixmar-about-features__title">PRECIO ACCESIBLE</h4>
+						<span class="lixmar-about-features__icon">
+							<img src="https://www.figma.com/api/mcp/asset/7a02d602-d5bf-448a-ad2d-aff7563644ad" alt="Mejor precio">
+						</span>
+					</div>
+					<p class="lixmar-about-features__text">Un único plan mensual que permite publicar productos ilimitados y acceder a todas las funciones de LIXMAR sin restricciones.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Team Section (Figma: 1:4270) -->
+		<section class="lixmar-team" data-node-id="1:4270">
+			<h3 class="lixmar-team__title">Nuestro Equipo</h3>
+			<div class="lixmar-team__grid">
+				<div class="lixmar-team__member">
+					<div class="lixmar-team__photo">
+						<img src="https://www.figma.com/api/mcp/asset/cedd94db-6655-4c08-adb8-2738b7391c70" alt="Henry Avery">
+					</div>
+					<h4 class="lixmar-team__name">Henry Avery</h4>
+					<p class="lixmar-team__role">Chairman</p>
+				</div>
+				<div class="lixmar-team__member">
+					<div class="lixmar-team__photo">
+						<img src="https://www.figma.com/api/mcp/asset/7dc81f7b-e5c1-4451-b78c-a8b2fe91d878" alt="Michael Edward">
+					</div>
+					<h4 class="lixmar-team__name">Michael Edward</h4>
+					<p class="lixmar-team__role">Vice President</p>
+				</div>
+				<div class="lixmar-team__member">
+					<div class="lixmar-team__photo">
+						<img src="https://www.figma.com/api/mcp/asset/a87288ed-b945-4b29-9712-683f2695207b" alt="Eden Hazard">
+					</div>
+					<h4 class="lixmar-team__name">Eden Hazard</h4>
+					<p class="lixmar-team__role">CEO</p>
+				</div>
+				<div class="lixmar-team__member">
+					<div class="lixmar-team__photo">
+						<img src="https://www.figma.com/api/mcp/asset/f2cdce8f-9721-4c38-9d91-bdd34b4c7881" alt="Robert Downey Jr">
+					</div>
+					<h4 class="lixmar-team__name">Robert Downey Jr</h4>
+					<p class="lixmar-team__role">CEO</p>
+				</div>
+				<div class="lixmar-team__member">
+					<div class="lixmar-team__photo">
+						<img src="https://www.figma.com/api/mcp/asset/aafd6eac-c63a-44b1-9498-768234d2312f" alt="Nathan Drake">
+					</div>
+					<h4 class="lixmar-team__name">Nathan Drake</h4>
+					<p class="lixmar-team__role">Strategist Director</p>
+				</div>
+			</div>
+		</section>
+
+	</main>
+
+	<!-- Footer (Figma: 8:2638) -->
+	<footer class="lixmar-footer" data-node-id="8:2638">
+		<div class="lixmar-footer__container">
+			<!-- Columna 1: Info de contacto -->
+			<div class="lixmar-footer__col lixmar-footer__col--contact">
+				<h3 class="lixmar-footer__brand">Lixmar</h3>
+				<p class="lixmar-footer__slogan">DESCUENTOS 24/7</p>
+				<p class="lixmar-footer__phone">(+54) xxxxxxxx</p>
+				<p class="lixmar-footer__address">CABA, Argentina</p>
+				<p class="lixmar-footer__email">contact@lixmar.com</p>
+				<div class="lixmar-footer__social">
+					<a href="#" class="lixmar-footer__social-link" aria-label="Twitter">🐦</a>
+					<a href="#" class="lixmar-footer__social-link" aria-label="Facebook">f</a>
+					<a href="#" class="lixmar-footer__social-link" aria-label="Google">G</a>
+					<a href="#" class="lixmar-footer__social-link" aria-label="YouTube">▶</a>
+					<a href="#" class="lixmar-footer__social-link" aria-label="Pinterest">P</a>
+				</div>
+				<div class="lixmar-footer__selectors">
+					<button class="lixmar-footer__selector">
+						<span>🇦🇷</span> ARG <span class="lixmar-footer__arrow">▼</span>
+					</button>
+					<button class="lixmar-footer__selector">
+						<img src="https://www.figma.com/api/mcp/asset/7c758971-9b63-4e7e-aa50-6a99ddb341b7" alt="" class="lixmar-footer__flag"> Esp <span class="lixmar-footer__arrow">▼</span>
+					</button>
+				</div>
+			</div>
+
+			<!-- Columna 2: Categorías -->
+			<div class="lixmar-footer__col">
+				<h4 class="lixmar-footer__title">Categorías</h4>
+				<ul class="lixmar-footer__list">
+					<li><a href="#">Laptops</a></li>
+					<li><a href="#">PC y Computadoras</a></li>
+					<li><a href="#">Celulares</a></li>
+					<li><a href="#">Tablets</a></li>
+					<li><a href="#">Gaming & VR</a></li>
+					<li><a href="#">Oficina</a></li>
+					<li><a href="#">Cámaras</a></li>
+					<li><a href="#">Sonido</a></li>
+					<li><a href="#">Hogar</a></li>
+				</ul>
+			</div>
+
+			<!-- Columna 3: Compañía -->
+			<div class="lixmar-footer__col">
+				<h4 class="lixmar-footer__title">Compañía</h4>
+				<ul class="lixmar-footer__list">
+					<li><a href="#">Sobre Lixmar</a></li>
+					<li><a href="#">Contacto</a></li>
+					<li><a href="#">Carrera</a></li>
+					<li><a href="#">Blog</a></li>
+					<li><a href="#">Mapa</a></li>
+					<li><a href="#">Ubicación</a></li>
+				</ul>
+			</div>
+
+			<!-- Columna 4: Ayuda -->
+			<div class="lixmar-footer__col">
+				<h4 class="lixmar-footer__title">Ayuda</h4>
+				<ul class="lixmar-footer__list">
+					<li><a href="#">Servicios</a></li>
+					<li><a href="#">Políticas</a></li>
+					<li><a href="#">Términos</a></li>
+					<li><a href="#">Ordenes</a></li>
+					<li><a href="#">FAQs</a></li>
+					<li><a href="#">Mi Cuenta</a></li>
+					<li><a href="#">Soporte</a></li>
+				</ul>
+			</div>
+
+			<!-- Columna 5: Marcas -->
+			<div class="lixmar-footer__col">
+				<h4 class="lixmar-footer__title">Marcas</h4>
+				<ul class="lixmar-footer__list">
+					<li><a href="#">Mejores Vendedores</a></li>
+					<li><a href="#">Afiliados</a></li>
+					<li><a href="#">Advertencias</a></li>
+					<li><a href="#">Socios</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Subscripción -->
+		<div class="lixmar-footer__subscribe">
+			<h4 class="lixmar-footer__subscribe-title">
+				Suscríbete y obtén un <span class="lixmar-footer__highlight">10%</span> de descuento en tu primer pedido
+			</h4>
+			<form class="lixmar-footer__form">
+				<span class="lixmar-footer__form-icon">✉</span>
+				<input type="email" class="lixmar-footer__input" placeholder="Introduce tu dirección de correo electrónico">
+				<button type="submit" class="lixmar-footer__submit">SUSCRIBIRSE →</button>
+			</form>
+			<p class="lixmar-footer__disclaimer">Al suscribirte, aceptas nuestra Política.</p>
+		</div>
+
+		<!-- Bottom bar -->
+		<div class="lixmar-footer__bottom">
+			<div class="lixmar-footer__payments">
+				<img src="https://www.figma.com/api/mcp/asset/7919ed33-755a-4b4b-bde3-094918c2081e" alt="PayPal" class="lixmar-footer__pay">
+				<img src="https://www.figma.com/api/mcp/asset/23be0821-3805-4738-8050-bd8a3171d923" alt="Visa" class="lixmar-footer__pay">
+				<img src="https://www.figma.com/api/mcp/asset/463c7028-2f19-4e4d-9130-a02fd32074e4" alt="Stripe" class="lixmar-footer__pay">
+				<img src="https://www.figma.com/api/mcp/asset/e2cdf869-5050-4c6e-8bc6-0b77c0edfe73" alt="MasterCard" class="lixmar-footer__pay">
+				<img src="https://www.figma.com/api/mcp/asset/ebd318eb-2c53-4207-a2b3-6e781c38b5ed" alt="Klarna" class="lixmar-footer__pay">
+			</div>
+			<a href="#" class="lixmar-footer__app">📱 App celular</a>
+		</div>
+	</footer>
+	<script src="src/main.js"></script>
+</body>
+</html>

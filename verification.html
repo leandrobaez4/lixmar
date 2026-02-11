@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>LIXMAR - Header Demo</title>
+	<link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+	<!-- Opciones adicionales -->
+	<div class="header-container" style="margin-top:10px;align-items:center;gap:20px;background:#ffffff;">
+		<div style="background:#ffffff;border-radius:6px;padding:4px 16px;display:flex;align-items:center;gap:8px;font-size:12px;">
+			<span style="font-weight:bold;font-size:14px;">🎤</span> OFERTAS 24/7
+		</div>
+		<div style="font-size:14px;">Vender en Lixmar</div>
+		<div style="font-size:14px;">Orden de Seguimiento</div>
+		<div style="display:flex;align-items:center;gap:8px;">
+			<span style="font-size:14px;">💲ARG</span>
+			<img src="https://www.figma.com/api/mcp/asset/5f8d6a42-6063-48eb-ab75-2746a2c0e657" alt="ENG" style="width:15px;height:15px;">
+			<span style="font-size:14px;">Esp</span>
+		</div>
+	</div>
+
+	<!-- Header Principal -->
+	<header class="header">
+		<div class="header-container">
+			<!-- Logo -->
+			<div class="header-left">
+				<img src="https://www.figma.com/api/mcp/asset/77526e53-e478-499c-ab2b-389155dfcfa1" alt="Logo" style="width:45px;height:45px;border-radius:11px;margin-right:10px;">
+				<span class="logo"><span style="color:#ff6a00;">LIX</span>MAR</span>
+			</div>
+
+			<!-- Navegación principal -->
+			<nav class="nav-main">
+				<a href="#" class="nav-link dropdown">INICIO</a>
+				<a href="#" class="nav-link dropdown">PÁGINAS</a>
+				<a href="#" class="nav-link dropdown">PRODUCTOS</a>
+				<a href="#" class="nav-link">CONTACTO</a>
+			</nav>
+
+			<!-- Acciones y usuario -->
+			<div class="header-right">
+				<button class="btn-icon" title="Notificaciones" style="background:orange;color:#fff;">
+					<img src="https://www.figma.com/api/mcp/asset/12c3182a-7ede-4e75-8f0b-0d1e7c26dbfd" alt="Notificación" style="width:17px;height:17px;">
+				</button>
+				<button class="btn-icon" title="Icono especial" style="background:orange;">
+					<img src="https://www.figma.com/api/mcp/asset/56b63bf3-a6cf-4586-8932-809b0e773911" alt="Icon" style="width:22px;height:22px;">
+				</button>
+				<button class="btn-icon" title="Usuario" style="background:#fff;">
+					<img src="https://www.figma.com/api/mcp/asset/6c05cca3-68d9-46d9-9ef6-3df5ee267521" alt="Usuario" style="width:41px;height:41px;">
+				</button>
+				<div class="account-menu">
+					<span class="account-label">BIENVENIDO!</span>
+					<a href="#">Entrar / Registrarse</a>
+				</div>
+				<div class="cart-btn">
+					<button class="btn-icon" style="background:orange;position:relative;">
+						<img src="https://www.figma.com/api/mcp/asset/45ae75aa-0218-43d8-8494-bc41d257db10" alt="Carrito" style="width:23px;height:23px;">
+						<span class="cart-count">5</span>
+					</button>
+					<div class="cart-price">CARRITO<br><span class="cart-total">$1.689.000</span></div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<!-- Barra de búsqueda y beneficios (Figma: 1:348) -->
+	<section class="search-bar-section search-bar-section--figma" data-node-id="1:348">
+		<div class="header-container">
+			<div class="nav-style3-row">
+				<div class="nav-style3-search" data-node-id="1:349">
+					<button class="dropdown-btn nav-style3-dropdown" type="button" data-node-id="1:350">
+						<span>Categorías</span>
+						<img src="https://www.figma.com/api/mcp/asset/af391325-c6eb-4fe0-bd4d-547a3fab74f3" alt="" class="nav-style3-caret" data-node-id="1:352">
+					</button>
+					<input class="search-input nav-style3-input" type="text" placeholder="Buscar Productos, Marcas y Más!" data-node-id="1:356">
+					<button class="search-btn nav-style3-searchbtn" type="button" aria-label="Buscar" data-node-id="1:359">🔍</button>
+				</div>
+
+				<div class="benefits-row nav-style3-benefits">
+					<div class="benefit nav-style3-benefit" data-node-id="1:361"> ENVÍO GRATIS SUPERANDO LOS<br><strong>$50.000,00</strong></div>
+					<div class="benefit nav-style3-benefit" data-node-id="1:363"> 30 DÍAS DE DEVOLUCIÓN<br><strong>DE DINERO</strong></div>
+					<div class="benefit nav-style3-benefit" data-node-id="1:365">s PAGO<br><strong>100% SEGURO</strong></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<main class="container" >
+		<!-- Breadcrumb (Figma: 1:3431) -->
+		<nav class="lixmar-breadcrumb" data-node-id="1:3431" aria-label="Breadcrumb">
+			<a href="#" class="lixmar-breadcrumb__link">Inicio</a>
+			<span class="lixmar-breadcrumb__sep">/</span>
+			<a href="#" class="lixmar-breadcrumb__link">pagina</a>
+			<span class="lixmar-breadcrumb__sep">/</span>
+			<span class="lixmar-breadcrumb__current">verificación</span>
+		</nav>
+
+		<!-- Verification Section (Figma: 2050:63) -->
+		<section class="lixmar-profile" data-node-id="2050:63">
+			<!-- Sidebar -->
+			<aside class="lixmar-profile__sidebar" data-node-id="2050:64">
+				<div class="lixmar-profile__avatar" data-node-id="2050:65">
+					<img src="https://www.figma.com/api/mcp/asset/f78a3704-09c5-4f72-9058-dc10c8457180" alt="Avatar" class="lixmar-profile__avatar-img">
+				</div>
+				<h5 class="lixmar-profile__name" data-node-id="2050:67">Mark Cole</h5>
+				<p class="lixmar-profile__email" data-node-id="2050:68">swoo@gmail.com</p>
+
+				<nav class="lixmar-profile__tabs">
+					<a href="profile.html" class="lixmar-profile__tab" data-node-id="2050:69">
+						<span>Informacion Personal</span>
+						<span class="lixmar-profile__tab-arrow">&rarr;</span>
+					</a>
+					<a href="#" class="lixmar-profile__tab lixmar-profile__tab--active" data-node-id="2050:75">
+						<span>Validar identidad</span>
+						<span class="lixmar-profile__tab-arrow">&rarr;</span>
+					</a>
+					<a href="#" class="lixmar-profile__tab" data-node-id="2050:72">
+						<span>Mi orden</span>
+						<span class="lixmar-profile__tab-arrow">&rarr;</span>
+					</a>
+					<a href="#" class="lixmar-profile__tab" data-node-id="2050:78">
+						<span>Mi direccion</span>
+						<span class="lixmar-profile__tab-arrow">&rarr;</span>
+					</a>
+					<a href="#" class="lixmar-profile__tab" data-node-id="2050:81">
+						<span>Cambiar contraseña</span>
+						<span class="lixmar-profile__tab-arrow">&rarr;</span>
+					</a>
+				</nav>
+			</aside>
+
+			<!-- Main Content -->
+			<div class="lixmar-profile__content">
+				<h4 class="lixmar-profile__title" data-node-id="2050:84">Verificación De Identidad</h4>
+
+				<!-- Status Banner -->
+				<div class="lixmar-verify__banner" data-node-id="2052:1735">
+					<div class="lixmar-verify__icon" data-node-id="2057:6">
+						<svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<rect x="0" y="28" width="40" height="40" rx="4" transform="rotate(-45 0 28)" fill="#b3b3b3"/>
+						</svg>
+					</div>
+					<p class="lixmar-verify__status" data-node-id="2057:7">Sin Verificar</p>
+				</div>
+
+				<!-- Verify Header -->
+				<div class="lixmar-verify__header">
+					<h4 class="lixmar-verify__title" data-node-id="2057:8">Verifica Tu Cuenta</h4>
+					<div class="lixmar-verify__veriff" data-node-id="2057:10">
+						<span>Asegurado e impulsado por</span>
+						<img src="https://www.figma.com/api/mcp/asset/6978bb8f-b31c-4ccc-9e46-80dd6de423eb" alt="Veriff" class="lixmar-verify__veriff-logo" data-node-id="2057:12">
+					</div>
+				</div>
+
+				<p class="lixmar-verify__intro" data-node-id="2057:13">Aquí tienes algunas pautas generales para una verificación fácil:</p>
+
+				<!-- Guidelines -->
+				<div class="lixmar-verify__guidelines">
+					<div class="lixmar-verify__guideline" data-node-id="2057:14">
+						<h5 class="lixmar-verify__guideline-title">Documentos Válidos</h5>
+						<p class="lixmar-verify__guideline-text">Asegúrate de que tu documento de identidad, pasaporte, carnet de residente, etc, sea válido en el país que selecciones.</p>
+					</div>
+					<div class="lixmar-verify__guideline" data-node-id="2057:15">
+						<h5 class="lixmar-verify__guideline-title">Calidad Y Claridad De La Foto</h5>
+						<p class="lixmar-verify__guideline-text">Encuentra un lugar bien iluminado con un fondo limpio. Asegúrate de que la foto sea clara, sin obstrucciones ni borrosidades.</p>
+					</div>
+					<div class="lixmar-verify__guideline" data-node-id="2057:16">
+						<h5 class="lixmar-verify__guideline-title">Selfie En Lugar De Carga De Foto</h5>
+						<p class="lixmar-verify__guideline-text">No uses imágenes de rostros de fotos o dispositivos digitales, ya que la detección de vida no funcionará.</p>
+					</div>
+					<div class="lixmar-verify__guideline" data-node-id="2057:17">
+						<h5 class="lixmar-verify__guideline-title">Importante</h5>
+						<p class="lixmar-verify__guideline-text">Solo puedes verificar una cuenta con tus datos de identidad, si verificas esta cuenta no podrás verificar ninguna otra cuenta con la misma información.</p>
+					</div>
+				</div>
+
+				<!-- Checkbox -->
+				<label class="lixmar-verify__confirm" data-node-id="2057:19">
+					<input type="checkbox" class="lixmar-verify__checkbox" id="verifyConfirm">
+					<span class="lixmar-verify__checkmark">
+						<img src="https://www.figma.com/api/mcp/asset/14dddfc4-ed16-42b1-a6e1-113e53f0a508" alt="✓" class="lixmar-verify__check-img">
+					</span>
+					<span class="lixmar-verify__confirm-text" data-node-id="2057:18">Entiendo, Esta Es Mi Cuenta Principal.</span>
+				</label>
+
+				<!-- CTA Button -->
+				<div class="lixmar-verify__cta">
+					<a href="#" class="lixmar-verify__btn" id="verifyBtn" data-node-id="2057:27">VERIFICAR ESTA CUENTA</a>
+				</div>
+			</div>
+		</section>
+
+	</main>
+
+	<!-- Footer (Figma: 8:2638) -->
+	<footer class="lixmar-footer" data-node-id="8:2638">
+		<div class="lixmar-footer__container">
+			<!-- Columna 1: Info de contacto -->
+			<div class="lixmar-footer__col lixmar-footer__col--contact">
+				<h3 class="lixmar-footer__brand">Lixmar</h3>
+				<p class="lixmar-footer__slogan">DESCUENTOS 24/7</p>
+				<p class="lixmar-footer__phone">(+54) xxxxxxxx</p>
+				<p class="lixmar-footer__address">CABA, Argentina</p>
+				<p class="lixmar-footer__email">contact@lixmar.com</p>
+				<div class="lixmar-footer__social">
+					<a href="#" class="lixmar-footer__social-link" aria-label="Twitter">🐦</a>
+					<a href="#" class="lixmar-footer__social-link" aria-label="Facebook">f</a>
+					<a href="#" class="lixmar-footer__social-link" aria-label="Google">G</a>
+					<a href="#" class="lixmar-footer__social-link" aria-label="YouTube">▶</a>
+					<a href="#" class="lixmar-footer__social-link" aria-label="Pinterest">P</a>
+				</div>
+				<div class="lixmar-footer__selectors">
+					<button class="lixmar-footer__selector">
+						<span>🇦🇷</span> ARG <span class="lixmar-footer__arrow">▼</span>
+					</button>
+					<button class="lixmar-footer__selector">
+						<img src="https://www.figma.com/api/mcp/asset/7c758971-9b63-4e7e-aa50-6a99ddb341b7" alt="" class="lixmar-footer__flag"> Esp <span class="lixmar-footer__arrow">▼</span>
+					</button>
+				</div>
+			</div>
+
+			<!-- Columna 2: Categorías -->
+			<div class="lixmar-footer__col">
+				<h4 class="lixmar-footer__title">Categorías</h4>
+				<ul class="lixmar-footer__list">
+					<li><a href="#">Laptops</a></li>
+					<li><a href="#">PC y Computadoras</a></li>
+					<li><a href="#">Celulares</a></li>
+					<li><a href="#">Tablets</a></li>
+					<li><a href="#">Gaming & VR</a></li>
+					<li><a href="#">Oficina</a></li>
+					<li><a href="#">Cámaras</a></li>
+					<li><a href="#">Sonido</a></li>
+					<li><a href="#">Hogar</a></li>
+				</ul>
+			</div>
+
+			<!-- Columna 3: Compañía -->
+			<div class="lixmar-footer__col">
+				<h4 class="lixmar-footer__title">Compañía</h4>
+				<ul class="lixmar-footer__list">
+					<li><a href="#">Sobre Lixmar</a></li>
+					<li><a href="#">Contacto</a></li>
+					<li><a href="#">Carrera</a></li>
+					<li><a href="#">Blog</a></li>
+					<li><a href="#">Mapa</a></li>
+					<li><a href="#">Ubicación</a></li>
+				</ul>
+			</div>
+
+			<!-- Columna 4: Ayuda -->
+			<div class="lixmar-footer__col">
+				<h4 class="lixmar-footer__title">Ayuda</h4>
+				<ul class="lixmar-footer__list">
+					<li><a href="#">Servicios</a></li>
+					<li><a href="#">Políticas</a></li>
+					<li><a href="#">Términos</a></li>
+					<li><a href="#">Ordenes</a></li>
+					<li><a href="#">FAQs</a></li>
+					<li><a href="#">Mi Cuenta</a></li>
+					<li><a href="#">Soporte</a></li>
+				</ul>
+			</div>
+
+			<!-- Columna 5: Marcas -->
+			<div class="lixmar-footer__col">
+				<h4 class="lixmar-footer__title">Marcas</h4>
+				<ul class="lixmar-footer__list">
+					<li><a href="#">Mejores Vendedores</a></li>
+					<li><a href="#">Afiliados</a></li>
+					<li><a href="#">Advertencias</a></li>
+					<li><a href="#">Socios</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Subscripción -->
+		<div class="lixmar-footer__subscribe">
+			<h4 class="lixmar-footer__subscribe-title">
+				Suscríbete y obtén un <span class="lixmar-footer__highlight">10%</span> de descuento en tu primer pedido
+			</h4>
+			<form class="lixmar-footer__form">
+				<span class="lixmar-footer__form-icon">✉</span>
+				<input type="email" class="lixmar-footer__input" placeholder="Introduce tu dirección de correo electrónico">
+				<button type="submit" class="lixmar-footer__submit">SUSCRIBIRSE →</button>
+			</form>
+			<p class="lixmar-footer__disclaimer">Al suscribirte, aceptas nuestra Política.</p>
+		</div>
+
+		<!-- Bottom bar -->
+		<div class="lixmar-footer__bottom">
+			<div class="lixmar-footer__payments">
+				<img src="https://www.figma.com/api/mcp/asset/7919ed33-755a-4b4b-bde3-094918c2081e" alt="PayPal" class="lixmar-footer__pay">
+				<img src="https://www.figma.com/api/mcp/asset/23be0821-3805-4738-8050-bd8a3171d923" alt="Visa" class="lixmar-footer__pay">
+				<img src="https://www.figma.com/api/mcp/asset/463c7028-2f19-4e4d-9130-a02fd32074e4" alt="Stripe" class="lixmar-footer__pay">
+				<img src="https://www.figma.com/api/mcp/asset/e2cdf869-5050-4c6e-8bc6-0b77c0edfe73" alt="MasterCard" class="lixmar-footer__pay">
+				<img src="https://www.figma.com/api/mcp/asset/ebd318eb-2c53-4207-a2b3-6e781c38b5ed" alt="Klarna" class="lixmar-footer__pay">
+			</div>
+			<a href="#" class="lixmar-footer__app">📱 App celular</a>
+		</div>
+	</footer>
+	<script src="src/main.js"></script>
+	<script>
+		// Tab switching
+		document.querySelectorAll('.lixmar-profile__tab').forEach(tab => {
+			tab.addEventListener('click', function(e) {
+				if (this.getAttribute('href') === '#') {
+					e.preventDefault();
+					document.querySelectorAll('.lixmar-profile__tab').forEach(t => t.classList.remove('lixmar-profile__tab--active'));
+					this.classList.add('lixmar-profile__tab--active');
+				}
+			});
+		});
+
+		// Verify button
+		const verifyBtn = document.getElementById('verifyBtn');
+		const verifyConfirm = document.getElementById('verifyConfirm');
+		if (verifyBtn) {
+			verifyBtn.addEventListener('click', function(e) {
+				e.preventDefault();
+				if (!verifyConfirm.checked) {
+					alert('Debes confirmar que esta es tu cuenta principal.');
+					return;
+				}
+				alert('¡Verificación iniciada!');
+			});
+		}
+	</script>
+</body>
+</html>
