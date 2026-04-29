@@ -1,0 +1,404 @@
+.lix-product-page {
+  padding-bottom: 80px;
+  background-color: #fafafa;
+}
+
+.lix-product-core {
+  display: flex;
+  margin-top: 20px;
+  gap: 60px;
+  background-color: transparent;
+}
+
+/* GALLERIA */
+.lix-gallery {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.lix-gallery-main {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+
+.lix-gallery-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: var(--color-lixmar-orange);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.lix-gallery-main img {
+  width: 100%;
+  max-height: 550px;
+  object-fit: contain;
+}
+
+.lix-gallery-nav {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.lix-gallery-thumb {
+  width: 80px;
+  height: 80px;
+  background-color: #ffffff;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 5px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+}
+
+.lix-gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.lix-gallery-thumb.is-active, .lix-gallery-thumb:hover {
+  border-color: var(--color-lixmar-orange);
+}
+
+
+/* DETALLES */
+.lix-product-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+}
+
+.lix-product-meta {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 12px;
+}
+
+.brand-tag {
+  color: var(--color-lixmar-orange);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.rating-pill {
+  background-color: #fff;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid #ebebeb;
+}
+
+.rating-pill span {
+  font-weight: 400;
+  color: #777;
+}
+
+.lix-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #111;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+
+.lix-price-wrapper {
+  margin-bottom: 25px;
+}
+
+.lix-price-current {
+  font-size: 44px;
+  font-weight: 800;
+  color: #111;
+  letter-spacing: -1.5px;
+}
+
+.lix-price-savings {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 5px;
+}
+
+.lix-price-old {
+  font-size: 18px;
+  color: #888;
+  text-decoration: line-through;
+}
+
+.lix-discount-tag {
+  background-color: rgba(255, 107, 53, 0.1);
+  color: var(--color-lixmar-orange);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.lix-info-divider {
+  height: 1px;
+  background-color: #eaeaea;
+  margin: 25px 0;
+}
+
+.lix-features-preview h3 {
+  font-size: 24px;
+  font-weight: 300;
+  margin-bottom: 15px;
+  color: #111;
+}
+
+.lix-features-preview ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lix-features-preview li {
+  font-size: 15px;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ACTIONS */
+.lix-pdp-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 35px;
+  margin-bottom: 15px;
+}
+
+.lix-qty-selector {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  height: 55px;
+}
+
+.lix-qty-selector button {
+  width: 45px;
+  height: 100%;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #555;
+}
+
+.lix-qty-selector input {
+  width: 40px;
+  text-align: center;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  outline: none;
+}
+
+.lix-btn-cart {
+  flex: 1;
+  background-color: #111;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  height: 55px;
+  transition: background-color 0.2s;
+}
+
+.lix-btn-cart:hover {
+  background-color: #333;
+}
+
+.lix-btn-buy {
+  width: 100%;
+  background-color: var(--color-lixmar-orange);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  height: 55px;
+  transition: background-color 0.2s;
+  margin-bottom: 30px;
+}
+
+.lix-btn-buy:hover {
+  background-color: var(--color-lixmar-orange-hover);
+}
+
+.lix-logistics {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #eaeaea;
+}
+
+.logistic-item {
+  display: flex;
+  gap: 15px;
+}
+
+.logistic-item .icon {
+  font-size: 24px;
+}
+
+.logistic-item strong {
+  display: block;
+  font-size: 15px;
+  color: #111;
+  margin-bottom: 4px;
+}
+
+.logistic-item p {
+  font-size: 13px;
+  color: #666;
+  margin: 0;
+}
+
+/* TABS */
+.lix-tabs-section {
+  margin-top: 80px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+  overflow: hidden;
+}
+
+.lix-tabs-headers {
+  display: flex;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.lix-tabs-headers button {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #777;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+}
+
+.lix-tabs-headers button.active, .lix-tabs-headers button:hover {
+  color: var(--color-lixmar-orange);
+  border-bottom-color: var(--color-lixmar-orange);
+  background-color: rgba(255, 107, 53, 0.02);
+}
+
+.lix-tabs-body {
+  padding: 40px;
+}
+
+.tab-pane p {
+  color: #444;
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 15px;
+}
+
+.spec-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.spec-list li {
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  font-size: 15px;
+  color: #333;
+}
+
+.mock-review {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+}
+
+/* RELATED */
+.lix-related {
+  margin-top: 80px;
+}
+
+.lix-related h3 {
+    /* font-size: 24px; */
+    /* font-weight: 300; */
+    /* margin-bottom: 25px; */
+    /* color: var(--color-text-main); */
+}
+
+.lix-related-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  .lix-product-core {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .lix-related-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .spec-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .lix-title {
+    font-size: 26px;
+  }
+  .lix-price-current {
+    font-size: 36px;
+  }
+  .lix-tabs-headers {
+    flex-direction: column;
+  }
+  .lix-related-grid {
+    grid-template-columns: 1fr;
+  }
+  .lix-gallery-main {
+    padding: 20px;
+  }
+}

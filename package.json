@@ -1,0 +1,32 @@
+{
+  "name": "lixmar",
+  "version": "2.0.0",
+  "description": "LIXMAR - Marketplace de electrónica moderna con React + Vite",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leandrobaez4/lixmar.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leandrobaez4/lixmar/issues"
+  },
+  "homepage": "https://github.com/leandrobaez4/lixmar#readme",
+  "dependencies": {
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "react-router-dom": "^7.5.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.1",
+    "sass": "^1.99.0",
+    "vite": "^8.0.8"
+  }
+}
