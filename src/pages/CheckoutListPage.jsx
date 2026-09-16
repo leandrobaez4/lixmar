@@ -1,12 +1,14 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import Breadcrumb from '@/components/layout/Breadcrumb'
+import { FaXmark } from 'react-icons/fa6'
+import { getPublicCartItems, setPublicCartItems } from '@/cart/publicCart'
 
 export default function CheckoutListPage() {
-  const [cartItems, setCartItems] = useState([
-    { id: 1, name: 'Pinnaeple Macbook Pro 2022 M1/ 512GB', price: 579000, qty: 1, img: '/assets/09b322b4fe86b16de5a9d343c6e82b51ff89fa52.png' },
-  ])
-  const [showAlert, setShowAlert] = useState(true)
+  const [cartItems, setCartItems] = useState(() => getPublicCartItems())
+
+  useEffect(() => {
+    setPublicCartItems(cartItems)
+  }, [cartItems])
 
   const formatPrice = (val) => `$${val.toLocaleString('es-AR')}`
 
@@ -22,22 +24,8 @@ export default function CheckoutListPage() {
 
   return (
     <main className="container">
-      <Breadcrumb items={[{ to: '/', label: 'Inicio' }, { to: '#', label: 'Página' }, { label: 'Carrito de compras' }]} />
-
       <section className="lixmar-cart">
         <h2 className="lixmar-cart__title">Carrito de compras</h2>
-
-        {showAlert && (
-          <div className="lixmar-cart__alert">
-            <div className="lixmar-cart__alert-content">
-              <span className="lixmar-cart__alert-icon">✔</span>
-              <p className="lixmar-cart__alert-text">
-                <strong>"Pinnapple Macbook Pro 2022 M1 / 512GB Gris Oscuro"</strong> fue agregado a tu carrito.
-              </p>
-            </div>
-            <button className="lixmar-cart__alert-close" aria-label="Cerrar" onClick={() => setShowAlert(false)}>✕</button>
-          </div>
-        )}
 
         <div className="lixmar-cart__table-wrap">
           <table className="lixmar-cart__table">
@@ -72,7 +60,7 @@ export default function CheckoutListPage() {
                     <span className="lixmar-cart__subtotal">{formatPrice(item.price * item.qty)}</span>
                   </td>
                   <td className="lixmar-cart__td lixmar-cart__td--remove">
-                    <button className="lixmar-cart__remove-btn" aria-label="Eliminar" onClick={() => removeItem(item.id)}>✕</button>
+                    <button className="lixmar-cart__remove-btn" aria-label="Eliminar" onClick={() => removeItem(item.id)}><FaXmark size={14} /></button>
                   </td>
                 </tr>
               ))}

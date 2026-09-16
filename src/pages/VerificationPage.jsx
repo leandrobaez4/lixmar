@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Breadcrumb from '@/components/layout/Breadcrumb'
+import { FaChevronRight } from 'react-icons/fa6'
 
 const tabs = [
   { id: 'info', label: 'Informacion Personal', to: '/perfil' },
@@ -31,8 +31,6 @@ export default function VerificationPage() {
 
   return (
     <main className="container">
-      <Breadcrumb items={[{ to: '/', label: 'Inicio' }, { to: '#', label: 'Página' }, { label: 'Verificación' }]} />
-
       <section className="lixmar-profile">
         {/* Sidebar */}
         <aside className="lixmar-profile__sidebar">
@@ -51,7 +49,7 @@ export default function VerificationPage() {
                   key={tab.id}
                 >
                   <span>{tab.label}</span>
-                  <span className="lixmar-profile__tab-arrow">→</span>
+                  <span className="lixmar-profile__tab-arrow"><FaChevronRight size={12} /></span>
                 </Link>
               ) : (
                 <a
@@ -61,7 +59,7 @@ export default function VerificationPage() {
                   onClick={(e) => e.preventDefault()}
                 >
                   <span>{tab.label}</span>
-                  <span className="lixmar-profile__tab-arrow">→</span>
+                  <span className="lixmar-profile__tab-arrow"><FaChevronRight size={12} /></span>
                 </a>
               )
             ))}

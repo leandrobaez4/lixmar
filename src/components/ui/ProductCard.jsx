@@ -1,7 +1,18 @@
 import { Link } from 'react-router-dom';
-import './ProductCard.scss';
+import { FaPlus } from 'react-icons/fa6';
+import '@/scss/components/ui/ProductCard.scss';
 
-export default function ProductCard({ id, title, price, originalPrice, image, isFreeShipping, isFreeGift }) {
+export default function ProductCard({
+  id,
+  title,
+  price,
+  originalPrice,
+  image,
+  isFreeShipping,
+  isFreeGift,
+  installmentText,
+  shippingText,
+}) {
   // Generar descuento random si hay precio original
   const discount = originalPrice ? Math.round((1 - price / originalPrice) * 100) : 0;
 
@@ -21,7 +32,7 @@ export default function ProductCard({ id, title, price, originalPrice, image, is
         
         {/* Quick add button visible on hover */}
         <button className="lixmar-card__quick-add" aria-label="Agregar al carrito" onClick={(e) => { e.preventDefault(); console.log('Added!'); }}>
-          +
+          <FaPlus size={14} />
         </button>
       </div>
 
@@ -35,6 +46,12 @@ export default function ProductCard({ id, title, price, originalPrice, image, is
               <span className="price-old">{formatPrice(originalPrice)}</span>
             )}
           </div>
+          {installmentText ? (
+            <span className="lixmar-card__installments">{installmentText}</span>
+          ) : null}
+          {shippingText ? (
+            <span className="lixmar-card__shipping-note">{shippingText}</span>
+          ) : null}
         </div>
       </div>
     </Link>

@@ -1,0 +1,168 @@
+// ── Contenedor (es un <li> en el nav) ───────────────────────────────────────
+.categories-menu {
+  position: static;
+}
+
+// ── Botón trigger ────────────────────────────────────────────────────────────
+.categories-menu__trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  cursor: pointer;
+}
+
+.categories-menu__trigger-chevron {
+  display: inline-flex;
+  align-items: center;
+  color: rgba(31, 41, 55, 0.55);
+  transition: transform 0.2s ease;
+}
+
+.categories-menu__trigger-chevron--open {
+  transform: rotate(180deg);
+}
+
+// ── Panel del mega-menú (desktop) ────────────────────────────────────────────
+.categories-menu__panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 460px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #fff;
+  border: 1px solid rgba(17, 24, 39, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.16);
+  padding: 24px;
+  z-index: 40;
+}
+
+// ── Grid de grupos de categorías ─────────────────────────────────────────────
+.categories-menu__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 24px 20px;
+}
+
+// ── Grupo individual (columna por categoría padre) ───────────────────────────
+.categories-menu__group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.categories-menu__group-title {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f172a;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding-bottom: 8px;
+  border-bottom: 2px solid rgba(245, 158, 11, 0.5);
+
+  &:hover {
+    color: #d97706;
+  }
+}
+
+.categories-menu__group-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.categories-menu__group-link {
+  display: block;
+  padding: 5px 0;
+  font-size: 13px;
+  font-weight: 400;
+  color: #374151;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: #d97706;
+  }
+}
+
+// ── Estado vacío / cargando ──────────────────────────────────────────────────
+.categories-menu__status {
+  margin: 0;
+  padding: 12px 0;
+  color: #4b5563;
+  font-size: 14px;
+}
+
+// ── Menú móvil ───────────────────────────────────────────────────────────────
+.categories-menu--mobile {
+  width: 100%;
+  max-height: min(58vh, 520px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
+.categories-menu__mobile-list,
+.categories-menu__mobile-sublist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.categories-menu__mobile-item {
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.categories-menu__mobile-item:first-child {
+  border-top: 0;
+}
+
+.categories-menu__mobile-toggle,
+.categories-menu__mobile-link {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 0;
+  border: 0;
+  background: transparent;
+  color: #0f172a;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.categories-menu__mobile-sublist {
+  padding-left: 14px;
+}
+
+.categories-menu__mobile-link--all {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.categories-menu__mobile-chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.categories-menu__mobile-chevron--open {
+  transform: rotate(180deg);
+}

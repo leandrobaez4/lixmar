@@ -1,0 +1,256 @@
+.ml-home {
+  --home-surface: #f4f4f5;
+  --home-text: #1f1f24;
+  --home-muted: #6b6e7a;
+  --home-border: #e5e7eb;
+  --home-card-border: #e5e8ed;
+  --home-accent: #ff6a00;
+
+  background: var(--home-surface);
+  color: var(--home-text);
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.ml-home__content {
+  width: min(100%, 1440px);
+  margin: 0 auto;
+  padding: 32px 120px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+}
+
+.ml-home__hero,
+.ml-home__benefits {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--home-border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.ml-home__hero {
+  aspect-ratio: 1200 / 515;
+  background: #1a1b1f;
+  border-color: transparent;
+  border-radius: 18px;
+}
+
+.ml-home__hero img,
+.ml-home__benefits img,
+.ml-home__category-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ml-home__section,
+.ml-home__categories {
+  width: 100%;
+}
+
+.ml-home__section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 22px;
+  line-height: 1.2;
+}
+
+.ml-home__section-header h2 {
+  margin: 0;
+  color: var(--home-text);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.ml-home__section-header a {
+  color: var(--home-text);
+  font-size: 13px;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.ml-home__section-header a:hover {
+  color: var(--home-accent);
+}
+
+.ml-home__categories-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.ml-home__category-card {
+  display: block;
+  min-width: 0;
+  height: 106px;
+  overflow: hidden;
+  border: 1px solid #e0e3e8;
+  border-radius: 14px;
+  background: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ml-home__category-card:hover {
+  box-shadow: 0 10px 24px rgba(255, 106, 0, 0.16);
+  transform: translateY(-2px);
+}
+
+.ml-home__products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  overflow: hidden;
+  border: 1px solid var(--home-border);
+  border-radius: 12px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.04));
+}
+
+.ml-home__products-grid .lixmar-card {
+  min-height: 300px;
+  border-color: var(--home-card-border);
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.ml-home__products-grid .lixmar-card:hover {
+  border-color: var(--home-card-border);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.09);
+  transform: translateY(-2px);
+}
+
+.ml-home__products-grid .lixmar-card__image-wrapper {
+  aspect-ratio: auto;
+  height: 180px;
+  background: #fff;
+  padding: 22px;
+}
+
+.ml-home__products-grid .lixmar-card__content {
+  min-height: 120px;
+  padding: 14px 16px;
+}
+
+.ml-home__products-grid .lixmar-card__title {
+  margin: 0 0 6px;
+  color: #212126;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+  -webkit-line-clamp: 1;
+}
+
+.ml-home__products-grid .lixmar-card__pricing {
+  gap: 4px;
+}
+
+.ml-home__products-grid .price-current {
+  color: #212126;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.ml-home__products-grid .lixmar-card__badges-top,
+.ml-home__products-grid .lixmar-card__quick-add,
+.ml-home__products-grid .price-old {
+  display: none;
+}
+
+.lixmar-card__installments,
+.lixmar-card__shipping-note {
+  display: block;
+  line-height: 1.35;
+}
+
+.lixmar-card__installments {
+  color: var(--home-accent);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.lixmar-card__shipping-note {
+  color: var(--home-muted);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.ml-home__benefits {
+  aspect-ratio: 1226 / 330;
+  border-radius: 16px;
+  background: var(--home-accent);
+}
+
+@media (max-width: 1280px) {
+  .ml-home__content {
+    padding-inline: 48px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .ml-home__content {
+    padding: 28px 24px 56px;
+  }
+
+  .ml-home__categories-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .ml-home__products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .ml-home__content {
+    padding: 18px 14px 44px;
+    gap: 28px;
+  }
+
+  .ml-home__hero {
+    aspect-ratio: 1200 / 515;
+    border-radius: 12px;
+  }
+
+  .ml-home__section-header {
+    margin-bottom: 14px;
+  }
+
+  .ml-home__section-header h2 {
+    font-size: 18px;
+  }
+
+  .ml-home__categories-grid {
+    display: flex;
+    gap: 12px;
+    margin-inline: -14px;
+    padding-inline: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+  }
+
+  .ml-home__category-card {
+    flex: 0 0 168px;
+    height: 86px;
+    scroll-snap-align: start;
+  }
+
+  .ml-home__products-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ml-home__products-grid .lixmar-card {
+    min-height: 292px;
+  }
+
+  .ml-home__benefits {
+    aspect-ratio: auto;
+    min-height: 190px;
+    border-radius: 12px;
+  }
+}

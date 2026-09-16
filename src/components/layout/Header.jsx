@@ -1,70 +1,215 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import './Header.scss'
+import { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { FaBars, FaChevronDown, FaXmark } from 'react-icons/fa6'
+import CategoriesMenu from './CategoriesMenu'
+import { clearPublicSession, getPublicSession, subscribeToPublicSession } from '@/auth/publicSession'
+import { getPublicCartCount, subscribeToPublicCart } from '@/cart/publicCart'
+import '@/scss/components/layout/Header.scss'
 
 export default function Header() {
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const navigate = useNavigate()
+  const [publicSession, setPublicSession] = useState(() => getPublicSession())
+  const [cartItemsCount, setCartItemsCount] = useState(() => getPublicCartCount())
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [openMobileSection, setOpenMobileSection] = useState('explore')
+  const [searchTerm, setSearchTerm] = useState('')
+  const userDisplayName = publicSession?.name?.trim() || publicSession?.email || 'Mi cuenta'
+
+  const handleLogout = () => {
+    clearPublicSession()
+    setIsMobileMenuOpen(false)
+    navigate('/')
+  }
+
+  const handleMobileNavigate = () => {
+    setIsMobileMenuOpen(false)
+  }
+
+  const toggleMobileSection = (section) => {
+    setOpenMobileSection((currentValue) => (currentValue === section ? '' : section))
+  }
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault()
+
+    const normalizedTerm = searchTerm.trim()
+    navigate(normalizedTerm ? `/buscar?q=${encodeURIComponent(normalizedTerm)}` : '/buscar')
+    setIsMobileMenuOpen(false)
+  }
+
+  useEffect(() => {
+    return subscribeToPublicSession(() => {
+      setPublicSession(getPublicSession())
+    })
+  }, [])
+
+  useEffect(() => {
+    return subscribeToPublicCart(() => {
+      setCartItemsCount(getPublicCartCount())
+    })
+  }, [])
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) {
+      return () => {}
+    }
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [isMobileMenuOpen])
 
   return (
     <header className="header-ml">
       <div className="header-ml__container">
-        {/* ROW 1: Logo, Search, Promo */}
         <div className="header-ml__top">
           <Link to="/" className="header-ml__logo">
-            <span className="logo-text">LIX</span>
-            <span className="logo-text highlight">MAR</span>
+            LIXMAR
           </Link>
           
-          <div className="header-ml__search">
+          <form className="header-ml__search" onSubmit={handleSearchSubmit} role="search">
+            <span className="header-ml__search-icon" aria-hidden="true">
+              <img src="/assets/header/search.svg" alt="" />
+            </span>
             <input 
               type="text" 
-              placeholder="Buscar productos, marcas y más…" 
+              placeholder="Buscar productos, marcas y categorías" 
               className="header-ml__search-input"
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
             />
-            <button className="header-ml__search-btn" aria-label="Buscar">
-              🔍
-            </button>
-          </div>
+          </form>
 
-          <div className="header-ml__promo">
-            <img src="/assets/a84219cc-c7d5-48e5-b304-6c6db0a23dfb.png" alt="Promo" className="header-ml__promo-img" onError={(e) => e.target.style.display = 'none'} />
-          </div>
-        </div>
-
-        {/* ROW 2: Envío, Nav Links, User Menu */}
-        <div className="header-ml__bottom">
-          <div className="header-ml__location">
-            <span className="location-icon">📍</span>
-            <div className="location-text">
-              <span className="location-send">Abre hoy</span>
-              <span className="location-zip">OFERTAS 24/7</span>
-            </div>
-          </div>
-
-          <nav className="header-ml__nav">
+          <nav className="header-ml__nav" aria-label="Principal">
             <ul className="header-ml__nav-list">
-              <li>
-                <Link to="/categorias" className="nav-btn-categorias">
-                  <span className="hamburger-icon">☰</span> Categorías
-                </Link>
-              </li>
+              <CategoriesMenu />
               <li><Link to="/ofertas" className="fravega-link">Ofertas</Link></li>
-              <li><Link to="/historial" className="fravega-link">Historial</Link></li>
-              <li><Link to="/supermercado" className="fravega-link">Supermercado</Link></li>
-              <li><Link to="/vender" className="fravega-link">Vender</Link></li>
-              <li><Link to="/ayuda" className="fravega-link">Ayuda</Link></li>
+              <li><Link to="/buscar?q=iphone" className="fravega-link">Prueba</Link></li>
             </ul>
           </nav>
 
-          <div className="header-ml__user">
-            <Link to="/login" className="user-link">Ingresa</Link>
-            <Link to="/registro" className="user-link">Crea tu cuenta</Link>
-            <Link to="/compras" className="user-link">Mis compras</Link>
-            <Link to="/cart" className="cart-link">
-              🛒 <span className="cart-badge">2</span>
+          <div className="header-ml__utility" aria-label="Accesos rápidos">
+            {publicSession ? (
+              <Link to="/perfil" className="user-link">Mis compras</Link>
+            ) : (
+              <Link to="/login" className="user-link">Mis compras</Link>
+            )}
+            <Link to="/vender" className="user-link user-link--sell">Vender</Link>
+            <Link to="/checkout/lista" className="header-ml__icon-link cart-link" aria-label="Carrito de compras">
+              <img src="/assets/header/cart.svg" alt="" />
+              {cartItemsCount > 0 ? <span className="cart-badge">{cartItemsCount}</span> : null}
             </Link>
+            <Link to="/favoritos" className="header-ml__icon-link" aria-label="Favoritos">
+              <img src="/assets/header/favorites.svg" alt="" />
+            </Link>
+            <Link to="/mensajes" className="header-ml__icon-link" aria-label="Mensajes">
+              <img src="/assets/header/messages.svg" alt="" />
+            </Link>
+            <span className="header-ml__divider" aria-hidden="true" />
+            {publicSession ? (
+              <div className="user-menu">
+                <button type="button" className="user-menu__trigger" aria-label="Menú de usuario">
+                  <img className="user-menu__avatar" src="/assets/header/account-avatar.svg" alt="" />
+                  <span className="user-menu__name">{userDisplayName}</span>
+                  <img className="user-menu__chevron-img" src="/assets/header/account-chevron.svg" alt="" />
+                </button>
+                <div className="user-menu__dropdown">
+                  <span className="user-menu__caption">{userDisplayName}</span>
+                  <Link to="/perfil" className="user-menu__item">Perfil</Link>
+                  <button type="button" className="user-menu__item user-menu__item--button" onClick={handleLogout}>Salir</button>
+                </div>
+              </div>
+            ) : (
+              <Link to="/login" className="header-ml__account-link">
+                <img className="user-menu__avatar" src="/assets/header/account-avatar.svg" alt="" />
+                <span>Mi cuenta</span>
+              </Link>
+            )}
+          </div>
+
+          <div className="header-ml__mobile-actions">
+            <Link to="/checkout/lista" className="cart-link header-ml__mobile-cart" aria-label="Carrito de compras" onClick={handleMobileNavigate}>
+              <img src="/assets/header/cart.svg" alt="" />
+              {cartItemsCount > 0 ? <span className="cart-badge">{cartItemsCount}</span> : null}
+            </Link>
+            <button
+              type="button"
+              className="header-ml__mobile-trigger"
+              aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+              aria-expanded={isMobileMenuOpen}
+              onClick={() => setIsMobileMenuOpen((currentValue) => !currentValue)}
+            >
+              {isMobileMenuOpen ? <FaXmark size={18} /> : <FaBars size={18} />}
+            </button>
           </div>
         </div>
+
+        {isMobileMenuOpen ? (
+          <div className="header-ml__mobile-panel">
+            <div className="header-ml__mobile-accordion">
+              <section className="header-ml__mobile-section">
+                <button
+                  type="button"
+                  className="header-ml__mobile-section-trigger"
+                  onClick={() => toggleMobileSection('explore')}
+                  aria-expanded={openMobileSection === 'explore'}
+                >
+                  <span>Explorar</span>
+                  <span className={`header-ml__mobile-section-chevron${openMobileSection === 'explore' ? ' header-ml__mobile-section-chevron--open' : ''}`}>
+                    <FaChevronDown size={12} />
+                  </span>
+                </button>
+
+                {openMobileSection === 'explore' ? (
+                  <div className="header-ml__mobile-section-content">
+                    <CategoriesMenu variant="mobile" onNavigate={handleMobileNavigate} />
+                    <div className="header-ml__mobile-links">
+                      <Link to="/ofertas" className="header-ml__mobile-link" onClick={handleMobileNavigate}>Ofertas</Link>
+                      <Link to="/buscar?q=iphone" className="header-ml__mobile-link" onClick={handleMobileNavigate}>Prueba</Link>
+                      <Link to="/historial" className="header-ml__mobile-link" onClick={handleMobileNavigate}>Historial</Link>
+                      <Link to="/vender" className="header-ml__mobile-link" onClick={handleMobileNavigate}>Vender</Link>
+                      <Link to="/ayuda" className="header-ml__mobile-link" onClick={handleMobileNavigate}>Ayuda</Link>
+                    </div>
+                  </div>
+                ) : null}
+              </section>
+
+              <section className="header-ml__mobile-section">
+                <button
+                  type="button"
+                  className="header-ml__mobile-section-trigger"
+                  onClick={() => toggleMobileSection('account')}
+                  aria-expanded={openMobileSection === 'account'}
+                >
+                  <span>{publicSession ? userDisplayName : 'Mi cuenta'}</span>
+                  <span className={`header-ml__mobile-section-chevron${openMobileSection === 'account' ? ' header-ml__mobile-section-chevron--open' : ''}`}>
+                    <FaChevronDown size={12} />
+                  </span>
+                </button>
+
+                {openMobileSection === 'account' ? (
+                  <div className="header-ml__mobile-section-content">
+                    {publicSession ? (
+                      <div className="header-ml__mobile-links">
+                        <Link to="/perfil" className="header-ml__mobile-link" onClick={handleMobileNavigate}>Perfil</Link>
+                        <Link to="/perfil" className="header-ml__mobile-link" onClick={handleMobileNavigate}>Mis compras</Link>
+                        <button type="button" className="header-ml__mobile-link header-ml__mobile-link--button" onClick={handleLogout}>Salir</button>
+                      </div>
+                    ) : (
+                      <div className="header-ml__mobile-links">
+                        <Link to="/login" className="header-ml__mobile-link" onClick={handleMobileNavigate}>Ingresa</Link>
+                        <Link to="/registro" className="header-ml__mobile-link" onClick={handleMobileNavigate}>Crea tu cuenta</Link>
+                      </div>
+                    )}
+                  </div>
+                ) : null}
+              </section>
+            </div>
+          </div>
+        ) : null}
       </div>
     </header>
   )

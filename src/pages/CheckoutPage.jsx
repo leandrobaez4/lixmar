@@ -1,24 +1,22 @@
 import { useState } from 'react'
-import Breadcrumb from '@/components/layout/Breadcrumb'
+import { FaTags, FaUserLarge } from 'react-icons/fa6'
 
 export default function CheckoutPage() {
   const [payMethod, setPayMethod] = useState('bank')
 
   return (
     <main className="container">
-      <Breadcrumb items={[{ to: '/', label: 'Inicio' }, { to: '#', label: 'Página' }, { label: 'Finalizar Compra' }]} />
-
       <section className="lixmar-finalize">
         <h2 className="lixmar-finalize__heading">FINALIZAR COMPRA</h2>
 
         {/* Alert boxes */}
         <div className="lixmar-finalize__alerts">
           <div className="lixmar-finalize__alert">
-            <span className="lixmar-finalize__alert-icon">👤</span>
+            <span className="lixmar-finalize__alert-icon"><FaUserLarge size={16} /></span>
             <span>¿Cliente que regresa? <a href="#" className="lixmar-finalize__alert-link">Haga clic aquí para iniciar sesión</a></span>
           </div>
           <div className="lixmar-finalize__alert">
-            <span className="lixmar-finalize__alert-icon">🏷️</span>
+            <span className="lixmar-finalize__alert-icon"><FaTags size={16} /></span>
             <span>¿Tienes un cupón? <a href="#" className="lixmar-finalize__alert-link">Haga clic aquí para ingresar su código</a></span>
           </div>
         </div>

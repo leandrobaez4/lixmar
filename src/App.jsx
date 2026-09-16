@@ -4,7 +4,10 @@ import HomePage from '@/pages/HomePage'
 import AboutPage from '@/pages/AboutPage'
 import LoginPage from '@/pages/LoginPage'
 import RegistrationPage from '@/pages/RegistrationPage'
+import RegistrationResultPage from '@/pages/RegistrationResultPage'
 import ProductsPage from '@/pages/ProductsPage'
+import SearchResultsPage from '@/pages/SearchResultsPage'
+import NewPublicationPage from '@/pages/NewPublicationPage'
 import SingleProductPage from '@/pages/SingleProductPage'
 import SingleProductPayPage from '@/pages/SingleProductPayPage'
 import CheckoutPage from '@/pages/CheckoutPage'
@@ -23,7 +26,10 @@ export default function App() {
         <Route path="/nosotros" element={<AboutPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/registro" element={<RegistrationPage />} />
+        <Route path="/registro/resultado" element={<RegistrationResultPage />} />
         <Route path="/productos" element={<ProductsPage />} />
+        <Route path="/buscar" element={<SearchResultsPage />} />
+        <Route path="/vender" element={<NewPublicationPage />} />
         <Route path="/producto/:id" element={<SingleProductPage />} />
         <Route path="/producto/:id/comprar" element={<SingleProductPayPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />

@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import Breadcrumb from '@/components/layout/Breadcrumb'
+import { FaCartShopping, FaCheck, FaFacebookF, FaHeart, FaInstagram, FaMinus, FaPlus, FaRegHeart, FaTruckFast, FaXmark, FaXTwitter, FaYoutube } from 'react-icons/fa6'
 import ProductCard from '@/components/ui/ProductCard'
+import RatingStars from '@/components/ui/RatingStars'
 
 export default function SingleProductPayPage() {
   const [qty, setQty] = useState(1)
@@ -15,8 +16,6 @@ export default function SingleProductPayPage() {
 
   return (
     <main className="container">
-      <Breadcrumb items={[{ to: '/', label: 'Inicio' }, { to: '/productos', label: 'Productos' }, { label: 'Comprar Producto' }]} />
-
       {/* Product Detail Pay Section */}
       <section className="lixmar-pdp">
         <div className="lixmar-pdp__layout">
@@ -25,7 +24,7 @@ export default function SingleProductPayPage() {
           <div className="lixmar-pdp__gallery">
             <div className="lixmar-pdp__main-img-wrap">
               <span className="lixmar-pdp__badge lixmar-pdp__badge--dark">NUEVO</span>
-              <button className="lixmar-pdp__wishlist">♡</button>
+              <button className="lixmar-pdp__wishlist"><FaRegHeart size={14} /></button>
               <img src={thumbs[activeThumb]} alt="Pinnapple Macbook Pro 2022" className="lixmar-pdp__main-img" />
             </div>
             <div className="lixmar-pdp__thumbs">
@@ -42,7 +41,7 @@ export default function SingleProductPayPage() {
           {/* CENTER: Product Info */}
           <div className="lixmar-pdp__info">
             <div className="lixmar-pdp__rating">
-              <span className="lixmar-pdp__stars">★★★★<span className="lixmar-pdp__star-empty">★</span></span>
+              <RatingStars value={4} className="lixmar-pdp__stars" size={12} />
               <span className="lixmar-pdp__rating-count">(5)</span>
             </div>
             <h1 className="lixmar-pdp__title">Pinnapple Macbook Pro 2022 M1 / 512GB<br />Gris Oscuro</h1>
@@ -58,19 +57,19 @@ export default function SingleProductPayPage() {
               <span className="lixmar-pdp__envio">ENVIO GRATIS</span>
             </div>
             <div className="lixmar-pdp__stock">
-              <span className="lixmar-pdp__stock-dot lixmar-pdp__stock-dot--green">●</span> En stock
+              <span className="lixmar-pdp__stock-dot lixmar-pdp__stock-dot--green"><FaCheck size={11} /></span> En stock
             </div>
 
             <div className="lixmar-pdp__quantity-section">
               <h4 className="lixmar-pdp__qty-label">Cantidad</h4>
               <div className="lixmar-pdp__qty-row">
                 <div className="lixmar-pdp__qty-control">
-                  <button className="lixmar-pdp__qty-btn lixmar-pdp__qty-btn--minus" onClick={() => setQty(q => Math.max(1, q-1))}>−</button>
+                  <button className="lixmar-pdp__qty-btn lixmar-pdp__qty-btn--minus" onClick={() => setQty(q => Math.max(1, q-1))}><FaMinus size={12} /></button>
                   <input type="text" value={qty} className="lixmar-pdp__qty-input" readOnly />
-                  <button className="lixmar-pdp__qty-btn lixmar-pdp__qty-btn--plus" onClick={() => setQty(q => q+1)}>+</button>
+                  <button className="lixmar-pdp__qty-btn lixmar-pdp__qty-btn--plus" onClick={() => setQty(q => q+1)}><FaPlus size={12} /></button>
                 </div>
-                <a href="#" className="lixmar-pdp__add-cart">ADD TO CART</a>
-                <button className="lixmar-pdp__fav-btn">♥</button>
+                <a href="#" className="lixmar-pdp__add-cart"><FaCartShopping size={14} /> ADD TO CART</a>
+                <button className="lixmar-pdp__fav-btn"><FaHeart size={14} /></button>
               </div>
             </div>
 
@@ -83,10 +82,10 @@ export default function SingleProductPayPage() {
             </div>
 
             <div className="lixmar-pdp__social">
-              <a href="#" className="lixmar-pdp__social-link">𝕏</a>
-              <a href="#" className="lixmar-pdp__social-link">f</a>
-              <a href="#" className="lixmar-pdp__social-link">📷</a>
-              <a href="#" className="lixmar-pdp__social-link">▶</a>
+              <a href="#" className="lixmar-pdp__social-link"><FaXTwitter size={14} /></a>
+              <a href="#" className="lixmar-pdp__social-link"><FaFacebookF size={14} /></a>
+              <a href="#" className="lixmar-pdp__social-link"><FaInstagram size={14} /></a>
+              <a href="#" className="lixmar-pdp__social-link"><FaYoutube size={14} /></a>
             </div>
           </div>
 
@@ -104,7 +103,7 @@ export default function SingleProductPayPage() {
                   <h4 className="lixmar-pdp__cart-item-name">Pinnaeple Macbook Pro 2022 M1/ 512GB</h4>
                   <span className="lixmar-pdp__cart-item-qty">3 x $579.000</span>
                 </div>
-                <button className="lixmar-pdp__cart-item-remove">×</button>
+                <button className="lixmar-pdp__cart-item-remove"><FaXmark size={12} /></button>
               </div>
               <div className="lixmar-pdp__cart-subtotal">
                 <span>Sub Total:</span>
@@ -117,7 +116,7 @@ export default function SingleProductPayPage() {
             </div>
 
             <div className="lixmar-pdp__shipping-note">
-              <span className="lixmar-pdp__shipping-icon">🚚</span>
+              <span className="lixmar-pdp__shipping-icon"><FaTruckFast size={15} /></span>
               <span>Envios desde <strong>Argentina</strong></span>
             </div>
           </div>
@@ -151,7 +150,7 @@ export default function SingleProductPayPage() {
             </>
           )}
           {activeTab === 'reviews' && (
-            <p className="lixmar-desctabs__text">⭐⭐⭐⭐⭐ "Excelente producto, llegó muy rápido." — Juan P.</p>
+            <p className="lixmar-desctabs__text"><RatingStars value={5} className="lixmar-pdp__stars" size={12} /> "Excelente producto, llegó muy rápido." — Juan P.</p>
           )}
           {activeTab === 'info' && (
             <p className="lixmar-desctabs__text">Procesador: M1 | RAM: 8GB | Almacenamiento: 512GB SSD | Pantalla: 13.3" Retina</p>

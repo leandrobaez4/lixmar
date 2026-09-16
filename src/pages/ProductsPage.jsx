@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Breadcrumb from '@/components/layout/Breadcrumb'
+import { FaBars, FaChevronDown, FaChevronLeft, FaChevronRight, FaHeart, FaRegHeart, FaTableCellsLarge, FaXmark } from 'react-icons/fa6'
+import RatingStars from '@/components/ui/RatingStars'
 
 const categories = [
   { name: 'iPhone (iOS)', count: 74, img: '/assets/0b070ec76034ae637ff589014ed8e2419a754a32.png' },
@@ -46,8 +47,6 @@ const products = [
 
 const formatPrice = (val) => `$${val.toLocaleString('es-AR')}`
 
-const stars = (n) => '★'.repeat(n) + (n < 5 ? '☆'.repeat(5 - n) : '')
-
 export default function ProductsPage() {
   const [activeFilters, setActiveFilters] = useState(['Min: $45.000', '10.9 pulgadas', 'Color: Rojo', '128GB'])
   const [viewMode, setViewMode] = useState('grid')
@@ -56,8 +55,6 @@ export default function ProductsPage() {
 
   return (
     <main className="container">
-      <Breadcrumb items={[{ to: '/', label: 'Inicio' }, { to: '#', label: 'Página' }, { label: 'Productos' }]} />
-
       {/* Best Phones & Tablets Banner */}
       <section className="lixmar-bestbanner">
         <h3 className="lixmar-bestbanner__title">Mejores celulares y tablets</h3>
@@ -79,9 +76,9 @@ export default function ProductsPage() {
               </div>
             </div>
             <div className="lixmar-bestbanner__controls">
-              <button className="lixmar-bestbanner__ctrl-arrow" aria-label="Anterior">←</button>
+              <button className="lixmar-bestbanner__ctrl-arrow" aria-label="Anterior"><FaChevronLeft size={12} /></button>
               <span className="lixmar-bestbanner__ctrl-count">3 / 3</span>
-              <button className="lixmar-bestbanner__ctrl-arrow" aria-label="Siguiente">→</button>
+              <button className="lixmar-bestbanner__ctrl-arrow" aria-label="Siguiente"><FaChevronRight size={12} /></button>
             </div>
           </div>
           <div className="lixmar-bestbanner__side">
@@ -137,7 +134,7 @@ export default function ProductsPage() {
               <div className="lixmar-shop__filter-tags">
                 {activeFilters.map(f => (
                   <span className="lixmar-shop__filter-tag" key={f}>
-                    {f} <button className="lixmar-shop__tag-remove" onClick={() => removeFilter(f)}>×</button>
+                    {f} <button className="lixmar-shop__tag-remove" onClick={() => removeFilter(f)}><FaXmark size={10} /></button>
                   </span>
                 ))}
               </div>
@@ -146,7 +143,7 @@ export default function ProductsPage() {
               <div className="lixmar-shop__filter-group">
                 <div className="lixmar-shop__filter-group-header">
                   <span className="lixmar-shop__filter-group-title">Por Precio</span>
-                  <span className="lixmar-shop__filter-toggle">▼</span>
+                  <span className="lixmar-shop__filter-toggle"><FaChevronDown size={10} /></span>
                 </div>
                 <div className="lixmar-shop__price-slider">
                   <div className="lixmar-shop__price-bar">
@@ -171,13 +168,13 @@ export default function ProductsPage() {
               <div className="lixmar-shop__filter-group">
                 <div className="lixmar-shop__filter-group-header">
                   <span className="lixmar-shop__filter-group-title">Por Valoración</span>
-                  <span className="lixmar-shop__filter-toggle">▼</span>
+                  <span className="lixmar-shop__filter-toggle"><FaChevronDown size={10} /></span>
                 </div>
                 <div className="lixmar-shop__filter-checks">
                   {[5,4,3,2].map(n => (
                     <label className="lixmar-shop__check" key={n}>
                       <input type="checkbox" />
-                      <span className="lixmar-shop__stars">{stars(n)}</span>
+                      <RatingStars value={n} className="lixmar-shop__stars" size={11} />
                       <span className="lixmar-shop__check-count">({[52,24,5,1][5-n]})</span>
                     </label>
                   ))}
@@ -188,7 +185,7 @@ export default function ProductsPage() {
               <div className="lixmar-shop__filter-group">
                 <div className="lixmar-shop__filter-group-header">
                   <span className="lixmar-shop__filter-group-title">Por Tamaño de pantalla</span>
-                  <span className="lixmar-shop__filter-toggle">▼</span>
+                  <span className="lixmar-shop__filter-toggle"><FaChevronDown size={10} /></span>
                 </div>
                 <div className="lixmar-shop__size-pills">
                   <span className="lixmar-shop__size-pill">7" y Menor</span>
@@ -202,7 +199,7 @@ export default function ProductsPage() {
               <div className="lixmar-shop__filter-group">
                 <div className="lixmar-shop__filter-group-header">
                   <span className="lixmar-shop__filter-group-title">By Color</span>
-                  <span className="lixmar-shop__filter-toggle">▼</span>
+                  <span className="lixmar-shop__filter-toggle"><FaChevronDown size={10} /></span>
                 </div>
                 <div className="lixmar-shop__color-swatches">
                   {['#a42a2a','#2f557b','#439abb','#222','#fff','#1aba1a','#696969','#534898'].map(c => (
@@ -215,7 +212,7 @@ export default function ProductsPage() {
               <div className="lixmar-shop__filter-group">
                 <div className="lixmar-shop__filter-group-header">
                   <span className="lixmar-shop__filter-group-title">Por Condición</span>
-                  <span className="lixmar-shop__filter-toggle">▼</span>
+                  <span className="lixmar-shop__filter-toggle"><FaChevronDown size={10} /></span>
                 </div>
                 <div className="lixmar-shop__filter-checks">
                   {[{l:'Nuevo',c:21},{l:'Usado',c:2},{l:'Reacondicionado',c:38}].map(x => (
@@ -234,19 +231,19 @@ export default function ProductsPage() {
             <div className="lixmar-shop__bestsellers">
               <h3 className="lixmar-shop__bestsellers-title">Los más vendidos en esta categoría</h3>
               <div className="lixmar-shop__bestsellers-wrap">
-                <button className="lixmar-shop__bs-arrow lixmar-shop__bs-arrow--prev">←</button>
+                <button className="lixmar-shop__bs-arrow lixmar-shop__bs-arrow--prev"><FaChevronLeft size={12} /></button>
                 <div className="lixmar-shop__bs-track">
                   {bestsellers.map((p, i) => (
                     <div className="lixmar-shop__bs-card" key={i}>
                       <div className="lixmar-shop__bs-card-top">
                         {p.save && <span className="lixmar-shop__badge lixmar-shop__badge--green">ahorra<br /><strong>{formatPrice(p.save)}</strong></span>}
-                        <button className="lixmar-shop__fav">♡</button>
+                        <button className="lixmar-shop__fav"><FaRegHeart size={14} /></button>
                       </div>
                       <img src={p.img} alt={p.name} className="lixmar-shop__bs-img" />
                       <div className="lixmar-shop__bs-info">
                         {p.rating && (
                           <div className="lixmar-shop__bs-stars">
-                            <span className="lixmar-shop__stars">{stars(p.rating)}</span>
+                            <RatingStars value={p.rating} className="lixmar-shop__stars" size={11} />
                             <span className="lixmar-shop__check-count">({p.reviews})</span>
                           </div>
                         )}
@@ -265,7 +262,7 @@ export default function ProductsPage() {
                     </div>
                   ))}
                 </div>
-                <button className="lixmar-shop__bs-arrow lixmar-shop__bs-arrow--next">→</button>
+                <button className="lixmar-shop__bs-arrow lixmar-shop__bs-arrow--next"><FaChevronRight size={12} /></button>
               </div>
             </div>
 
@@ -288,8 +285,8 @@ export default function ProductsPage() {
                   <option>Precio: mayor a menor</option>
                 </select>
                 <span className="lixmar-shop__toolbar-label">Ver Como</span>
-                <button className={`lixmar-shop__view-btn${viewMode === 'grid' ? ' lixmar-shop__view-btn--active' : ''}`} onClick={() => setViewMode('grid')}>⊞</button>
-                <button className={`lixmar-shop__view-btn${viewMode === 'list' ? ' lixmar-shop__view-btn--active' : ''}`} onClick={() => setViewMode('list')}>☰</button>
+                <button className={`lixmar-shop__view-btn${viewMode === 'grid' ? ' lixmar-shop__view-btn--active' : ''}`} onClick={() => setViewMode('grid')}><FaTableCellsLarge size={14} /></button>
+                <button className={`lixmar-shop__view-btn${viewMode === 'list' ? ' lixmar-shop__view-btn--active' : ''}`} onClick={() => setViewMode('list')}><FaBars size={14} /></button>
               </div>
             </div>
 
@@ -300,7 +297,7 @@ export default function ProductsPage() {
                   <div className="lixmar-shop__product-top">
                     {p.save && <span className="lixmar-shop__badge lixmar-shop__badge--green">ahorra<br /><strong>{formatPrice(p.save)}</strong></span>}
                     {p.badge && <span className="lixmar-shop__badge lixmar-shop__badge--dark">{p.badge}</span>}
-                    <button className="lixmar-shop__fav">♡</button>
+                    <button className="lixmar-shop__fav"><FaHeart size={14} /></button>
                   </div>
                   <Link to={`/producto/${p.id}`}>
                     <img src={p.img} alt={p.name} className="lixmar-shop__product-img" />
@@ -308,7 +305,7 @@ export default function ProductsPage() {
                   <div className="lixmar-shop__product-info">
                     {p.rating && (
                       <div className="lixmar-shop__bs-stars">
-                        <span className="lixmar-shop__stars">{stars(p.rating)}</span>
+                        <RatingStars value={p.rating} className="lixmar-shop__stars" size={11} />
                         <span className="lixmar-shop__check-count">({p.reviews})</span>
                       </div>
                     )}

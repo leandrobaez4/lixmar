@@ -1,10 +1,8 @@
-import Breadcrumb from '@/components/layout/Breadcrumb'
+import { FaCreditCard } from 'react-icons/fa6'
 
 export default function PaymentPage() {
   return (
     <main className="container">
-      <Breadcrumb items={[{ to: '/', label: 'Inicio' }, { to: '#', label: 'Página' }, { label: 'Pago' }]} />
-
       <section className="lixmar-payment">
         <div className="lixmar-payment__grid">
           {/* Left: Order Summary */}
@@ -46,7 +44,7 @@ export default function PaymentPage() {
                 <input type="text" className="lixmar-payment__input lixmar-payment__input--half" placeholder="MM/AA" maxLength="5" />
                 <div className="lixmar-payment__cvc-wrapper">
                   <input type="text" className="lixmar-payment__input lixmar-payment__input--half" placeholder="CVC" maxLength="4" />
-                  <span className="lixmar-payment__cvc-icon">💳</span>
+                  <span className="lixmar-payment__cvc-icon"><FaCreditCard size={15} /></span>
                 </div>
               </div>
 

@@ -1,10 +1,6 @@
-import Breadcrumb from '@/components/layout/Breadcrumb'
-
 export default function AboutPage() {
   return (
     <main className="container">
-      <Breadcrumb items={[{ to: '/', label: 'Inicio' }, { to: '#', label: 'Página' }, { label: 'Sobre nosotros' }]} />
-
       <section className="lixmar-about">
         <div className="lixmar-about__hero">
           <div className="lixmar-about__banner" style={{ backgroundImage: "url('/assets/1333657b62d5951cab503cc5588b2c67ff3f5306.png')" }}>

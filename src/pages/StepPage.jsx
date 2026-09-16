@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Breadcrumb from '@/components/layout/Breadcrumb'
+import { FaCheck, FaHeart, FaMinus, FaPlus, FaTrashCan } from 'react-icons/fa6'
+import RatingStars from '@/components/ui/RatingStars'
 
 const cartProducts = [
   {
@@ -36,8 +37,6 @@ export default function StepPage() {
 
   return (
     <main className="container">
-      <Breadcrumb items={[{ to: '/', label: 'Inicio' }, { to: '#', label: 'Página' }, { label: 'Carrito' }]} />
-
       <section className="lixmar-checkout">
         <div className="lixmar-checkout__products">
           {cartProducts.map(p => (
@@ -48,7 +47,7 @@ export default function StepPage() {
               <div className="lixmar-checkout__card-info">
                 {p.rating && (
                   <div className="lixmar-checkout__rating-row">
-                    <span className="lixmar-checkout__rating">{'★'.repeat(p.rating)}</span>
+                    <RatingStars value={p.rating} className="lixmar-checkout__rating" size={12} />
                     {p.reviews && <span className="lixmar-checkout__rating-count">({p.reviews})</span>}
                   </div>
                 )}
@@ -57,9 +56,9 @@ export default function StepPage() {
                   {formatPrice(p.price)}
                 </p>
                 <div className="lixmar-checkout__qty">
-                  <button type="button" className="lixmar-checkout__qty-btn lixmar-checkout__qty-minus" onClick={() => updateQty(p.id, -1)}>−</button>
+                  <button type="button" className="lixmar-checkout__qty-btn lixmar-checkout__qty-minus" onClick={() => updateQty(p.id, -1)}><FaMinus size={12} /></button>
                   <input type="number" className="lixmar-checkout__qty-input" value={quantities[p.id]} readOnly />
-                  <button type="button" className="lixmar-checkout__qty-btn lixmar-checkout__qty-plus" onClick={() => updateQty(p.id, 1)}>+</button>
+                  <button type="button" className="lixmar-checkout__qty-btn lixmar-checkout__qty-plus" onClick={() => updateQty(p.id, 1)}><FaPlus size={12} /></button>
                 </div>
                 <div className="lixmar-checkout__badges">
                   {p.freeShipping && <span className="lixmar-checkout__badge lixmar-checkout__badge--green">Envío gratis</span>}
@@ -68,7 +67,7 @@ export default function StepPage() {
                 </div>
                 {p.stock && (
                   <p className="lixmar-checkout__stock">
-                    <span className="lixmar-checkout__stock-icon">✔</span> En stock
+                    <span className="lixmar-checkout__stock-icon"><FaCheck size={12} /></span> En stock
                   </p>
                 )}
               </div>
@@ -80,8 +79,8 @@ export default function StepPage() {
               )}
               {p.badge && <div className="lixmar-checkout__new-badge">{p.badge}</div>}
               <div className="lixmar-checkout__actions">
-                <button className="lixmar-checkout__action-btn lixmar-checkout__action-btn--fav" title="Favoritos">♡</button>
-                <button className="lixmar-checkout__action-btn lixmar-checkout__action-btn--del" title="Eliminar">✕</button>
+                <button className="lixmar-checkout__action-btn lixmar-checkout__action-btn--fav" title="Favoritos"><FaHeart size={14} /></button>
+                <button className="lixmar-checkout__action-btn lixmar-checkout__action-btn--del" title="Eliminar"><FaTrashCan size={14} /></button>
               </div>
             </div>
           ))}
