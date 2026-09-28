@@ -1,0 +1,25 @@
+name: Plane agent
+
+on:
+  push:
+    paths:
+      - automation/plane-agent/**
+      - .github/workflows/plane-agent.yml
+  pull_request:
+    paths:
+      - automation/plane-agent/**
+      - .github/workflows/plane-agent.yml
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: automation/plane-agent
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm test
+      - run: npm run check

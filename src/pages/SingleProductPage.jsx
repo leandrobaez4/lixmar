@@ -1,233 +1,199 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { getPublicCartItems, setPublicCartItems } from '@/cart/publicCart'
+import { addPublicCartItem } from '@/cart/publicCart'
+import { fetchProduct, fetchProducts } from '@/catalog/catalogApi'
+import { accountRequest } from '@/account/accountApi'
+import ProductReviews from '@/catalog/ProductReviews'
+import { useDefaultProductImage } from '@/catalog/productImage'
 import '@/scss/pages/SingleProductPage.scss'
 
-const PRODUCT = {
-  id: 1,
-  title: 'Apple iPhone 15 Pro 256 GB',
-  price: 2349999,
-  rating: 4.8,
-  reviews: 342,
-  images: [],
-  condition: 'Nuevo',
-  installments: '12 cuotas de $ 195.833 sin interés',
-  stock: '+10 unidades',
-  seller: { name: 'Tech Store', rating: 4.9, sales: '+1.200 ventas' },
-  description: 'iPhone 15 Pro con diseño de titanio, pantalla Super Retina XDR de 6,1”, chip A17 Pro y sistema de cámaras profesional. Publicación verificada con garantía y envío protegido por LIXMAR.',
-  specifications: [
-    'Capacidad: 256 GB',
-    'Color: Titanio natural',
-    'Condición: Nuevo',
-    'Garantía: 12 meses',
-  ],
+function productImages(product) {
+  const gallery = Array.isArray(product?.assets?.gallery) ? product.assets.gallery : []
+  const media = Array.isArray(product?.media) ? product.media.filter((item) => item.type === 'image') : []
+  const images = [product?.assets?.primary || product?.primary_image, ...gallery, ...media]
+  return images.filter((image, index) => image?.url && images.findIndex((candidate) => candidate?.url === image.url) === index)
 }
 
-const QUESTIONS = [
-  { question: '¿Hacés envíos al interior?', answer: 'Sí, enviamos a todo el país. Podés calcular el envío antes de comprar.' },
-  { question: '¿Viene sellado de fábrica?', answer: 'Sí. Es nuevo, sellado y cuenta con garantía.' },
-]
-
-const REVIEWS = [
-  { title: 'Excelente compra', body: 'Llegó rápido, sellado y exactamente como se describe.' },
-  { title: 'Muy buen producto', body: 'La cámara y la batería son excelentes.' },
-  { title: 'Todo perfecto', body: 'Buen vendedor y envío impecable.' },
-]
-
-const RECOMMENDATIONS = [
-  { id: 2, title: 'Samsung Galaxy S24', price: 1799999 },
-  { id: 3, title: 'AirPods Pro 2', price: 399999 },
-  { id: 4, title: 'Apple Watch Series 9', price: 749999 },
-  { id: 5, title: 'MacBook Air M3', price: 2199999 },
-]
-
-const TABS = [
-  { id: 'description', label: 'Descripción' },
-  { id: 'specifications', label: 'Características' },
-  { id: 'reviews', label: 'Opiniones' },
-  { id: 'questions', label: 'Preguntas' },
-]
-
-const formatPrice = (value) => `$ ${value.toLocaleString('es-AR')}`
-
-function ProductVisual({ title, image, compact = false }) {
-  if (image) return <img src={image} alt={title} />
-
-  return (
-    <span className={compact ? 'lix-product-placeholder--compact' : 'lix-product-placeholder'}>
-      {compact ? title : <>{title}<br />Imagen de producto</>}
-    </span>
-  )
-}
-
-function RecommendationCard({ product }) {
-  return (
-    <Link className="lix-recommendation-card" to={`/producto/${product.id}`}>
-      <div className="lix-recommendation-card__visual">
-        <ProductVisual title={product.title} compact />
-      </div>
-      <div className="lix-recommendation-card__content">
-        <h3>{product.title}</h3>
-        <strong>{formatPrice(product.price)}</strong>
-        <span>Envío gratis</span>
-      </div>
-    </Link>
-  )
+function productAttributes(product) {
+  const values = product?.custom_values
+  if (values && !Array.isArray(values) && typeof values === 'object') {
+    return Object.entries(values).filter(([, value]) => value !== null && value !== '').map(([name, value]) => ({
+      id: name,
+      name: name.replace(/_/g, ' '),
+      value: String(value),
+    }))
+  }
+  return (Array.isArray(values) ? values : []).filter((item) => item.field?.name).map((item) => ({
+    id: item.id,
+    name: item.field.name,
+    value: item.option_label || item.value_text || (typeof item.value_boolean === 'boolean' ? (item.value_boolean ? 'Sí' : 'No') : null),
+  })).filter((item) => item.value)
 }
 
 export default function SingleProductPage() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const [activeImage, setActiveImage] = useState(0)
+  const [product, setProduct] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+  const [busy, setBusy] = useState(false)
+  const [quantity, setQuantity] = useState(1)
+  const [added, setAdded] = useState(false)
+  const [favoriteMessage, setFavoriteMessage] = useState('')
+  const [favoriteBusy, setFavoriteBusy] = useState(false)
+  const [related, setRelated] = useState([])
+  const [selectedImage, setSelectedImage] = useState(0)
   const [activeTab, setActiveTab] = useState('description')
-  const [cartAdded, setCartAdded] = useState(false)
-  const recommendation = RECOMMENDATIONS.find((item) => item.id === Number(id))
-  const product = recommendation ? { ...PRODUCT, ...recommendation } : PRODUCT
-  const gallerySlots = Array.from({ length: 4 }, (_, index) => product.images[index] ?? null)
 
   useEffect(() => {
-    setActiveImage(0)
-    setActiveTab('description')
-    setCartAdded(false)
+    const controller = new AbortController()
     window.scrollTo(0, 0)
+    setLoading(true)
+    setError('')
+    setProduct(null)
+    setQuantity(1)
+    setAdded(false)
+    setFavoriteMessage('')
+    setRelated([])
+    setSelectedImage(0)
+    setActiveTab('description')
+    fetchProduct(id, controller.signal).then((payload) => {
+      if (!controller.signal.aborted) setProduct(payload.data)
+    }).catch((failure) => {
+      if (!controller.signal.aborted) setError(failure.message)
+    }).finally(() => {
+      if (!controller.signal.aborted) setLoading(false)
+    })
+    return () => controller.abort()
   }, [id])
 
-  const addToCart = () => {
-    const items = getPublicCartItems()
-    const existingItem = items.find((item) => item.id === product.id)
-    const nextItems = existingItem
-      ? items.map((item) => item.id === product.id ? { ...item, qty: item.qty + 1 } : item)
-      : [...items, {
-          id: product.id,
-          name: product.title,
-          price: product.price,
-          qty: 1,
-          img: product.images[0] ?? '/assets/default-placeholder.png',
-        }]
+  useEffect(() => {
+    if (!product?.category?.id) return undefined
+    const controller = new AbortController()
+    fetchProducts({ category_id: product.category.id, page: 1, per_page: 8 }, controller.signal)
+      .then((payload) => {
+        if (!controller.signal.aborted) setRelated((payload.data || []).filter((item) => String(item.id) !== String(id)).slice(0, 4))
+      }).catch(() => {})
+    return () => controller.abort()
+  }, [product?.category?.id, id])
 
-    setPublicCartItems(nextItems)
-    setCartAdded(true)
+  const addToCart = async (goToCart = false) => {
+    if (!product || busy) return
+    setBusy(true)
+    setError('')
+    try {
+      await addPublicCartItem(product.id, quantity)
+      setAdded(true)
+      if (goToCart) navigate('/checkout/lista')
+    } catch (failure) {
+      setError(failure.message)
+    } finally {
+      setBusy(false)
+    }
   }
 
-  const buyNow = () => {
-    addToCart()
-    navigate(`/producto/${product.id}/comprar`)
+  const saveFavorite = async () => {
+    if (!product || favoriteBusy) return
+    setFavoriteBusy(true)
+    setFavoriteMessage('')
+    try {
+      await accountRequest('/catalog/favorites', {
+        method: 'POST', body: JSON.stringify({ product_id: product.id }),
+      })
+      setFavoriteMessage('Producto guardado en favoritos.')
+    } catch (failure) {
+      if (failure.status === 401 || failure.status === 403) navigate('/login')
+      else setFavoriteMessage(failure.message)
+    } finally {
+      setFavoriteBusy(false)
+    }
   }
 
-  const goToSection = (tabId) => {
-    setActiveTab(tabId)
-    document.getElementById(`product-${tabId}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
+  const formatPrice = (value, currency = product?.currency || 'ARS') => new Intl.NumberFormat('es-AR', {
+    style: 'currency', currency,
+  }).format(Number(value) || 0)
+  const images = productImages(product)
+  const attributes = productAttributes(product)
 
   return (
     <main className="lix-product-page">
       <div className="lix-product-shell">
-        <div className="lix-product-core">
-          <section className="lix-gallery-card" aria-label="Galería del producto">
-            <div className="lix-gallery-thumbnails">
-              {gallerySlots.map((image, index) => (
-                <button
-                  key={`${image ?? 'placeholder'}-${index}`}
-                  type="button"
-                  className={`lix-gallery-thumbnail ${activeImage === index ? 'is-active' : ''}`}
-                  onClick={() => setActiveImage(index)}
-                  aria-label={`Ver imagen ${index + 1}`}
-                  aria-pressed={activeImage === index}
-                >
-                  {image ? <img src={image} alt="" /> : null}
-                </button>
-              ))}
+        {loading && <p role="status">Cargando producto…</p>}
+        {error && <p role="alert">{error} <Link to="/productos">Volver al catálogo</Link></p>}
+        {product && <>
+          <section className="lix-product-core" aria-label={`Detalle de ${product.title}`}>
+            <div className={`lix-gallery-card${images.length > 1 ? '' : ' lix-gallery-card--single'}`} aria-label="Galería del producto">
+              {images.length > 1 && <div className="lix-gallery-thumbnails" aria-label="Elegir imagen">
+                {images.map((image, index) => <button
+                  key={image.id || image.url} type="button"
+                  className={`lix-gallery-thumbnail${selectedImage === index ? ' is-active' : ''}`}
+                  aria-label={`Ver imagen ${index + 1}`} aria-pressed={selectedImage === index}
+                  onClick={() => setSelectedImage(index)}
+                ><img src={image.thumbnail_url || image.url} alt="" onError={useDefaultProductImage} /></button>)}
+              </div>}
+              <div className="lix-gallery-main">
+                {images.length ? <img src={images[selectedImage]?.url || images[0].url} alt={product.title} onError={useDefaultProductImage} />
+                  : <span className="lix-product-placeholder">{product.title}<br />Imagen de producto</span>}
+              </div>
             </div>
-            <div className="lix-gallery-main">
-              <ProductVisual title={product.title.replace(' 256 GB', '')} image={gallerySlots[activeImage]} />
+            <div className="lix-purchase-card">
+              {product.condition && <span className="lix-condition-badge">{product.condition === 'new' ? 'NUEVO' : product.condition === 'used' ? 'USADO' : product.condition}</span>}
+              <h1>{product.title}</h1>
+              <p className="lix-product-price">{formatPrice(product.price)}</p>
+              {product.shipping && <p className="lix-shipping">{product.shipping}</p>}
+              {product.status === 'active' && <p className="lix-stock">Disponible para comprar</p>}
+              <label className="lix-quantity-label">Cantidad
+                <input type="number" min="1" max="9999" value={quantity}
+                  onChange={(event) => setQuantity(Math.max(1, Math.min(9999, Number(event.target.value) || 1)))} />
+              </label>
+              {product.status === 'active' ? <div className="lix-purchase-actions">
+                <button className="lix-buy-button" type="button" disabled={busy} onClick={() => addToCart(true)}>Comprar ahora</button>
+                <button className="lix-cart-button" type="button" disabled={busy} onClick={() => addToCart(false)}>Agregar al carrito</button>
+                <button className="lix-favorite-button" type="button" disabled={favoriteBusy} onClick={saveFavorite}>Guardar en favoritos</button>
+              </div> : <p>Esta publicación todavía no está disponible para comprar.</p>}
+              {added && <p role="status">Producto agregado al carrito.</p>}
+              {favoriteMessage && <p role="status">{favoriteMessage}</p>}
+              <div className="lix-seller-card">
+                <strong>Vendido por {product.seller?.name || `Vendedor #${product.seller_id}`}</strong>
+                {product.location?.city && <span>{product.location.city}{product.location.province ? `, ${product.location.province}` : ''}</span>}
+              </div>
             </div>
           </section>
-
-          <aside className="lix-purchase-card">
-            <span className="lix-condition-badge">{product.condition.toUpperCase()}</span>
-            <h1>{product.title}</h1>
-            <p className="lix-product-rating">★ {String(product.rating).replace('.', ',')} <span>·</span> {product.reviews} opiniones</p>
-            <p className="lix-product-price">{formatPrice(product.price)}</p>
-            <p className="lix-installments">{product.installments}</p>
-            <p className="lix-shipping">Envío gratis a todo el país</p>
-            <p className="lix-stock">Stock disponible <span>·</span> {product.stock}</p>
-
-            <div className="lix-purchase-actions">
-              <button type="button" className="lix-buy-button" onClick={buyNow}>Comprar ahora</button>
-              <button type="button" className="lix-cart-button" onClick={addToCart}>
-                {cartAdded ? 'Agregado al carrito' : 'Agregar al carrito'}
-              </button>
+          <section className="lix-product-information" aria-label="Información del producto">
+            <div className="lix-product-tabs" role="tablist" aria-label="Información del producto">
+              {[['description', 'Descripción'], ['characteristics', 'Características']].map(([key, label]) => <button
+                key={key} type="button" role="tab" aria-selected={activeTab === key}
+                className={activeTab === key ? 'is-active' : ''} onClick={() => setActiveTab(key)}>{label}</button>)}
+              <a href="#opiniones">Opiniones</a><a href="#preguntas">Preguntas</a>
             </div>
-
-            <div className="lix-seller-card" id="seller">
-              <strong>Tienda oficial • {product.seller.name}</strong>
-              <span>★ {String(product.seller.rating).replace('.', ',')} <b>·</b> {product.seller.sales}</span>
-              <button type="button">Ver perfil del vendedor →</button>
+            <div className="lix-description-content" role="tabpanel">
+              {activeTab === 'description' ? <><h2>Descripción del producto</h2><p>{product.description || 'El vendedor todavía no agregó una descripción.'}</p></>
+                : <><h2>Características</h2><ul>
+                  {product.condition && <li>Condición: {product.condition === 'new' ? 'Nuevo' : product.condition === 'used' ? 'Usado' : product.condition}</li>}
+                  {product.category?.name && <li>Categoría: {product.category.name}</li>}
+                  {attributes.map((item) => <li key={item.id}>{item.name}: {item.value}</li>)}
+                  {!product.condition && !product.category?.name && !attributes.length && <li>Sin características informadas.</li>}
+                </ul></>}
             </div>
-          </aside>
-        </div>
-
-        <section className="lix-product-information" id="product-description">
-          <nav className="lix-product-tabs" aria-label="Información del producto">
-            {TABS.map((tab) => (
-              <button
-                key={tab.id}
-                type="button"
-                className={activeTab === tab.id ? 'is-active' : ''}
-                onClick={() => goToSection(tab.id)}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </nav>
-          <div className="lix-description-content">
-            <h2>Potencia profesional en tu bolsillo</h2>
-            <p>{product.description}</p>
-            <ul id="product-specifications">
-              {product.specifications.map((specification) => <li key={specification}>{specification}</li>)}
-            </ul>
-          </div>
-        </section>
-
-        <section className="lix-questions-card" id="product-questions">
-          <h2>Preguntas y respuestas</h2>
-          <div className="lix-question-list">
-            {QUESTIONS.map((item) => (
-              <article key={item.question}>
-                <h3>{item.question}</h3>
-                <p>{item.answer}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="lix-reviews-card" id="product-reviews">
-          <h2>Opiniones del producto</h2>
-          <div className="lix-reviews-layout">
-            <div className="lix-review-summary">
-              <strong>{String(product.rating).replace('.', ',')}</strong>
-              <div><span>★★★★★</span><p>{product.reviews} opiniones</p></div>
+          </section>
+          <section className="lix-questions-card" id="preguntas">
+            <h2>Preguntas y respuestas</h2>
+            <p>Las preguntas de esta publicación aún no están disponibles.</p>
+          </section>
+          <div id="opiniones"><ProductReviews key={product.id} productId={product.id} /></div>
+          {related.length > 0 && <section className="lix-recommendations" aria-label="Productos relacionados">
+            <h2>También te puede interesar</h2>
+            <div className="lix-recommendations-grid">
+              {related.map((item) => <Link key={item.id} to={`/producto/${item.id}`} className="lix-recommendation-card">
+                <div className="lix-recommendation-card__visual">
+                  {item.primary_image?.url ? <img src={item.primary_image.thumbnail_url || item.primary_image.url} alt="" loading="lazy" onError={useDefaultProductImage} />
+                    : <span className="lix-product-placeholder--compact">{item.title}</span>}
+                </div>
+                <div className="lix-recommendation-card__content"><h3>{item.title}</h3><strong>{formatPrice(item.price, item.currency)}</strong></div>
+              </Link>)}
             </div>
-            <div className="lix-review-list">
-              {REVIEWS.map((review) => (
-                <article key={review.title}>
-                  <span>★★★★★</span>
-                  <h3>{review.title}</h3>
-                  <p>{review.body}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="lix-recommendations">
-          <h2>También te puede gustar</h2>
-          <div className="lix-recommendations-grid">
-            {RECOMMENDATIONS.map((recommendation) => (
-              <RecommendationCard key={recommendation.id} product={recommendation} />
-            ))}
-          </div>
-        </section>
+          </section>}
+        </>}
       </div>
     </main>
   )

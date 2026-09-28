@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FaPlus } from 'react-icons/fa6';
+import { DEFAULT_PRODUCT_IMAGE, useDefaultProductImage } from '@/catalog/productImage';
 import '@/scss/components/ui/ProductCard.scss';
 
 export default function ProductCard({
@@ -12,15 +12,14 @@ export default function ProductCard({
   isFreeGift,
   installmentText,
   shippingText,
+  currency = 'ARS',
 }) {
-  // Generar descuento random si hay precio original
   const discount = originalPrice ? Math.round((1 - price / originalPrice) * 100) : 0;
 
-  // Format currency
-  const formatPrice = (val) => new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', maximumSignificantDigits: 9 }).format(val);
+  const formatPrice = (val) => new Intl.NumberFormat('es-AR', { style: 'currency', currency, maximumSignificantDigits: 9 }).format(val);
 
   return (
-    <Link to={`/producto/${id || 1}`} className="lixmar-card" style={{ textDecoration: 'none' }}>
+    <Link to={`/producto/${id}`} className="lixmar-card" style={{ textDecoration: 'none' }}>
       <div className="lixmar-card__image-wrapper">
         {(isFreeShipping || isFreeGift) && (
           <div className="lixmar-card__badges-top">
@@ -28,12 +27,8 @@ export default function ProductCard({
             {discount > 0 && <span className="badge-discount">-{discount}%</span>}
           </div>
         )}
-        <img src={image || '/assets/default-placeholder.png'} alt={title} loading="lazy" />
+        <img src={image || DEFAULT_PRODUCT_IMAGE} alt={title} loading="lazy" onError={useDefaultProductImage} />
         
-        {/* Quick add button visible on hover */}
-        <button className="lixmar-card__quick-add" aria-label="Agregar al carrito" onClick={(e) => { e.preventDefault(); console.log('Added!'); }}>
-          <FaPlus size={14} />
-        </button>
       </div>
 
       <div className="lixmar-card__content">

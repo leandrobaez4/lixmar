@@ -5,10 +5,10 @@ import Footer from './Footer'
 export default function Layout() {
   return (
     <>
+      <a className="lix-skip-link" href="#contenido-principal">Saltar al contenido principal</a>
       <Header />
-      <Outlet />
+      <div id="contenido-principal" tabIndex={-1}><Outlet /></div>
       <Footer />
     </>
   )
 }
-

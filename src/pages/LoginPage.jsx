@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
-import { FaApple, FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa6'
-import { isPublicEmailVerified } from '@/auth/publicEmailVerification'
-import { getPublicSession, setPublicSession } from '@/auth/publicSession'
+import { getPublicSession, verifyPublicSession } from '@/auth/publicSession'
 
 const LOGIN_ENDPOINT = '/api/v1/auth/login'
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -10,11 +8,9 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 export default function LoginPage() {
   const navigate = useNavigate()
   const publicSession = getPublicSession()
-  const [showPassword, setShowPassword] = useState(false)
   const [formValues, setFormValues] = useState({
     email: '',
     password: '',
-    remember: false,
   })
   const [fieldErrors, setFieldErrors] = useState({})
   const [feedbackMessage, setFeedbackMessage] = useState('')
@@ -31,11 +27,11 @@ export default function LoginPage() {
   }
 
   function handleFieldChange(event) {
-    const { name, value, type, checked } = event.target
+    const { name, value } = event.target
 
     setFormValues((currentValue) => ({
       ...currentValue,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: value,
     }))
 
     setFieldErrors((currentValue) => ({
@@ -55,16 +51,14 @@ export default function LoginPage() {
     return typeof fieldError === 'string' ? fieldError : ''
   }
 
-  function completeLogin(sessionData = {}, options = {}) {
-    setPublicSession({
-      name: sessionData.name || '',
-      email: sessionData.email || normalizedEmail,
-      token: sessionData.token || '',
-      remember: formValues.remember,
-    })
-
+  async function completeLogin() {
+    if (!await verifyPublicSession()) {
+      setFeedbackTone('error')
+      setFeedbackMessage('No se pudo validar la sesión. Inténtalo nuevamente.')
+      return
+    }
     setFeedbackTone('success')
-    setFeedbackMessage(options.message || 'Ingresaste correctamente. Redirigiendo...')
+    setFeedbackMessage('Ingresaste correctamente. Redirigiendo...')
     navigate('/')
   }
 
@@ -93,6 +87,7 @@ export default function LoginPage() {
     try {
       const response = await fetch(LOGIN_ENDPOINT, {
         method: 'POST',
+        credentials: 'same-origin',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
@@ -112,13 +107,6 @@ export default function LoginPage() {
         }
 
         if (response.status === 422 && payload?.needsVerification) {
-          if (isPublicEmailVerified(normalizedEmail)) {
-            completeLogin({
-              email: payload?.data?.email || normalizedEmail,
-            })
-            return
-          }
-
           setFeedbackTone('error')
           setFeedbackMessage('Debes verificar tu email con el link de confirmación antes de iniciar sesión por primera vez.')
           return
@@ -129,13 +117,7 @@ export default function LoginPage() {
         return
       }
 
-      const authenticatedUser = payload?.data?.user || {}
-
-      completeLogin({
-        name: authenticatedUser.name || '',
-        email: authenticatedUser.email || normalizedEmail,
-        token: payload?.data?.token || '',
-      })
+      await completeLogin()
     } catch (submitError) {
       setFeedbackTone('error')
       setFeedbackMessage(submitError.message || 'No pudimos iniciar tu sesión. Inténtalo nuevamente.')
@@ -148,82 +130,64 @@ export default function LoginPage() {
   const passwordErrorMessage = getFieldError('password')
 
   return (
-    <main className="container">
-      <section className="lixmar-login lixmar-login--modern">
+    <main className="lixmar-login-page">
+      <section className="lixmar-login lixmar-login--figma" aria-labelledby="login-title">
         <div className="lixmar-login__form-shell">
-          <div className="lixmar-login__form lixmar-login__form--modern">
+          <div className="lixmar-login__form lixmar-login__form--figma">
             <div className="lixmar-login__form-head">
-              <span className="lixmar-login__badge">Lixmar ID</span>
-              <h2 className="lixmar-login__title">Bienvenido de nuevo</h2>
-              <p className="lixmar-login__subtitle">INICIA SESIÓN PARA CONTINUAR</p>
+              <h1 id="login-title" className="lixmar-login__title">Ingresá a LIXMAR</h1>
+              <p className="lixmar-login__subtitle">Accedé a tus compras, favoritos, mensajes y publicaciones.</p>
             </div>
 
             {feedbackMessage ? (
-              <div className={`lixmar-login__feedback lixmar-login__feedback--${feedbackTone}`}>
+              <div className={`lixmar-login__feedback lixmar-login__feedback--${feedbackTone}`} role={feedbackTone === 'error' ? 'alert' : 'status'}>
                 {feedbackMessage}
               </div>
             ) : null}
 
             <form onSubmit={handleSubmit} noValidate>
               <div className="lixmar-login__field">
-                <label className="lixmar-login__label">Dirección de correo electrónico</label>
+                <label htmlFor="login-email" className="lixmar-login__label">Email</label>
                 <input
+                  id="login-email"
                   type="email"
                   name="email"
+                  autoComplete="email"
+                  aria-invalid={Boolean(emailErrorMessage)}
+                  aria-describedby={emailErrorMessage ? 'login-email-error' : undefined}
                   className={`lixmar-login__input${emailErrorMessage ? ' lixmar-login__input--error' : ''}`}
-                  placeholder="Ejemplo@gmail.com"
+                  placeholder="Ingresá email"
                   value={formValues.email}
                   onChange={handleFieldChange}
                 />
-                {emailErrorMessage ? <p className="lixmar-login__field-error">{emailErrorMessage}</p> : null}
+                {emailErrorMessage ? <p id="login-email-error" className="lixmar-login__field-error" role="alert">{emailErrorMessage}</p> : null}
               </div>
               <div className="lixmar-login__field">
-                <div className="lixmar-login__label-row">
-                  <label className="lixmar-login__label">Contraseña</label>
-                  <a href="#" className="lixmar-login__forgot lixmar-login__forgot--inline">¿Olvidaste tu contraseña?</a>
-                </div>
-                <div className="lixmar-login__password-wrap">
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    name="password"
-                    className={`lixmar-login__input${passwordErrorMessage ? ' lixmar-login__input--error' : ''}`}
-                    placeholder="Ingresa tu contraseña"
-                    value={formValues.password}
-                    onChange={handleFieldChange}
-                  />
-                  <button
-                    type="button"
-                    className="lixmar-login__toggle-pass"
-                    aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
-                    onClick={() => setShowPassword((currentValue) => !currentValue)}
-                  >
-                    {showPassword ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
-                  </button>
-                </div>
-                {passwordErrorMessage ? <p className="lixmar-login__field-error">{passwordErrorMessage}</p> : null}
+                <label htmlFor="login-password" className="lixmar-login__label">Contraseña</label>
+                <input
+                  id="login-password"
+                  type="password"
+                  name="password"
+                  autoComplete="current-password"
+                  aria-invalid={Boolean(passwordErrorMessage)}
+                  aria-describedby={passwordErrorMessage ? 'login-password-error' : undefined}
+                  className={`lixmar-login__input${passwordErrorMessage ? ' lixmar-login__input--error' : ''}`}
+                  placeholder="Ingresá contraseña"
+                  value={formValues.password}
+                  onChange={handleFieldChange}
+                />
+                {passwordErrorMessage ? <p id="login-password-error" className="lixmar-login__field-error" role="alert">{passwordErrorMessage}</p> : null}
               </div>
 
-              <label className="lixmar-login__remember">
-                <input type="checkbox" name="remember" checked={formValues.remember} onChange={handleFieldChange} />
-                <span>Mantener mi sesión iniciada</span>
-              </label>
-
               <button type="submit" className="lixmar-login__submit lixmar-login__submit--wide" disabled={isSubmitting}>
-                {isSubmitting ? 'INGRESANDO...' : 'INGRESAR'}
+                {isSubmitting ? 'Ingresando...' : 'Ingresar'}
               </button>
             </form>
 
-            <div className="lixmar-login__divider">
-              <span>o continúa con</span>
-            </div>
-
-            <div className="lixmar-login__socials">
-              <button type="button" className="lixmar-login__social-button"><FaGoogle size={16} /> Google</button>
-              <button type="button" className="lixmar-login__social-button"><FaApple size={16} /> Apple</button>
-            </div>
-
-            <p className="lixmar-login__register lixmar-login__register--modern">
-              NUEVO USUARIO? <Link to="/registro">REGISTRARSE</Link>
+            <p className="lixmar-login__links">
+              <Link to="/recuperar-contrasena">¿Olvidaste tu contraseña?</Link>
+              <span aria-hidden="true">·</span>
+              <Link to="/registro">Crear cuenta</Link>
             </p>
           </div>
         </div>

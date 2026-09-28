@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
-import { FaApple, FaEye, FaEyeSlash, FaGoogle, FaArrowLeft } from 'react-icons/fa6'
-import { clearPublicEmailVerified } from '@/auth/publicEmailVerification'
-import { getPublicSession, setPublicSession } from '@/auth/publicSession'
+import { FaArrowLeft } from 'react-icons/fa6'
+import { getPublicSession, verifyPublicSession } from '@/auth/publicSession'
 import BiometricScanner from '@/components/BiometricScanner'
 
 const SEND_VERIFICATION_ENDPOINT = '/api/v1/auth/send-verification'
@@ -15,11 +14,6 @@ export default function RegistrationPage() {
   const navigate = useNavigate()
   const publicSession = getPublicSession()
   const [step, setStep] = useState(1)
-  const [showPassword, setShowPassword] = useState(false)
-  const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false)
-  const [touchedFields, setTouchedFields] = useState({
-    passwordConfirmation: false,
-  })
   const [formValues, setFormValues] = useState({
     name: '',
     email: '',
@@ -45,12 +39,6 @@ export default function RegistrationPage() {
     ? 'Ingresa un email válido.'
     : ''
   const passwordValidationError = getPasswordValidationError(formValues.password)
-  const passwordConfirmationValidationError = getPasswordConfirmationValidationError(
-    formValues.password,
-    formValues.passwordConfirmation,
-    touchedFields.passwordConfirmation,
-  )
-
   if (publicSession) {
     return <Navigate to="/perfil" replace />
   }
@@ -61,6 +49,7 @@ export default function RegistrationPage() {
     setFormValues((currentValue) => ({
       ...currentValue,
       [name]: type === 'checkbox' ? checked : value,
+      ...(name === 'password' ? { passwordConfirmation: value } : {}),
     }))
 
     setFieldErrors((currentValue) => ({
@@ -69,40 +58,26 @@ export default function RegistrationPage() {
     }))
   }
 
-  function handleFieldBlur(event) {
-    const { name } = event.target
-
-    if (name === 'passwordConfirmation') {
-      setTouchedFields((currentValue) => ({
-        ...currentValue,
-        passwordConfirmation: true,
-      }))
-    }
-  }
-
   function nextStep() {
     if (step === 1) {
-      if (!normalizedEmail || emailValidationError || !formValues.password || passwordValidationError || passwordConfirmationValidationError) {
+      if (!formValues.name.trim() || !normalizedEmail || emailValidationError || !formValues.password || passwordValidationError) {
         setFieldErrors({
+          name: !formValues.name.trim() ? 'Ingresá tu nombre y apellido.' : '',
           email: !normalizedEmail ? 'Ingresa un email' : emailValidationError,
           password: !formValues.password ? 'Ingresa una contraseña' : passwordValidationError,
-          password_confirmation: passwordConfirmationValidationError,
         })
         return
       }
-    }
-    if (step === 2) {
-      if (!formValues.name.trim()) {
-        setFieldErrors({ name: 'Tu nombre es requerido' })
-        return
-      }
+      setFieldErrors({})
+      setStep(3)
+      return
     }
     setFieldErrors({})
     setStep(step + 1)
   }
 
   function prevStep() {
-    setStep(step - 1)
+    setStep(step === 3 ? 1 : step - 1)
   }
 
   async function handleSubmit(event) {
@@ -168,7 +143,6 @@ export default function RegistrationPage() {
       }
 
       const registeredEmail = payload?.data?.email || normalizedEmail
-      clearPublicEmailVerified(registeredEmail)
 
       setVerificationId(payload?.data?.verificationId || '')
       setRegisteredUserId(payload?.data?.userId || null)
@@ -238,7 +212,7 @@ export default function RegistrationPage() {
         setStep5Error(extractApiError(payload, 'No se pudo enviar el código. Revisá el número e intentá de nuevo.'))
         return
       }
-      if (payload?.data?.devCode) setDevCode(payload.data.devCode)
+      if (import.meta.env.DEV && payload?.data?.devCode) setDevCode(payload.data.devCode)
       setCodeSent(true)
     } catch {
       setStep5Error('Error de red. Revisá tu conexión e intentá de nuevo.')
@@ -257,6 +231,7 @@ export default function RegistrationPage() {
     try {
       const response = await fetch(VERIFY_CODE_ENDPOINT, {
         method: 'POST',
+        credentials: 'same-origin',
         headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify({
           verification_id: verificationId,
@@ -269,12 +244,10 @@ export default function RegistrationPage() {
         setStep5Error(extractApiError(payload, 'Código incorrecto o expirado. Intentá de nuevo.'))
         return
       }
-      setPublicSession({
-        name: payload?.user?.name || formValues.name,
-        email: payload?.user?.email || formValues.email,
-        token: payload?.token || '',
-        remember: false,
-      })
+      if (!await verifyPublicSession()) {
+        setStep5Error('Se verificó el código, pero no se pudo validar la sesión. Ingresá con tu contraseña.')
+        return
+      }
       navigate('/')
     } catch {
       setStep5Error('Error de red. Revisá tu conexión e intentá de nuevo.')
@@ -293,129 +266,92 @@ export default function RegistrationPage() {
 
   const emailErrorMessage = getFieldError('email') || emailValidationError
   const passwordErrorMessage = getFieldError('password') || passwordValidationError
-  const passwordConfirmationErrorMessage = getFieldError('password_confirmation') || passwordConfirmationValidationError
+  const nameErrorMessage = getFieldError('name')
 
   return (
-    <main className="container">
-      <section className="lixmar-login lixmar-login--modern">
+    <main className="lixmar-login-page">
+      <section className="lixmar-login lixmar-login--figma" aria-labelledby="registration-title">
         <div className="lixmar-login__form-shell">
-          <div className="lixmar-login__form lixmar-login__form--modern">
+          <div className="lixmar-login__form lixmar-login__form--figma">
             <div className="lixmar-login__form-head">
               {step > 1 && (
-                <button type="button" onClick={prevStep} className="lixmar-login__back-button" style={{ background: 'none', border: 'none', cursor: 'pointer', float: 'left', marginTop: '4px' }}>
+                <button type="button" onClick={prevStep} aria-label="Volver al paso anterior" className="lixmar-login__back-button" style={{ background: 'none', border: 'none', cursor: 'pointer', float: 'left', marginTop: '4px' }}>
                   <FaArrowLeft size={16} />
                 </button>
               )}
-              <span className="lixmar-login__badge">Paso {step} de 5</span>
-              <h2 className="lixmar-login__title">Crea tu cuenta</h2>
-              <p className="lixmar-login__subtitle">REGÍSTRATE PARA EMPEZAR A COMPRAR</p>
+              {step > 1 ? <span className="lixmar-login__badge">Configuración de cuenta</span> : null}
+              <h1 id="registration-title" className="lixmar-login__title">{step === 1 ? 'Creá tu cuenta' : 'Terminá de configurar tu cuenta'}</h1>
+              <p className="lixmar-login__subtitle">
+                {step === 1
+                  ? 'Registrate para comprar, vender y guardar todo lo que te interesa.'
+                  : 'Completá los pasos de seguridad para activar tu cuenta.'}
+              </p>
             </div>
 
             <form onSubmit={(e) => { e.preventDefault(); if(step === 4) handleSubmit(e); else nextStep(); }} noValidate>
-              
+
               {/* Paso 1: Cuenta */}
               {step === 1 && (
                 <div className="lixmar-login__step">
                   <div className="lixmar-login__field">
-                    <label className="lixmar-login__label">Dirección de correo electrónico</label>
+                    <label htmlFor="registration-name" className="lixmar-login__label">Nombre y apellido</label>
                     <input
+                      id="registration-name"
+                      type="text"
+                      name="name"
+                      autoComplete="name"
+                      aria-invalid={Boolean(nameErrorMessage)}
+                      aria-describedby={nameErrorMessage ? 'registration-name-error' : undefined}
+                      className={`lixmar-login__input${nameErrorMessage ? ' lixmar-login__input--error' : ''}`}
+                      placeholder="Ingresá nombre y apellido"
+                      value={formValues.name}
+                      onChange={handleFieldChange}
+                    />
+                    {nameErrorMessage ? <p id="registration-name-error" className="lixmar-login__field-error" role="alert">{nameErrorMessage}</p> : null}
+                  </div>
+                  <div className="lixmar-login__field">
+                    <label htmlFor="registration-email" className="lixmar-login__label">Email</label>
+                    <input
+                      id="registration-email"
                       type="email"
                       name="email"
+                      autoComplete="email"
+                      aria-invalid={Boolean(emailErrorMessage)}
+                      aria-describedby={emailErrorMessage ? 'registration-email-error' : undefined}
                       className={`lixmar-login__input${emailErrorMessage ? ' lixmar-login__input--error' : ''}`}
-                      placeholder="Ejemplo@gmail.com"
+                      placeholder="Ingresá email"
                       value={formValues.email}
                       onChange={handleFieldChange}
                       required
                     />
-                    {emailErrorMessage ? <p className="lixmar-login__field-error">{emailErrorMessage}</p> : null}
+                    {emailErrorMessage ? <p id="registration-email-error" className="lixmar-login__field-error" role="alert">{emailErrorMessage}</p> : null}
                   </div>
 
                   <div className="lixmar-login__field">
-                    <label className="lixmar-login__label">Contraseña</label>
-                    <div className="lixmar-login__password-wrap">
-                      <input
-                        name="password"
-                        type={showPassword ? 'text' : 'password'}
-                        className={`lixmar-login__input${passwordErrorMessage ? ' lixmar-login__input--error' : ''}`}
-                        placeholder="Crea una contraseña segura"
-                        value={formValues.password}
-                        onChange={handleFieldChange}
-                        required
-                      />
-                      <button
-                        type="button"
-                        className="lixmar-login__toggle-pass"
-                        aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
-                        onClick={() => setShowPassword((currentValue) => !currentValue)}
-                      >
-                        {showPassword ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
-                      </button>
-                    </div>
-                    {passwordErrorMessage ? <p className="lixmar-login__field-error">{passwordErrorMessage}</p> : null}
-                  </div>
-
-                  <div className="lixmar-login__field">
-                    <label className="lixmar-login__label">Confirmar contraseña</label>
-                    <div className="lixmar-login__password-wrap">
-                      <input
-                        name="passwordConfirmation"
-                        type={showPasswordConfirmation ? 'text' : 'password'}
-                        className={`lixmar-login__input${passwordConfirmationErrorMessage ? ' lixmar-login__input--error' : ''}`}
-                        placeholder="Repite tu contraseña"
-                        value={formValues.passwordConfirmation}
-                        onChange={handleFieldChange}
-                        onBlur={handleFieldBlur}
-                        required
-                      />
-                      <button
-                        type="button"
-                        className="lixmar-login__toggle-pass"
-                        aria-label={showPasswordConfirmation ? 'Ocultar confirmación de contraseña' : 'Mostrar confirmación de contraseña'}
-                        onClick={() => setShowPasswordConfirmation((currentValue) => !currentValue)}
-                      >
-                        {showPasswordConfirmation ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
-                      </button>
-                    </div>
-                    {passwordConfirmationErrorMessage ? <p className="lixmar-login__field-error">{passwordConfirmationErrorMessage}</p> : null}
-                  </div>
-                  
-                  <button type="button" onClick={nextStep} className="lixmar-login__submit lixmar-login__submit--wide">
-                    CONTINUAR
-                  </button>
-
-                  <div className="lixmar-login__divider">
-                    <span>o regístrate con</span>
-                  </div>
-
-                  <div className="lixmar-login__socials">
-                    <button type="button" className="lixmar-login__social-button"><FaGoogle size={16} /> Google</button>
-                    <button type="button" className="lixmar-login__social-button"><FaApple size={16} /> Apple</button>
-                  </div>
-
-                  <p className="lixmar-login__register lixmar-login__register--modern">
-                    ¿YA TIENES CUENTA? <Link to="/login">INGRESAR</Link>
-                  </p>
-                </div>
-              )}
-
-              {/* Paso 2: Datos Personales */}
-              {step === 2 && (
-                <div className="lixmar-login__step">
-                  <div className="lixmar-login__field">
-                    <label className="lixmar-login__label">Nombre completo</label>
+                    <label htmlFor="registration-password" className="lixmar-login__label">Contraseña</label>
                     <input
-                      type="text"
-                      name="name"
-                      className={`lixmar-login__input${getFieldError('name') ? ' lixmar-login__input--error' : ''}`}
-                      placeholder="Tu nombre y apellido"
-                      value={formValues.name}
+                      id="registration-password"
+                      name="password"
+                      autoComplete="new-password"
+                      aria-invalid={Boolean(passwordErrorMessage)}
+                      aria-describedby={passwordErrorMessage ? 'registration-password-error' : undefined}
+                      type="password"
+                      className={`lixmar-login__input${passwordErrorMessage ? ' lixmar-login__input--error' : ''}`}
+                      placeholder="Ingresá contraseña"
+                      value={formValues.password}
                       onChange={handleFieldChange}
+                      required
                     />
-                    {getFieldError('name') ? <p className="lixmar-login__field-error">{getFieldError('name')}</p> : null}
+                    {passwordErrorMessage ? <p id="registration-password-error" className="lixmar-login__field-error" role="alert">{passwordErrorMessage}</p> : null}
                   </div>
-                  <button type="button" onClick={nextStep} className="lixmar-login__submit lixmar-login__submit--wide">
-                    CONTINUAR
+
+                  <button type="submit" className="lixmar-login__submit lixmar-login__submit--wide">
+                    Crear cuenta
                   </button>
+
+                  <p className="lixmar-login__links">
+                    <Link to="/login">Ya tengo una cuenta</Link>
+                  </p>
                 </div>
               )}
 
@@ -425,7 +361,7 @@ export default function RegistrationPage() {
                   <p style={{ textAlign: 'center', marginBottom: '1rem' }}>
                     Para proteger tu cuenta, necesitamos validar tu identidad con una foto de tu rostro.
                   </p>
-                  
+
                   {formValues.biometricVerified ? (
                     <div style={{ textAlign: 'center', padding: '2rem', backgroundColor: '#e6ffe6', borderRadius: '8px' }}>
                       <p style={{ color: 'green', fontWeight: 'bold' }}>¡Validación biométrica exitosa!</p>
@@ -455,9 +391,11 @@ export default function RegistrationPage() {
                   {!codeSent ? (
                     <>
                       <div className="lixmar-login__field">
-                        <label className="lixmar-login__label">Número de teléfono</label>
+                        <label htmlFor="registration-phone" className="lixmar-login__label">Número de teléfono</label>
                         <input
+                          id="registration-phone"
                           type="tel"
+                          autoComplete="tel-national"
                           className="lixmar-login__input"
                           placeholder="1166871552"
                           value={phoneValue}
@@ -480,15 +418,16 @@ export default function RegistrationPage() {
                       <p style={{ textAlign: 'center', color: '#22c55e', fontWeight: 600, marginBottom: '1rem', fontSize: '14px' }}>
                         ✓ Código enviado a {phoneValue}
                       </p>
-                      {devCode && (
+                      {import.meta.env.DEV && devCode && (
                         <div style={{ background: '#fff3ef', border: '1.5px solid var(--color-lixmar-orange, #ff6b35)', borderRadius: '8px', padding: '10px 14px', marginBottom: '1rem', textAlign: 'center' }}>
                           <p style={{ margin: 0, fontSize: '11px', color: '#e55a2b', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Modo desarrollo — código SMS</p>
                           <p style={{ margin: '4px 0 0', fontSize: '26px', fontWeight: 700, letterSpacing: '0.25em', color: '#ff6b35' }}>{devCode}</p>
                         </div>
                       )}
                       <div className="lixmar-login__field">
-                        <label className="lixmar-login__label">Código de verificación</label>
+                        <label htmlFor="registration-verification-code" className="lixmar-login__label">Código de verificación</label>
                         <input
+                          id="registration-verification-code"
                           type="text"
                           inputMode="numeric"
                           maxLength={5}
@@ -525,7 +464,7 @@ export default function RegistrationPage() {
                   <p style={{ marginBottom: '1rem' }}>
                     Estás a un paso de terminar. Revisa que estés de acuerdo con nuestros términos.
                   </p>
-                  
+
                   <label className="lixmar-login__remember">
                     <input
                       type="checkbox"
@@ -575,22 +514,6 @@ function getPasswordValidationError(password) {
 
   if (!/[^a-zA-Z0-9]/.test(password)) {
     return 'La contraseña debe incluir al menos un carácter especial.'
-  }
-
-  return ''
-}
-
-function getPasswordConfirmationValidationError(password, passwordConfirmation, isTouched) {
-  if (!password && !passwordConfirmation) {
-    return ''
-  }
-
-  if (isTouched && password && !passwordConfirmation) {
-    return 'Confirma tu contraseña.'
-  }
-
-  if (password !== passwordConfirmation) {
-    return 'La confirmación debe ser igual a la contraseña.'
   }
 
   return ''

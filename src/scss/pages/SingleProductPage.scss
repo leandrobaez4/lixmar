@@ -13,6 +13,18 @@
 
 .lix-product-shell { width: min(1324px, 100%); margin: 0 auto; }
 
+.lix-reviews-card { margin-top: 24px; padding: 24px 29px; }
+.lix-review { padding: 16px 0; border-top: 1px solid var(--pdp-border); }
+.lix-review strong { color: var(--pdp-orange); }
+.lix-review small { display: block; margin-top: 5px; color: var(--pdp-muted); }
+.lix-reviews-pages { display: flex; align-items: center; gap: 14px; }
+.lix-review-form { display: grid; gap: 12px; max-width: 480px; margin-top: 20px; }
+.lix-review-form label { display: grid; gap: 5px; }
+.lix-review-form textarea { min-height: 90px; resize: vertical; }
+.lix-review-form select, .lix-review-form textarea { padding: 9px; border: 1px solid var(--pdp-border); border-radius: 8px; font: inherit; }
+.lix-review-form button, .lix-reviews-pages button { width: fit-content; padding: 9px 16px; border: 1px solid var(--pdp-orange); border-radius: 8px; background: #fff; color: var(--pdp-orange); cursor: pointer; }
+.lix-review-form button:disabled, .lix-reviews-pages button:disabled { opacity: .5; cursor: default; }
+
 .lix-product-core {
   display: grid;
   grid-template-columns: minmax(0, 730px) minmax(420px, 570px);
@@ -55,7 +67,7 @@
 
 .lix-gallery-thumbnail.is-active,
 .lix-gallery-thumbnail:hover,
-.lix-gallery-thumbnail:focus-visible { border-color: var(--pdp-orange); outline: none; }
+.lix-gallery-thumbnail:focus-visible { border-color: var(--pdp-orange); outline: 2px solid var(--pdp-orange); outline-offset: 2px; }
 .lix-gallery-thumbnail img { width: 100%; height: 100%; object-fit: contain; }
 
 .lix-gallery-main {
@@ -153,7 +165,7 @@
 
 .lix-product-tabs button.is-active,
 .lix-product-tabs button:hover,
-.lix-product-tabs button:focus-visible { border-bottom-color: var(--pdp-orange); color: var(--pdp-orange); outline: none; }
+.lix-product-tabs button:focus-visible { border-bottom-color: var(--pdp-orange); color: var(--pdp-orange); outline: 2px solid var(--pdp-orange); outline-offset: 2px; }
 .lix-description-content { padding-top: 25px; }
 
 .lix-description-content h2,
@@ -178,6 +190,8 @@
 
 .lix-review-summary p { margin: 0; color: var(--pdp-orange); font-size: 13px; }
 .lix-review-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 50px; }
+.lix-review-list .lix-review { padding: 0; border: 0; }
+.lix-review-list .lix-review small { color: var(--pdp-muted); font-size: 11px; }
 .lix-review-list h3 { margin-top: 5px; }
 .lix-review-list p { margin: 9px 0 0; color: var(--pdp-muted); font-size: 12px; line-height: 1.35; }
 .lix-recommendations { margin-top: 32px; }
@@ -196,13 +210,30 @@
 }
 
 .lix-recommendation-card:hover,
-.lix-recommendation-card:focus-visible { border-color: var(--pdp-orange); outline: none; transform: translateY(-2px); }
+.lix-recommendation-card:focus-visible { border-color: var(--pdp-orange); outline: 2px solid var(--pdp-orange); outline-offset: 2px; transform: translateY(-2px); }
 .lix-recommendation-card__visual { height: 150px; display: flex; align-items: center; padding: 20px; background: #f0f0f2; }
 .lix-product-placeholder--compact { color: var(--pdp-muted); font-size: 15px; font-weight: 600; }
 .lix-recommendation-card__content { padding: 17px 15px 15px; display: flex; flex-direction: column; }
 .lix-recommendation-card__content h3 { margin: 0; font-size: 14px; font-weight: 600; }
 .lix-recommendation-card__content strong { margin-top: 5px; font-size: 16px; }
 .lix-recommendation-card__content span { margin-top: 5px; color: var(--pdp-green); font-size: 12px; font-weight: 500; }
+
+.lix-product-related { margin-top: 32px; }
+.lix-product-related__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+
+.lix-gallery-card--single { grid-template-columns: minmax(0, 1fr); }
+.lix-gallery-card--single .lix-gallery-main { max-width: 520px; margin: 0 auto; }
+.lix-quantity-label { display: flex; align-items: center; gap: 12px; margin-top: 18px; font-size: 13px; color: var(--pdp-muted); }
+.lix-quantity-label input { width: 72px; padding: 6px 8px; border: 1px solid var(--pdp-border); border-radius: 8px; font: inherit; color: var(--pdp-text); }
+.lix-favorite-button { width: fit-content; padding: 4px 0; border: 0; background: transparent; color: var(--pdp-orange); font: inherit; font-size: 13px; cursor: pointer; }
+.lix-favorite-button:hover, .lix-favorite-button:focus-visible { text-decoration: underline; }
+.lix-product-tabs a { align-self: stretch; display: inline-flex; align-items: center; color: var(--pdp-text); text-decoration: none; font-size: 14px; font-weight: 600; }
+.lix-product-tabs a:hover, .lix-product-tabs a:focus-visible { color: var(--pdp-orange); }
+.lix-questions-card p { margin: 22px 0 0; color: var(--pdp-muted); font-size: 13px; }
+.lix-recommendation-card__visual { justify-content: center; overflow: hidden; }
+.lix-recommendation-card__visual img { width: 100%; height: 100%; object-fit: contain; }
+.lix-recommendation-card__content h3 { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.lix-recommendation-card__content strong { color: var(--pdp-text); }
 
 @media (max-width: 1100px) {
   .lix-product-core { grid-template-columns: minmax(0, 1.2fr) minmax(370px, .8fr); }
@@ -212,6 +243,7 @@
 }
 
 @media (max-width: 860px) {
+  .lix-product-related__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .lix-product-core { grid-template-columns: 1fr; }
   .lix-gallery-card, .lix-purchase-card { min-height: auto; }
   .lix-reviews-layout { grid-template-columns: 1fr; gap: 24px; }
@@ -219,14 +251,17 @@
 }
 
 @media (max-width: 600px) {
+  .lix-product-related__grid { grid-template-columns: 1fr; }
   .lix-product-page { padding: 16px 12px 60px; }
   .lix-gallery-card { padding: 16px; grid-template-columns: 1fr; }
+  .lix-gallery-card--single { display: block; }
   .lix-gallery-thumbnails { order: 2; flex-direction: row; overflow-x: auto; }
   .lix-gallery-main { height: 330px; }
   .lix-product-placeholder { padding: 20px; font-size: 22px; }
   .lix-purchase-card { padding: 24px 20px; }
   .lix-product-information, .lix-questions-card, .lix-reviews-card { padding-left: 20px; padding-right: 20px; }
   .lix-product-tabs { gap: 16px; overflow-x: auto; }
+  .lix-product-tabs a { flex: 0 0 auto; }
   .lix-product-tabs button { flex: 0 0 auto; }
   .lix-description-content ul { margin-top: 28px; }
   .lix-review-list { grid-template-columns: 1fr; gap: 24px; }

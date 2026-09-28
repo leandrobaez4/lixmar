@@ -212,6 +212,8 @@
   font-weight: 400;
 }
 
+.lixmar-publish__search:focus-within { outline: 2px solid var(--publish-accent); outline-offset: 2px; }
+
 .lixmar-publish__search input::placeholder {
   color: var(--publish-muted);
   opacity: 1;
@@ -353,6 +355,7 @@
 }
 
 .lixmar-publish__field > span,
+.lixmar-publish__field > label,
 .lixmar-publish__condition legend {
   color: var(--publish-muted);
   font-size: 12px;
@@ -360,7 +363,8 @@
   line-height: 15px;
 }
 
-.lixmar-publish__field input {
+.lixmar-publish__field input,
+.lixmar-publish__field select {
   width: 100%;
   height: 46px;
   padding: 0 13px;
@@ -369,6 +373,25 @@
   border-radius: 8px;
   color: var(--publish-text);
   font: inherit;
+  font-size: 12px;
+}
+
+.lixmar-publish__field select[multiple] {
+  height: auto;
+  min-height: 120px;
+  padding: 8px;
+}
+
+.lixmar-publish__field [role='group'] {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.lixmar-publish__field [role='group'] label {
+  display: grid;
+  gap: 7px;
+  color: var(--publish-muted);
   font-size: 12px;
 }
 
@@ -457,7 +480,8 @@
 .lixmar-publish__details-continue:hover,
 .lixmar-publish__details-continue:focus-visible {
   background: #e95f00;
-  outline: none;
+  outline: 2px solid #212126;
+  outline-offset: 2px;
 }
 
 .lixmar-publish__media-card {
@@ -840,7 +864,8 @@
 .lixmar-publish__preview-actions button:hover,
 .lixmar-publish__preview-actions button:focus-visible {
   background: #e95f00;
-  outline: none;
+  outline: 2px solid #212126;
+  outline-offset: 2px;
 }
 
 @media (max-width: 1324px) {

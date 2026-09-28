@@ -1,0 +1,653 @@
+body:has(.lixmar-account) {
+  background: #fbfbfd;
+}
+
+.lixmar-account {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+  padding-top: 32px;
+  padding-bottom: 48px;
+  color: #1f1f24;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+.lixmar-account__sidebar {
+  min-height: 528px;
+  padding: 24px 22px;
+  border: 1px solid #e3e5eb;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.lixmar-account__sidebar-title {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.lixmar-account__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lixmar-account__nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 18px;
+  color: #1f1f24;
+  font-size: 13px;
+  line-height: 1.25;
+  text-decoration: none;
+}
+
+.lixmar-account__nav-link:hover {
+  color: #b94d00;
+}
+
+.lixmar-account__nav-link:focus-visible,
+.lixmar-account__button:focus-visible,
+.lixmar-account input:focus-visible,
+.lixmar-account select:focus-visible {
+  outline: 2px solid #ff6a00;
+  outline-offset: 3px;
+}
+
+.lixmar-account__nav-dot {
+  width: 10px;
+  height: 10px;
+  flex: 0 0 10px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+
+.lixmar-account__nav-link--active .lixmar-account__nav-dot {
+  background: currentColor;
+}
+
+.lixmar-account__main,
+.lixmar-account-panel {
+  min-width: 0;
+}
+
+.lixmar-account-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.lixmar-account__heading h1 {
+  margin: 0 0 12px;
+  color: #1f1f24;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.lixmar-account__heading p {
+  margin: 0;
+  color: #1f1f24;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.lixmar-account__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+  padding: 20px 22px;
+  border: 1px solid #e0e3e8;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.lixmar-account__card h2 {
+  margin: 0;
+  color: #1f1f24;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.lixmar-account__card > p {
+  min-height: 32px;
+  margin: 0;
+  color: #6b6e78;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.lixmar-account__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 210px;
+  min-height: 44px;
+  padding: 10px 18px;
+  border: 1px solid #ff6a00;
+  border-radius: 8px;
+  background: #ff6a00;
+  color: #fff;
+  font: 600 13px/1.3 'Inter', 'Segoe UI', sans-serif;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.lixmar-account__button:hover {
+  background: #e65f00;
+  border-color: #e65f00;
+}
+
+.lixmar-account__button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.lixmar-account__button--secondary {
+  background: #fff;
+  color: #b94d00;
+}
+
+.lixmar-account__button--secondary:hover {
+  background: #fff5ed;
+}
+
+.lixmar-account__status {
+  margin: 0;
+  padding: 12px 16px;
+  border: 1px solid #c5e8cd;
+  border-radius: 8px;
+  background: #f0fdf4;
+  color: #166534;
+  font-size: 13px;
+}
+
+.lixmar-account__status--error {
+  border-color: #fecaca;
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.lixmar-account__edit-form {
+  width: 100%;
+}
+
+.lixmar-account__form-row,
+.lixmar-account__actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.lixmar-account__form-row label {
+  display: flex;
+  flex: 1 1 180px;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 13px;
+}
+
+.lixmar-account input,
+.lixmar-account select {
+  min-height: 42px;
+  padding: 9px 12px;
+  border: 1px solid #d7dbe3;
+  border-radius: 8px;
+  background: #fff;
+  color: #1f1f24;
+  font: inherit;
+}
+
+.lixmar-account__actions {
+  margin-top: 14px;
+}
+
+.lixmar-account .lixmar-profile__change-card {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.lixmar-account__heading--action {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.lixmar-account__back {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #b94d00;
+  font-size: 13px;
+}
+
+.lixmar-account__button--compact {
+  min-width: 150px;
+}
+
+.lixmar-account__button--small {
+  min-width: 100px;
+  min-height: 38px;
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
+.lixmar-account__metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.lixmar-account__metrics > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  padding: 16px 18px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.lixmar-account__metrics span {
+  color: #6b6e78;
+  font-size: 11px;
+}
+
+.lixmar-account__metrics strong {
+  color: #1f1f24;
+  font-size: 20px;
+}
+
+.lixmar-account__filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  font-size: 13px;
+}
+
+.lixmar-account__filters button {
+  padding: 6px 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: #1f1f24;
+  font: inherit;
+  cursor: pointer;
+}
+
+.lixmar-account__filters button[aria-current='page'] {
+  border-color: #ff6a00;
+  font-weight: 600;
+}
+
+.lixmar-account__filters a {
+  color: #b94d00;
+}
+
+.lixmar-account__filters select {
+  min-width: 180px;
+}
+
+.lixmar-account__empty,
+.lixmar-account__count {
+  margin: 0;
+  padding: 20px 22px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  color: #6b6e78;
+  font-size: 13px;
+}
+
+.lixmar-account__count {
+  padding: 10px 0;
+  border: 0;
+  background: transparent;
+}
+
+.lixmar-account__table-wrap {
+  overflow-x: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+}
+
+.lixmar-account__table {
+  width: 100%;
+  min-width: 700px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.lixmar-account__table th {
+  padding: 14px 18px;
+  background: #fbfbfc;
+  color: #6b6e78;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.lixmar-account__table td {
+  padding: 16px 18px;
+  border-top: 1px solid #e5e7eb;
+  color: #444853;
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+.lixmar-account__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-size: 13px;
+}
+
+.lixmar-account__pagination button {
+  padding: 8px 12px;
+  border: 1px solid #e0e3e8;
+  border-radius: 8px;
+  background: #fff;
+  color: #1f1f24;
+  cursor: pointer;
+}
+
+.lixmar-account__pagination button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.lixmar-account__order-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  padding: 20px 22px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 13px;
+}
+
+.lixmar-account__product {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 18px 20px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+}
+
+.lixmar-account__product-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.lixmar-account__product h2 {
+  margin: 0;
+  color: #1f1f24;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.lixmar-account__product p {
+  margin: 0;
+  color: #6b6e78;
+  font-size: 12px;
+}
+
+.lixmar-account__product strong {
+  font-size: 19px;
+}
+
+.lixmar-account__publication-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lixmar-account__favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.lixmar-account__favorite {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.lixmar-account__favorite .lixmar-account__button {
+  width: 100%;
+}
+
+.lixmar-account__summary {
+  width: 100%;
+  margin: 0;
+  font-size: 13px;
+}
+
+.lixmar-account__summary div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 6px 0;
+}
+
+.lixmar-account__summary-total {
+  border-top: 1px solid #e5e7eb;
+  font-weight: 700;
+}
+
+.lixmar-account__summary dd {
+  margin: 0;
+}
+
+.lixmar-account__preference-state {
+  display: inline-block;
+  padding: 9px 0;
+  color: #366348;
+  font-size: 13px;
+}
+
+.lixmar-account__address-form {
+  align-items: stretch;
+}
+
+@media (max-width: 760px) {
+  .lixmar-account {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .lixmar-account__sidebar {
+    min-height: 0;
+  }
+
+  .lixmar-account__nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
+  }
+
+  .lixmar-account__heading h1 {
+    font-size: 24px;
+  }
+
+  .lixmar-account__metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .lixmar-account__card {
+    padding: 18px;
+  }
+
+  .lixmar-account__button {
+    width: 100%;
+  }
+
+  .lixmar-account__heading--action,
+  .lixmar-account__product {
+    flex-direction: column;
+  }
+
+  .lixmar-account__metrics {
+    grid-template-columns: 1fr;
+  }
+}
+
+.lixmar-account__messages-layout {
+  display: grid;
+  grid-template-columns: minmax(200px, 260px) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.lixmar-account__conversation-list,
+.lixmar-account__thread {
+  min-width: 0;
+  min-height: 330px;
+  border: 1px solid #e0e3e8;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.lixmar-account__conversation-list {
+  overflow: hidden;
+}
+
+.lixmar-account__conversation {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 15px;
+  border-bottom: 1px solid #e9ebef;
+  color: #1f1f24;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.lixmar-account__conversation:hover,
+.lixmar-account__conversation--active {
+  background: #fff4eb;
+}
+
+.lixmar-account__conversation span,
+.lixmar-account__conversation small {
+  overflow: hidden;
+  color: #6b6e78;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lixmar-account__conversation b {
+  align-self: flex-start;
+  min-width: 20px;
+  padding: 2px 5px;
+  border-radius: 12px;
+  background: #ff6a00;
+  color: #fff;
+  font-size: 11px;
+  text-align: center;
+}
+
+.lixmar-account__thread {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+}
+
+.lixmar-account__thread-heading {
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e9ebef;
+}
+
+.lixmar-account__thread-heading h2 {
+  margin: 0 0 5px;
+  font-size: 17px;
+}
+
+.lixmar-account__thread-heading a {
+  color: #b94d00;
+  font-size: 12px;
+}
+
+.lixmar-account__message-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 430px;
+  overflow-y: auto;
+}
+
+.lixmar-account__message {
+  align-self: flex-start;
+  max-width: 80%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #f2f3f6;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.lixmar-account__message--mine {
+  align-self: flex-end;
+  background: #fff0e2;
+}
+
+.lixmar-account__message p {
+  margin: 0 0 6px;
+}
+
+.lixmar-account__message time {
+  color: #6b6e78;
+  font-size: 10px;
+}
+
+.lixmar-account__message-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid #e9ebef;
+  font-size: 13px;
+}
+
+.lixmar-account__message-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d7dbe3;
+  border-radius: 8px;
+  font: inherit;
+  resize: vertical;
+}
+
+@media (max-width: 850px) {
+  .lixmar-account__messages-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .lixmar-account__conversation-list,
+  .lixmar-account__thread {
+    min-height: 0;
+  }
+}

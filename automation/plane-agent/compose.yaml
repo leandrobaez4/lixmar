@@ -1,0 +1,17 @@
+services:
+  plane-agent:
+    build: .
+    container_name: lixmar-plane-agent
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      PLANE_BASE_URL: http://host.docker.internal:8081
+      DATA_DIR: /app/data
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    ports:
+      - "8787:8787"
+    volumes:
+      - ./data:/app/data
+

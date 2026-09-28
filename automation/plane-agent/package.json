@@ -1,0 +1,24 @@
+{
+  "name": "@lixmar/plane-agent",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Automatización segura de Plane con un LLM configurable",
+  "scripts": {
+    "rotate:openai": "bash scripts/rotate-openai-key.sh",
+    "configure:plane-webhook": "bash scripts/set-plane-webhook-secret.sh",
+    "start": "node --env-file=.env src/index.mjs",
+    "configure:openai": "bash scripts/configure-openai.sh",
+    "approve": "node src/approve.mjs",
+    "rollback": "node --env-file=.env scripts/rollback.mjs",
+    "test": "node --test",
+    "smoke:plane": "node --env-file=.env scripts/smoke-plane.mjs",
+    "smoke:webhook": "node --env-file=.env scripts/smoke-webhook.mjs",
+    "report": "node --env-file=.env scripts/report.mjs",
+    "evaluate": "node --env-file=.env scripts/evaluate.mjs",
+    "check": "node scripts/check.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

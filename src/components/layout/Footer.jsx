@@ -6,18 +6,18 @@ const footerColumns = [
     title: 'Institucional',
     links: [
       { label: 'Quiénes somos', to: '/nosotros' },
-      { label: 'Trabajá con nosotros', href: '#' },
-      { label: 'Prensa', href: '#' },
-      { label: 'Sustentabilidad', href: '#' },
+      { label: 'Trabajá con nosotros' },
+      { label: 'Prensa' },
+      { label: 'Sustentabilidad' },
     ],
   },
   {
     title: 'Ayuda',
     links: [
-      { label: 'Centro de ayuda', href: '#' },
-      { label: 'Cómo comprar', href: '#' },
-      { label: 'Seguridad', href: '#' },
-      { label: 'Términos y condiciones', href: '#' },
+      { label: 'Centro de ayuda' },
+      { label: 'Cómo comprar' },
+      { label: 'Seguridad' },
+      { label: 'Términos y condiciones' },
     ],
   },
   {
@@ -25,22 +25,22 @@ const footerColumns = [
     links: [
       { label: 'Cómo vender', to: '/vender' },
       { label: 'Planes para vender', to: '/suscripcion' },
-      { label: 'Beneficios', href: '#' },
-      { label: 'Preguntas frecuentes', href: '#' },
+      { label: 'Beneficios' },
+      { label: 'Preguntas frecuentes' },
     ],
   },
   {
     title: 'Medios de pago',
     links: [
-      { label: 'VISA · Mastercard', href: '#' },
-      { label: 'Mercado Pago', href: '#' },
+      { label: 'VISA · Mastercard' },
+      { label: 'Mercado Pago' },
     ],
   },
   {
     title: 'Seguinos',
     links: [
-      { label: 'Instagram · Facebook', href: '#' },
-      { label: 'TikTok · YouTube', href: '#' },
+      { label: 'Instagram · Facebook' },
+      { label: 'TikTok · YouTube' },
     ],
   },
 ]
@@ -50,7 +50,7 @@ function FooterLink({ link }) {
     return <Link to={link.to}>{link.label}</Link>
   }
 
-  return <a href={link.href}>{link.label}</a>
+  return <span className="lixmar-footer-v2__unavailable" aria-disabled="true" title="Próximamente">{link.label}</span>
 }
 
 export default function Footer() {

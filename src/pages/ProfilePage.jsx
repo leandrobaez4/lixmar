@@ -1,24 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
-import { FaChevronRight } from 'react-icons/fa6'
-import { clearPublicEmailVerified, isPublicEmailVerified, markPublicEmailVerified } from '@/auth/publicEmailVerification'
-import { getPublicSession, setPublicSession } from '@/auth/publicSession'
+import { clearPublicSession, getPublicSession, setPublicSession } from '@/auth/publicSession'
 
 const PROFILE_ENDPOINT = '/api/v1/profile'
 const PROFILE_EMAIL_CHANGE_ENDPOINT = '/api/v1/profile/email'
 const PROFILE_PHONE_CHANGE_ENDPOINT = '/api/v1/profile/phone'
 
-const tabs = [
-  { id: 'info', label: 'Informacion Personal' },
-  { id: 'verify', label: 'Validar identidad' },
-  { id: 'orders', label: 'Mi orden' },
-  { id: 'address', label: 'Mi direccion' },
-  { id: 'password', label: 'Cambiar contraseña' },
-]
-
 export default function ProfilePage() {
   const publicSession = getPublicSession()
-  const sessionToken = publicSession?.token || ''
   const [firstName = '', ...lastNameParts] = (publicSession?.name?.trim() || '').split(/\s+/)
   const [profileForm, setProfileForm] = useState(() => ({
     firstName,
@@ -26,23 +15,21 @@ export default function ProfilePage() {
     email: publicSession?.email || '',
     phone: publicSession?.phone || '',
   }))
-  const [activeTab, setActiveTab] = useState('info')
   const [saveMessage, setSaveMessage] = useState('')
   const [saveTone, setSaveTone] = useState('success')
-  const [isLoadingProfile, setIsLoadingProfile] = useState(Boolean(publicSession?.token))
+  const [isLoadingProfile, setIsLoadingProfile] = useState(Boolean(publicSession))
   const [isSavingProfile, setIsSavingProfile] = useState(false)
+  const [isEditingName, setIsEditingName] = useState(false)
   const [emailChange, setEmailChange] = useState(createContactChangeState)
   const [phoneChange, setPhoneChange] = useState(createContactChangeState)
+  const [sessionExpired, setSessionExpired] = useState(false)
   const profileName = publicSession?.name?.trim() || [profileForm.firstName, profileForm.lastName].filter(Boolean).join(' ').trim()
   const profileEmail = publicSession?.email || profileForm.email
-  const emailVerified = isPublicEmailVerified(profileEmail)
-
-  if (!publicSession) {
-    return <Navigate to="/login" replace />
-  }
+  const emailVerified = Boolean(publicSession?.emailVerifiedAt)
+  const sessionId = publicSession?.id
 
   useEffect(() => {
-    if (!sessionToken) {
+    if (!sessionId) {
       setIsLoadingProfile(false)
       return () => {}
     }
@@ -55,16 +42,22 @@ export default function ProfilePage() {
         const currentSession = getPublicSession()
 
         const response = await fetch(PROFILE_ENDPOINT, {
-          headers: {
-            Accept: 'application/json',
-            Authorization: `Bearer ${sessionToken}`,
-          },
+          headers: { Accept: 'application/json' },
+          credentials: 'same-origin',
           signal: abortController.signal,
         })
 
         const payload = await response.json().catch(() => ({}))
 
+        if (response.status === 401 || response.status === 403) {
+          clearPublicSession()
+          setSessionExpired(true)
+          return
+        }
+
         if (!response.ok || !payload?.data) {
+          setSaveTone('error')
+          setSaveMessage(payload?.message || 'No pudimos cargar tu perfil real.')
           return
         }
 
@@ -87,6 +80,8 @@ export default function ProfilePage() {
           firstName: nextProfile.firstName || '',
           lastName: nextProfile.lastName || '',
           username: nextProfile.username || '',
+          verified: nextProfile.verified,
+          emailVerifiedAt: nextProfile.emailVerifiedAt,
         }
 
         if (
@@ -103,7 +98,7 @@ export default function ProfilePage() {
       } catch (error) {
         if (error.name !== 'AbortError') {
           setSaveTone('error')
-          setSaveMessage('No pudimos cargar tu perfil real. Mostramos la sesión local disponible.')
+          setSaveMessage('No pudimos cargar tu perfil real.')
         }
       } finally {
         setIsLoadingProfile(false)
@@ -115,7 +110,11 @@ export default function ProfilePage() {
     return () => {
       abortController.abort()
     }
-  }, [sessionToken])
+  }, [sessionId])
+
+  if (!publicSession || sessionExpired) {
+    return <Navigate to="/login" replace />
+  }
 
   function handleFieldChange(event) {
     const { name, value } = event.target
@@ -132,19 +131,6 @@ export default function ProfilePage() {
 
     const nextName = [profileForm.firstName.trim(), profileForm.lastName.trim()].filter(Boolean).join(' ').trim()
 
-    if (!publicSession?.token) {
-      setPublicSession({
-        ...publicSession,
-        name: nextName,
-        email: profileForm.email.trim(),
-        phone: profileForm.phone.trim(),
-      })
-
-      setSaveTone('success')
-      setSaveMessage('Datos guardados correctamente en esta sesión.')
-      return
-    }
-
     setIsSavingProfile(true)
 
     try {
@@ -153,8 +139,8 @@ export default function ProfilePage() {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${publicSession.token}`,
         },
+        credentials: 'same-origin',
         body: JSON.stringify({
           firstName: profileForm.firstName.trim(),
           lastName: profileForm.lastName.trim(),
@@ -163,6 +149,12 @@ export default function ProfilePage() {
       })
 
       const payload = await response.json().catch(() => ({}))
+
+      if (response.status === 401 || response.status === 403) {
+        clearPublicSession()
+        setSessionExpired(true)
+        return
+      }
 
       if (!response.ok || !payload?.data) {
         setSaveTone('error')
@@ -194,6 +186,7 @@ export default function ProfilePage() {
 
       setSaveTone('success')
       setSaveMessage('Datos guardados correctamente.')
+      setIsEditingName(false)
     } catch (error) {
       setSaveTone('error')
       setSaveMessage(error.message || 'No pudimos guardar el perfil.')
@@ -206,21 +199,11 @@ export default function ProfilePage() {
     const setState = kind === 'email' ? setEmailChange : setPhoneChange
     const endpoint = kind === 'email' ? PROFILE_EMAIL_CHANGE_ENDPOINT : PROFILE_PHONE_CHANGE_ENDPOINT
 
-    if (!publicSession?.token) {
-      setState((currentValue) => ({
-        ...currentValue,
-        tone: 'error',
-        message: 'Necesitas una sesión válida para iniciar este cambio.',
-      }))
-      return
-    }
-
     setState((currentValue) => ({ ...currentValue, isBusy: true, message: '' }))
 
     try {
       const payload = await sendProfileRequest(`${endpoint}/change-request`, {
         method: 'POST',
-        token: publicSession.token,
       })
       const data = payload.data || {}
 
@@ -253,7 +236,6 @@ export default function ProfilePage() {
     try {
       await sendProfileRequest(`${endpoint}/verify-current`, {
         method: 'POST',
-        token: publicSession.token,
         body: {
           verificationId: state.verificationId,
           code: state.currentCode.trim(),
@@ -289,7 +271,6 @@ export default function ProfilePage() {
     try {
       const payload = await sendProfileRequest(`${endpoint}/change`, {
         method: 'POST',
-        token: publicSession.token,
         body: {
           verificationId: state.verificationId,
           [payloadField]: state.pendingValue.trim(),
@@ -326,7 +307,6 @@ export default function ProfilePage() {
     try {
       const payload = await sendProfileRequest(`${endpoint}/verify-new`, {
         method: 'POST',
-        token: publicSession.token,
         body: {
           verificationId: state.nextVerificationId || state.verificationId,
           code: state.newCode.trim(),
@@ -335,15 +315,12 @@ export default function ProfilePage() {
       const nextUser = payload.data?.user || {}
 
       if (kind === 'email') {
-        const previousEmail = publicSession?.email || profileForm.email
         const nextEmail = nextUser.email || state.pendingValue.trim()
-
-        clearPublicEmailVerified(previousEmail)
-        markPublicEmailVerified(nextEmail)
 
         setProfileForm((currentValue) => ({
           ...currentValue,
           email: nextEmail,
+          emailVerifiedAt: nextUser.emailVerifiedAt || null,
         }))
         setPublicSession({
           ...publicSession,
@@ -393,7 +370,6 @@ export default function ProfilePage() {
     try {
       await sendProfileRequest(`${endpoint}/cancel`, {
         method: 'POST',
-        token: publicSession.token,
         body: {
           verificationId: state.verificationId,
         },
@@ -421,116 +397,82 @@ export default function ProfilePage() {
   }
 
   return (
-    <main className="container">
-      <section className="lixmar-profile">
-        {/* Sidebar */}
-        <aside className="lixmar-profile__sidebar">
-          <h5 className="lixmar-profile__name">{profileName}</h5>
-          <p className="lixmar-profile__email">{profileEmail}</p>
-          <span className={`lixmar-profile__email-status${emailVerified ? ' lixmar-profile__email-status--verified' : ''}`}>
-            {emailVerified ? 'Email verificado' : 'Email pendiente de verificación'}
-          </span>
+    <section className="lixmar-account-panel" aria-labelledby="account-personal-title">
+      <header className="lixmar-account__heading">
+        <h1 id="account-personal-title">Datos personales</h1>
+        <p>Administrá la información principal de tu cuenta.</p>
+      </header>
 
-          <nav className="lixmar-profile__tabs">
-            {tabs.map(tab => (
-              <a
-                href="#"
-                className={`lixmar-profile__tab${activeTab === tab.id ? ' lixmar-profile__tab--active' : ''}`}
-                key={tab.id}
-                onClick={(e) => { e.preventDefault(); setActiveTab(tab.id); }}
-              >
-                <span>{tab.label}</span>
-                <span className="lixmar-profile__tab-arrow"><FaChevronRight size={12} /></span>
-              </a>
-            ))}
-          </nav>
-        </aside>
+      {isLoadingProfile ? <p className="lixmar-account__status" role="status">Cargando datos del perfil...</p> : null}
+      {!isLoadingProfile && saveMessage ? <p className={'lixmar-account__status lixmar-account__status--' + saveTone} role={saveTone === 'error' ? 'alert' : 'status'}>{saveMessage}</p> : null}
 
-        {/* Main Content */}
-        <div className="lixmar-profile__content">
-          <div className={`lixmar-profile__notice${emailVerified ? ' lixmar-profile__notice--verified' : ''}`}>
-            <strong>{emailVerified ? 'Cuenta lista para ingresar' : 'Verificación pendiente'}</strong>
-            <p>
-              {emailVerified
-                ? 'Tu email ya fue confirmado y tu cuenta quedó habilitada para usar el marketplace.'
-                : 'Todavía necesitamos confirmar tu email para completar el alta de la cuenta.'}
-            </p>
-          </div>
-
-          <h4 className="lixmar-profile__title">Informacion Personal</h4>
-
-          {isLoadingProfile ? <p className="lixmar-profile__save-message">Cargando datos del perfil...</p> : null}
-          {!isLoadingProfile && saveMessage ? <p className={`lixmar-profile__save-message lixmar-profile__save-message--${saveTone}`}>{saveMessage}</p> : null}
-
-          <form className="lixmar-profile__form" onSubmit={handleSubmit}>
-            <div className="lixmar-profile__row">
-              <div className="lixmar-profile__field">
-                <label className="lixmar-profile__label" htmlFor="profName">Nombre <span className="lixmar-profile__required">*</span></label>
-                <input type="text" id="profName" name="firstName" className="lixmar-profile__input" value={profileForm.firstName} onChange={handleFieldChange} />
-              </div>
-              <div className="lixmar-profile__field">
-                <label className="lixmar-profile__label" htmlFor="profLastname">Apellido <span className="lixmar-profile__required">*</span></label>
-                <input type="text" id="profLastname" name="lastName" className="lixmar-profile__input" value={profileForm.lastName} onChange={handleFieldChange} />
-              </div>
+      <article className="lixmar-account__card">
+        <h2>Nombre y apellido</h2>
+        <p>{profileName || 'Todavía no registraste tu nombre.'}</p>
+        {isEditingName ? (
+          <form className="lixmar-account__edit-form" onSubmit={handleSubmit}>
+            <div className="lixmar-account__form-row">
+              <label>Nombre
+                <input name="firstName" value={profileForm.firstName} onChange={handleFieldChange} required autoComplete="given-name" />
+              </label>
+              <label>Apellido
+                <input name="lastName" value={profileForm.lastName} onChange={handleFieldChange} required autoComplete="family-name" />
+              </label>
             </div>
-
-            <div className="lixmar-profile__field">
-              <div className="lixmar-profile__field-head">
-                <label className="lixmar-profile__label" htmlFor="profEmail">Correo electronico <span className="lixmar-profile__required">*</span></label>
-                <button type="button" className="lixmar-profile__change-trigger" onClick={() => handleContactRequest('email')} disabled={emailChange.isBusy || isLoadingProfile || !publicSession?.token || emailChange.step !== 'idle'}>
-                  {emailChange.step === 'idle' ? 'Cambiar email' : 'Cambio en curso'}
-                </button>
-              </div>
-              <input type="email" id="profEmail" name="email" className="lixmar-profile__input lixmar-profile__input--readonly" value={profileForm.email} readOnly />
-              <p className="lixmar-profile__field-hint">El backend exige verificar primero el email actual y luego confirmar el nuevo.</p>
-              <ContactChangePanel
-                kind="email"
-                valueLabel="Nuevo email"
-                valuePlaceholder="nuevo@email.com"
-                valueType="email"
-                state={emailChange}
-                onCurrentCodeChange={(value) => handleContactFieldChange('email', 'currentCode', value)}
-                onPendingValueChange={(value) => handleContactFieldChange('email', 'pendingValue', value)}
-                onNewCodeChange={(value) => handleContactFieldChange('email', 'newCode', value)}
-                onVerifyCurrent={() => handleContactVerifyCurrent('email')}
-                onSubmitNew={() => handleContactSubmitNew('email')}
-                onVerifyNew={() => handleContactVerifyNew('email')}
-                onCancel={() => handleContactCancel('email')}
-              />
+            <div className="lixmar-account__actions">
+              <button className="lixmar-account__button" type="submit" disabled={isSavingProfile || isLoadingProfile}>{isSavingProfile ? 'Guardando…' : 'Guardar datos'}</button>
+              <button className="lixmar-account__button lixmar-account__button--secondary" type="button" onClick={() => setIsEditingName(false)} disabled={isSavingProfile}>Cancelar</button>
             </div>
-
-            <div className="lixmar-profile__field">
-              <div className="lixmar-profile__field-head">
-                <label className="lixmar-profile__label" htmlFor="profPhone">Numero de telefono <span className="lixmar-profile__optional">(Opcional)</span></label>
-                <button type="button" className="lixmar-profile__change-trigger" onClick={() => handleContactRequest('phone')} disabled={phoneChange.isBusy || isLoadingProfile || !publicSession?.token || phoneChange.step !== 'idle'}>
-                  {phoneChange.step === 'idle' ? 'Cambiar telefono' : 'Cambio en curso'}
-                </button>
-              </div>
-              <input type="tel" id="profPhone" name="phone" className="lixmar-profile__input lixmar-profile__input--readonly" value={profileForm.phone} readOnly />
-              <p className="lixmar-profile__field-hint">El backend exige formato internacional, por ejemplo +5491123456789.</p>
-              <ContactChangePanel
-                kind="phone"
-                valueLabel="Nuevo telefono"
-                valuePlaceholder="+5491123456789"
-                valueType="tel"
-                state={phoneChange}
-                onCurrentCodeChange={(value) => handleContactFieldChange('phone', 'currentCode', value)}
-                onPendingValueChange={(value) => handleContactFieldChange('phone', 'pendingValue', value)}
-                onNewCodeChange={(value) => handleContactFieldChange('phone', 'newCode', value)}
-                onVerifyCurrent={() => handleContactVerifyCurrent('phone')}
-                onSubmitNew={() => handleContactSubmitNew('phone')}
-                onVerifyNew={() => handleContactVerifyNew('phone')}
-                onCancel={() => handleContactCancel('phone')}
-              />
-            </div>
-
-            <button type="submit" className="lixmar-profile__save" disabled={isSavingProfile || isLoadingProfile}>
-              {isSavingProfile ? 'GUARDANDO...' : 'GUARDAR'}
-            </button>
           </form>
-        </div>
-      </section>
-    </main>
+        ) : <button className="lixmar-account__button" type="button" onClick={() => setIsEditingName(true)} disabled={isLoadingProfile}>Editar datos</button>}
+      </article>
+
+      <article className="lixmar-account__card">
+        <h2>Email</h2>
+        <p>{profileEmail || 'Sin email'} · {emailVerified ? 'Verificado' : 'Pendiente de verificación'}</p>
+        <button className="lixmar-account__button" type="button" onClick={() => handleContactRequest('email')} disabled={emailChange.isBusy || isLoadingProfile || emailChange.step !== 'idle'}>Cambiar email</button>
+        <ContactChangePanel
+          kind="email"
+          valueLabel="Nuevo email"
+          valuePlaceholder="nuevo@email.com"
+          valueType="email"
+          state={emailChange}
+          onCurrentCodeChange={(value) => handleContactFieldChange('email', 'currentCode', value)}
+          onPendingValueChange={(value) => handleContactFieldChange('email', 'pendingValue', value)}
+          onNewCodeChange={(value) => handleContactFieldChange('email', 'newCode', value)}
+          onVerifyCurrent={() => handleContactVerifyCurrent('email')}
+          onSubmitNew={() => handleContactSubmitNew('email')}
+          onVerifyNew={() => handleContactVerifyNew('email')}
+          onCancel={() => handleContactCancel('email')}
+        />
+      </article>
+
+      <article className="lixmar-account__card">
+        <h2>Teléfono</h2>
+        <p>{profileForm.phone || 'Todavía no registraste un teléfono.'}</p>
+        <button className="lixmar-account__button" type="button" onClick={() => handleContactRequest('phone')} disabled={phoneChange.isBusy || isLoadingProfile || phoneChange.step !== 'idle'}>Editar teléfono</button>
+        <ContactChangePanel
+          kind="phone"
+          valueLabel="Nuevo teléfono"
+          valuePlaceholder="+5491123456789"
+          valueType="tel"
+          state={phoneChange}
+          onCurrentCodeChange={(value) => handleContactFieldChange('phone', 'currentCode', value)}
+          onPendingValueChange={(value) => handleContactFieldChange('phone', 'pendingValue', value)}
+          onNewCodeChange={(value) => handleContactFieldChange('phone', 'newCode', value)}
+          onVerifyCurrent={() => handleContactVerifyCurrent('phone')}
+          onSubmitNew={() => handleContactSubmitNew('phone')}
+          onVerifyNew={() => handleContactVerifyNew('phone')}
+          onCancel={() => handleContactCancel('phone')}
+        />
+      </article>
+
+      <article className="lixmar-account__card">
+        <h2>Datos fiscales</h2>
+        <p>DNI / CUIT y datos de facturación · Disponible próximamente</p>
+        <button className="lixmar-account__button" type="button" disabled>Configurar</button>
+      </article>
+    </section>
   )
 }
 
@@ -549,14 +491,14 @@ function createContactChangeState() {
   }
 }
 
-async function sendProfileRequest(url, { method, token, body }) {
+async function sendProfileRequest(url, { method, body }) {
   const response = await fetch(url, {
     method,
     headers: {
       Accept: 'application/json',
       ...(body ? { 'Content-Type': 'application/json' } : {}),
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
+    credentials: 'same-origin',
     ...(body ? { body: JSON.stringify(body) } : {}),
   })
 
@@ -620,13 +562,12 @@ function ContactChangePanel({
         <span className="lixmar-profile__change-step">{getContactStepLabel(state.step)}</span>
       </div>
 
-      {state.message ? <p className="lixmar-profile__change-text">{state.message}</p> : null}
+      {state.message ? <p className="lixmar-profile__change-text" role={state.tone === 'error' ? 'alert' : 'status'}>{state.message}</p> : null}
       {state.maskedDestination ? <p className="lixmar-profile__change-hint">Destino actual: {state.maskedDestination}</p> : null}
-      {state.step !== 'completed' ? <p className="lixmar-profile__change-hint">En desarrollo podés usar el código 12345.</p> : null}
 
       {state.step === 'verify-current' ? (
         <>
-          <input type="text" inputMode="numeric" maxLength={5} className="lixmar-profile__input" value={state.currentCode} onChange={(event) => onCurrentCodeChange(event.target.value)} placeholder="Código actual de 5 dígitos" />
+          <input type="text" inputMode="numeric" maxLength={5} className="lixmar-profile__input" value={state.currentCode} onChange={(event) => onCurrentCodeChange(event.target.value)} placeholder="Código actual de 5 dígitos" aria-label="Código actual de 5 dígitos" />
           <div className="lixmar-profile__change-actions">
             <button type="button" className="lixmar-profile__change-button" onClick={onVerifyCurrent} disabled={state.isBusy || state.currentCode.trim().length !== 5}>Verificar codigo</button>
             <button type="button" className="lixmar-profile__change-button lixmar-profile__change-button--ghost" onClick={onCancel} disabled={state.isBusy}>Cancelar</button>
@@ -636,7 +577,7 @@ function ContactChangePanel({
 
       {state.step === 'submit-new' ? (
         <>
-          <input type={valueType} className="lixmar-profile__input" value={state.pendingValue} onChange={(event) => onPendingValueChange(event.target.value)} placeholder={valuePlaceholder} />
+          <input type={valueType} className="lixmar-profile__input" value={state.pendingValue} onChange={(event) => onPendingValueChange(event.target.value)} placeholder={valuePlaceholder} aria-label={valuePlaceholder} />
           <div className="lixmar-profile__change-actions">
             <button type="button" className="lixmar-profile__change-button" onClick={onSubmitNew} disabled={state.isBusy || !state.pendingValue.trim()}>{valueLabel}</button>
             <button type="button" className="lixmar-profile__change-button lixmar-profile__change-button--ghost" onClick={onCancel} disabled={state.isBusy}>Cancelar</button>
@@ -646,7 +587,7 @@ function ContactChangePanel({
 
       {state.step === 'verify-new' ? (
         <>
-          <input type="text" inputMode="numeric" maxLength={5} className="lixmar-profile__input" value={state.newCode} onChange={(event) => onNewCodeChange(event.target.value)} placeholder="Código final de 5 dígitos" />
+          <input type="text" inputMode="numeric" maxLength={5} className="lixmar-profile__input" value={state.newCode} onChange={(event) => onNewCodeChange(event.target.value)} placeholder="Código final de 5 dígitos" aria-label="Código final de 5 dígitos" />
           <div className="lixmar-profile__change-actions">
             <button type="button" className="lixmar-profile__change-button" onClick={onVerifyNew} disabled={state.isBusy || state.newCode.trim().length !== 5}>Confirmar cambio</button>
             <button type="button" className="lixmar-profile__change-button lixmar-profile__change-button--ghost" onClick={onCancel} disabled={state.isBusy}>Cancelar</button>

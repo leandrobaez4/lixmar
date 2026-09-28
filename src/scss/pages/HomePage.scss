@@ -94,6 +94,20 @@
   border-radius: 14px;
   background: #fff;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ml-home__category-name {
+  position: absolute;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #222;
+  font-weight: 700;
+  text-align: center;
 }
 
 .ml-home__category-card:hover {
@@ -253,4 +267,15 @@
     min-height: 190px;
     border-radius: 12px;
   }
+}
+.ml-home__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

@@ -4,7 +4,7 @@
   --search-text: #1f1f24;
   --search-muted: #6b6e78;
   --search-border: #e5e8ed;
-  --search-accent: #ff6a00;
+  --search-accent: #b44500;
 
   min-height: 100%;
   background: var(--search-surface);
@@ -210,6 +210,8 @@
   font-size: 12px;
   outline: 0;
 }
+
+.lixmar-search__sort select:focus-visible { outline: 2px solid #ff6a00; outline-offset: 2px; }
 
 .lixmar-search__grid {
   display: grid;

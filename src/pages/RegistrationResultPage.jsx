@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
-import { isPublicEmailVerified, markPublicEmailVerified } from '@/auth/publicEmailVerification'
 
 const toneMap = {
   success: {
@@ -29,18 +28,14 @@ const toneMap = {
 export default function RegistrationResultPage() {
   const navigate = useNavigate()
   const location = useLocation()
-  const state = location.state
+  const state = location.state || {}
   const [isConfirmingDev, setIsConfirmingDev] = useState(false)
   const [devConfirmationMessage, setDevConfirmationMessage] = useState('')
   const [devConfirmationTone, setDevConfirmationTone] = useState('success')
-  const [isEmailVerified, setIsEmailVerified] = useState(() => isPublicEmailVerified(state?.registeredEmail || ''))
+  const [isEmailVerified, setIsEmailVerified] = useState(false)
   const [shouldAutoRedirectToLogin, setShouldAutoRedirectToLogin] = useState(false)
 
-  if (!state?.tone || !toneMap[state.tone]) {
-    return <Navigate to="/registro" replace />
-  }
-
-  const config = toneMap[state.tone]
+  const config = toneMap[state?.tone] || toneMap.error
   const primaryLabel = state.tone === 'success' && isEmailVerified ? 'Ingresar ahora' : config.primaryLabel
   const statusTitle = state.tone === 'success' && isEmailVerified ? 'Email confirmado' : 'Estado del registro'
   const statusText = state.tone === 'success' && isEmailVerified
@@ -60,6 +55,10 @@ export default function RegistrationResultPage() {
       window.clearTimeout(timeoutId)
     }
   }, [navigate, shouldAutoRedirectToLogin])
+
+  if (!state?.tone || !toneMap[state.tone]) {
+    return <Navigate to="/registro" replace />
+  }
 
   async function handleDevConfirmation() {
     if (!state.devConfirmationUrl || isConfirmingDev) {
@@ -87,7 +86,6 @@ export default function RegistrationResultPage() {
       setDevConfirmationMessage(payload?.message || 'Cuenta confirmada para desarrollo.')
 
       if (state.registeredEmail) {
-        markPublicEmailVerified(state.registeredEmail)
         setIsEmailVerified(true)
       }
 
@@ -108,7 +106,7 @@ export default function RegistrationResultPage() {
           <div className="lixmar-login__form lixmar-login__form--modern lixmar-login__form--result">
             <div className="lixmar-login__form-head lixmar-login__form-head--result">
               <span className="lixmar-login__badge">{config.kicker}</span>
-              <h2 className="lixmar-login__title">{state.title}</h2>
+              <h1 className="lixmar-login__title">{state.title}</h1>
               <p className="lixmar-login__subtitle lixmar-login__subtitle--result">{state.description}</p>
             </div>
 
@@ -118,7 +116,7 @@ export default function RegistrationResultPage() {
               {state.tone === 'success' && !isEmailVerified ? (
                 <p className="lixmar-login__status-note">Tu primer ingreso quedará habilitado después de confirmar el email desde el link.</p>
               ) : null}
-              {state.devConfirmationUrl ? (
+              {import.meta.env.DEV && state.devConfirmationUrl ? (
                 <div className="lixmar-login__dev-helper">
                   <strong className="lixmar-login__dev-helper-title">Link de desarrollo</strong>
                   <span className="lixmar-login__dev-helper-link">

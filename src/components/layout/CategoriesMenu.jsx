@@ -5,8 +5,8 @@ import '@/scss/components/layout/CategoriesMenu.scss'
 
 const CATEGORIES_ENDPOINT = '/api/v1/public/catalog/categories'
 
-function buildCategoryHref(slug) {
-  return `/productos?categoria=${encodeURIComponent(slug)}`
+function buildCategoryHref(id) {
+  return `/productos?category_id=${encodeURIComponent(id)}`
 }
 
 function DesktopCategoryGroup({ category, onNavigate }) {
@@ -15,7 +15,7 @@ function DesktopCategoryGroup({ category, onNavigate }) {
   return (
     <div className="categories-menu__group">
       <Link
-        to={buildCategoryHref(category.slug)}
+        to={buildCategoryHref(category.id)}
         className="categories-menu__group-title"
         onClick={onNavigate}
       >
@@ -27,7 +27,7 @@ function DesktopCategoryGroup({ category, onNavigate }) {
           {category.children.map((child) => (
             <li key={child.id} className="categories-menu__group-item">
               <Link
-                to={buildCategoryHref(child.slug)}
+                to={buildCategoryHref(child.id)}
                 className="categories-menu__group-link"
                 onClick={onNavigate}
               >
@@ -49,7 +49,7 @@ function MobileCategoryBranch({ category, onNavigate }) {
     return (
       <li className="categories-menu__mobile-item">
         <Link
-          to={buildCategoryHref(category.slug)}
+          to={buildCategoryHref(category.id)}
           className="categories-menu__mobile-link"
           onClick={onNavigate}
         >
@@ -77,7 +77,7 @@ function MobileCategoryBranch({ category, onNavigate }) {
         <ul className="categories-menu__mobile-sublist">
           <li className="categories-menu__mobile-item">
             <Link
-              to={buildCategoryHref(category.slug)}
+              to={buildCategoryHref(category.id)}
               className="categories-menu__mobile-link categories-menu__mobile-link--all"
               onClick={onNavigate}
             >
@@ -99,6 +99,7 @@ export default function CategoriesMenu({ variant = 'desktop', onNavigate = () =>
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState('')
   const containerRef = useRef(null)
+  const triggerRef = useRef(null)
   const isMobile = variant === 'mobile'
 
   useEffect(() => {
@@ -149,10 +150,19 @@ export default function CategoriesMenu({ variant = 'desktop', onNavigate = () =>
       }
     }
 
+    function handleKeyDown(event) {
+      if (event.key === 'Escape' && containerRef.current?.contains(document.activeElement)) {
+        setIsOpen(false)
+        triggerRef.current?.focus()
+      }
+    }
+
     document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('keydown', handleKeyDown)
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('keydown', handleKeyDown)
     }
   }, [isMobile])
 
@@ -182,7 +192,9 @@ export default function CategoriesMenu({ variant = 'desktop', onNavigate = () =>
         type="button"
         className="nav-btn-categorias categories-menu__trigger"
         aria-haspopup="menu"
+        aria-controls="categories-panel"
         aria-expanded={isOpen}
+        ref={triggerRef}
         onClick={() => setIsOpen((currentValue) => !currentValue)}
       >
         <span className="hamburger-icon"><FaBars size={14} /></span>
@@ -193,7 +205,7 @@ export default function CategoriesMenu({ variant = 'desktop', onNavigate = () =>
       </button>
 
       {isOpen ? (
-        <div className="categories-menu__panel" role="menu">
+        <div className="categories-menu__panel" id="categories-panel">
           {isLoading ? <p className="categories-menu__status">Cargando categorías...</p> : null}
           {!isLoading && error ? <p className="categories-menu__status">{error}</p> : null}
           {!isLoading && !error && categories.length === 0 ? (

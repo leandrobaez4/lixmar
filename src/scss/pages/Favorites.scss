@@ -1,0 +1,283 @@
+.lixmar-favorites {
+  gap: 22px;
+}
+
+.lixmar-favorites__tabs {
+  display: flex;
+  gap: 28px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.lixmar-favorites__tabs button {
+  padding: 0 0 12px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: #6b6e78;
+  font: 500 14px/1.4 'Inter', 'Segoe UI', sans-serif;
+  cursor: pointer;
+}
+
+.lixmar-favorites__tabs button[aria-selected='true'] {
+  border-bottom-color: #ff6a00;
+  color: #1f1f24;
+  font-weight: 600;
+}
+
+.lixmar-favorites button:focus-visible,
+.lixmar-favorites a:focus-visible {
+  outline: 2px solid #ff6a00;
+  outline-offset: 3px;
+}
+
+.lixmar-favorites [role='tabpanel'][hidden] {
+  display: none;
+}
+
+.lixmar-favorites__items {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.lixmar-favorites__card {
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  gap: 20px;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+}
+
+.lixmar-favorites__image {
+  display: block;
+  width: 150px;
+  height: 120px;
+  flex: 0 0 150px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #f7f7f8;
+}
+
+.lixmar-favorites__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.lixmar-favorites__details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+  padding-right: 28px;
+}
+
+.lixmar-favorites__title {
+  color: #1f1f24;
+  font-size: 16px;
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+.lixmar-favorites__title:hover {
+  text-decoration: underline;
+}
+
+.lixmar-favorites__price {
+  color: #1f1f24;
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.lixmar-favorites__shipping {
+  color: #14804a;
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.lixmar-favorites__actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #6b6e78;
+}
+
+.lixmar-favorites__actions button,
+.lixmar-favorites__heart,
+.lixmar-favorites__list-heading button,
+.lixmar-favorites__list-item > button {
+  border: 0;
+  background: none;
+  color: #6b6e78;
+  font: 400 12px/1.4 'Inter', 'Segoe UI', sans-serif;
+  cursor: pointer;
+}
+
+.lixmar-favorites__actions button {
+  padding: 0;
+}
+
+.lixmar-favorites__actions button:hover,
+.lixmar-favorites__list-heading button:hover,
+.lixmar-favorites__list-item > button:hover {
+  color: #b94d00;
+  text-decoration: underline;
+}
+
+.lixmar-favorites__heart {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 2px;
+  color: #1f1f24;
+  font-size: 24px;
+}
+
+.lixmar-favorites button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.lixmar-favorites__list-picker {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 3px;
+  font-size: 12px;
+}
+
+.lixmar-favorites__list-picker select {
+  min-height: 34px;
+  padding: 5px 8px;
+  font-size: 12px;
+}
+
+.lixmar-favorites__list-picker button,
+.lixmar-favorites__create button {
+  min-height: 34px;
+  padding: 6px 12px;
+  border: 1px solid #ff6a00;
+  border-radius: 7px;
+  background: #ff6a00;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.lixmar-favorites__more {
+  display: flex;
+  margin: 20px auto 0;
+}
+
+.lixmar-favorites__create {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+
+.lixmar-favorites__create > div {
+  display: flex;
+  gap: 8px;
+}
+
+.lixmar-favorites__create input {
+  width: min(320px, 100%);
+}
+
+.lixmar-favorites__lists {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 20px;
+}
+
+.lixmar-favorites__list-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.lixmar-favorites__list-nav button {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+  color: #1f1f24;
+  text-align: left;
+  cursor: pointer;
+}
+
+.lixmar-favorites__list-nav button[aria-current='true'] {
+  border-color: #ff6a00;
+}
+
+.lixmar-favorites__list-content {
+  min-width: 0;
+}
+
+.lixmar-favorites__list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.lixmar-favorites__list-heading h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.lixmar-favorites__list-item > button {
+  margin: 6px 0 0 16px;
+}
+
+@media (max-width: 620px) {
+  .lixmar-favorites__card {
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .lixmar-favorites__image {
+    width: 96px;
+    height: 96px;
+    flex-basis: 96px;
+  }
+
+  .lixmar-favorites__details {
+    gap: 5px;
+  }
+
+  .lixmar-favorites__title {
+    font-size: 14px;
+  }
+
+  .lixmar-favorites__price {
+    font-size: 18px;
+  }
+
+  .lixmar-favorites__lists {
+    grid-template-columns: 1fr;
+  }
+
+  .lixmar-favorites__list-nav {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .lixmar-favorites__list-nav button {
+    flex: 0 0 auto;
+  }
+}
