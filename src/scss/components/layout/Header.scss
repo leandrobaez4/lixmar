@@ -131,7 +131,9 @@
 .nav-btn-categorias,
 .fravega-link,
 .user-link,
-.header-ml__account-link {
+.header-ml__account-link,
+.user-menu__dropdown,
+.user-menu__item {
   color: var(--header-text);
   font-family: inherit;
   font-size: var(--header-nav-font-size);
@@ -169,6 +171,7 @@
 .fravega-link:hover,
 .user-link:hover,
 .header-ml__account-link:hover,
+.user-menu__item:hover,
 .nav-btn-categorias:hover {
   color: var(--header-accent);
 }
@@ -257,9 +260,7 @@
 }
 
 .user-menu__dropdown {
-  font-family: inherit;
-  font-size: var(--header-nav-font-size);
-  font-weight: 400;
+  white-space: normal;
   position: absolute;
   top: 100%;
   right: 0;
@@ -301,12 +302,8 @@
   padding: 0 10px;
   display: flex;
   align-items: center;
-  color: #333;
   border-radius: 10px;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  text-decoration: none;
+  white-space: normal;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
@@ -321,7 +318,6 @@
 
 .user-menu__item:hover {
   background: rgba(255, 106, 0, 0.1);
-  color: #111827;
 }
 
 .cart-link {
