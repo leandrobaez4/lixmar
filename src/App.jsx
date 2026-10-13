@@ -21,6 +21,7 @@ import SubscriptionPage from '@/pages/SubscriptionPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 import AccountOrdersPage from '@/pages/AccountOrdersPage'
 import FavoritesPage from '@/pages/FavoritesPage'
+import RequireAnonymousSession from '@/auth/RequireAnonymousSession'
 import RequirePublicSession from '@/auth/RequirePublicSession'
 import RequireSellerPublication from '@/auth/RequireSellerPublication'
 import AccountLayout from '@/account/AccountLayout'
@@ -36,7 +37,9 @@ export default function App() {
       <Route element={<Layout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/nosotros" element={<AboutPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route element={<RequireAnonymousSession />}>
+          <Route path="/login" element={<LoginPage />} />
+        </Route>
         <Route path="/recuperar-contrasena" element={<ForgotPasswordPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route path="/registro" element={<RegistrationPage />} />
