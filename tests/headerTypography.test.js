@@ -4,19 +4,29 @@ import test from 'node:test'
 
 const headerStyles = readFileSync(new URL('../src/scss/components/layout/Header.scss', import.meta.url), 'utf8')
 
-test('desktop user menu shares the navigation typography', () => {
-  assert.match(headerStyles, /--header-nav-font-size:\s*14px;/)
-
-  const sharedTypography = headerStyles.match(
-    /\.nav-btn-categorias,\s*\.fravega-link,\s*\.user-link,\s*\.header-ml__account-link,\s*\.user-menu__dropdown,\s*\.user-menu__item\s*\{([^}]*)\}/,
+test('desktop user menu matches the unchanged navigation typography', () => {
+  const navigationTypography = headerStyles.match(
+    /\.nav-btn-categorias,\s*\.fravega-link,\s*\.user-link,\s*\.header-ml__account-link\s*\{([^}]*)\}/,
+  )?.[1]
+  const userMenuTypography = headerStyles.match(
+    /\.user-menu__dropdown,\s*\.user-menu__item\s*\{([^}]*)\}/,
   )?.[1]
 
-  assert.ok(sharedTypography, 'expected user menu and navigation links to share one typography rule')
-  assert.match(sharedTypography, /font-family:\s*inherit;/)
-  assert.match(sharedTypography, /font-size:\s*var\(--header-nav-font-size\);/)
-  assert.match(sharedTypography, /font-weight:\s*400;/)
-  assert.match(sharedTypography, /line-height:\s*1;/)
-  assert.match(sharedTypography, /white-space:\s*nowrap;/)
+  assert.ok(navigationTypography, 'expected the original navigation typography rule')
+  assert.ok(userMenuTypography, 'expected a dedicated user menu typography rule')
+
+  for (const declaration of [
+    /color:\s*var\(--header-text\);/,
+    /font-family:\s*inherit;/,
+    /font-size:\s*11px;/,
+    /font-weight:\s*400;/,
+    /line-height:\s*1;/,
+    /text-decoration:\s*none;/,
+    /white-space:\s*nowrap;/,
+  ]) {
+    assert.match(navigationTypography, declaration)
+    assert.match(userMenuTypography, declaration)
+  }
 })
 
 test('user menu item layout does not override the shared typography', () => {
@@ -33,4 +43,5 @@ test('user name keeps its emphasis while inheriting the menu font size', () => {
   assert.ok(caption, 'expected a user menu caption rule')
   assert.match(caption, /font-size:\s*inherit;/)
   assert.match(caption, /font-weight:\s*700;/)
+  assert.match(caption, /white-space:\s*normal;/)
 })
