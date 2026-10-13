@@ -256,6 +256,9 @@
 }
 
 .user-menu__dropdown {
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 400;
   position: absolute;
   top: 100%;
   right: 0;
@@ -286,8 +289,8 @@
   padding-bottom: 10px;
   border-bottom: 1px solid rgba(15, 23, 42, 0.08);
   color: var(--header-strong);
-  font-size: 13px;
-  font-weight: 700;
+  font-size: inherit;
+  font-weight: inherit;
   line-height: 1.45;
   word-break: break-word;
 }
@@ -299,8 +302,9 @@
   align-items: center;
   color: #333;
   border-radius: 10px;
-  font-size: 14px;
-  font-weight: 500;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
   text-decoration: none;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
