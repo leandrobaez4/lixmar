@@ -1,13 +1,12 @@
 import { useState } from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
-import { getPublicSession, verifyPublicSession } from '@/auth/publicSession'
+import { Link, useNavigate } from 'react-router-dom'
+import { verifyPublicSession } from '@/auth/publicSession'
 
 const LOGIN_ENDPOINT = '/api/v1/auth/login'
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export default function LoginPage() {
   const navigate = useNavigate()
-  const publicSession = getPublicSession()
   const [formValues, setFormValues] = useState({
     email: '',
     password: '',
@@ -21,10 +20,6 @@ export default function LoginPage() {
   const emailValidationError = normalizedEmail && !EMAIL_PATTERN.test(normalizedEmail)
     ? 'Ingresa un email válido.'
     : ''
-
-  if (publicSession) {
-    return <Navigate to="/" replace />
-  }
 
   function handleFieldChange(event) {
     const { name, value } = event.target
