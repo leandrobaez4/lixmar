@@ -5,6 +5,7 @@
   --header-control: #fcfcfe;
   --header-control-border: #e5e7eb;
   --header-accent: #ff6a00;
+  --header-nav-font-size: 14px;
 
   position: sticky;
   top: 0;
@@ -133,7 +134,7 @@
 .header-ml__account-link {
   color: var(--header-text);
   font-family: inherit;
-  font-size: 11px;
+  font-size: var(--header-nav-font-size);
   font-weight: 400;
   line-height: 1;
   text-decoration: none;
@@ -231,7 +232,7 @@
   background: transparent;
   color: var(--header-strong);
   font-family: inherit;
-  font-size: 11px;
+  font-size: var(--header-nav-font-size);
   font-weight: 400;
   cursor: pointer;
 }
@@ -257,7 +258,7 @@
 
 .user-menu__dropdown {
   font-family: inherit;
-  font-size: 11px;
+  font-size: var(--header-nav-font-size);
   font-weight: 400;
   position: absolute;
   top: 100%;
@@ -290,7 +291,7 @@
   border-bottom: 1px solid rgba(15, 23, 42, 0.08);
   color: var(--header-strong);
   font-size: inherit;
-  font-weight: inherit;
+  font-weight: 700;
   line-height: 1.45;
   word-break: break-word;
 }
