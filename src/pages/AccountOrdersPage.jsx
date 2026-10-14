@@ -39,17 +39,20 @@ export default function AccountOrdersPage({ seller = false }) {
     const query = new URLSearchParams({ page: String(page) })
     if (status) query.set('status', status)
     const path = id ? `${endpoint}/${encodeURIComponent(id)}` : `${endpoint}?${query}`
-    accountRequest(path, { signal: controller.signal }).then((payload) => {
+    queueMicrotask(() => {
       if (controller.signal.aborted) return
-      if (id) setOrder(payload.data)
-      else {
-        setOrders(payload.data || [])
-        setMeta(payload.meta || { current_page: 1, last_page: 1 })
-      }
-    }).catch((failure) => {
-      if (!controller.signal.aborted) setError(failure.message)
-    }).finally(() => {
-      if (!controller.signal.aborted) setLoading(false)
+      accountRequest(path, { signal: controller.signal }).then((payload) => {
+        if (controller.signal.aborted) return
+        if (id) setOrder(payload.data)
+        else {
+          setOrders(payload.data || [])
+          setMeta(payload.meta || { current_page: 1, last_page: 1 })
+        }
+      }).catch((failure) => {
+        if (!controller.signal.aborted) setError(failure.message)
+      }).finally(() => {
+        if (!controller.signal.aborted) setLoading(false)
+      })
     })
     return () => controller.abort()
   }, [endpoint, id, page, status, retry])
