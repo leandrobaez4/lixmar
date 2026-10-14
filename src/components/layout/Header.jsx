@@ -21,7 +21,7 @@ export default function Header() {
   const [isLoggingOut, setIsLoggingOut] = useState(false)
   const userDisplayName = publicSession?.name?.trim() || publicSession?.email || 'Mi cuenta'
   const accountGreeting = publicSession?.name?.trim()
-    ? `Hola, ${publicSession.name.trim().split(/\s+/)[0]}`
+    ? `Hola, ${publicSession.name.trim()}`
     : 'Mi cuenta'
 
   const handleLogout = async () => {
