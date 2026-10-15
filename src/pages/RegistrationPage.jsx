@@ -5,7 +5,10 @@ import { getPublicSession, verifyPublicSession } from '@/auth/publicSession'
 import BiometricScanner from '@/components/BiometricScanner'
 
 const SEND_VERIFICATION_ENDPOINT = '/api/v1/auth/send-verification'
+const RESEND_VERIFICATION_ENDPOINT = '/api/v1/auth/resend-verification'
 const VERIFY_CODE_ENDPOINT = '/api/v1/auth/verify-code'
+const SHOW_PHONE_VERIFICATION_CODE = import.meta.env.DEV
+  && import.meta.env.VITE_SHOW_PHONE_VERIFICATION_CODE === 'true'
 
 const REGISTER_ENDPOINT = '/api/v1/auth/register'
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -30,8 +33,10 @@ export default function RegistrationPage() {
   const [codeSent, setCodeSent] = useState(false)
   const [verificationCodeValue, setVerificationCodeValue] = useState('')
   const [isSendingCode, setIsSendingCode] = useState(false)
+  const [resendingChannel, setResendingChannel] = useState('')
   const [isVerifyingCode, setIsVerifyingCode] = useState(false)
   const [step5Error, setStep5Error] = useState('')
+  const [step5Notice, setStep5Notice] = useState('')
   const [devCode, setDevCode] = useState('')
 
   const normalizedEmail = formValues.email.trim()
@@ -189,6 +194,7 @@ export default function RegistrationPage() {
 
   async function handleSendCode() {
     setStep5Error('')
+    setStep5Notice('')
     const trimmedPhone = phoneValue.trim()
     if (!trimmedPhone) {
       setStep5Error('Ingresá tu número de teléfono.')
@@ -212,12 +218,61 @@ export default function RegistrationPage() {
         setStep5Error(extractApiError(payload, 'No se pudo enviar el código. Revisá el número e intentá de nuevo.'))
         return
       }
-      if (import.meta.env.DEV && payload?.data?.devCode) setDevCode(payload.data.devCode)
+      const phoneVerificationId = payload?.data?.verificationId
+      if (!phoneVerificationId) {
+        setStep5Error('No se pudo iniciar la verificación. Intentá enviar el código nuevamente.')
+        return
+      }
+      setVerificationId(phoneVerificationId)
+      if (SHOW_PHONE_VERIFICATION_CODE && payload?.data?.devCode) setDevCode(payload.data.devCode)
       setCodeSent(true)
     } catch {
       setStep5Error('Error de red. Revisá tu conexión e intentá de nuevo.')
     } finally {
       setIsSendingCode(false)
+    }
+  }
+
+  async function handleResendCode(channel) {
+    setStep5Error('')
+    setStep5Notice('')
+
+    if (!registeredUserId) {
+      setStep5Error('No pudimos identificar tu registro. Volvé a iniciar el proceso.')
+      return
+    }
+
+    setResendingChannel(channel)
+
+    try {
+      const response = await fetch(RESEND_VERIFICATION_ENDPOINT, {
+        method: 'POST',
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: registeredUserId, channel }),
+      })
+      const payload = await response.json().catch(() => ({}))
+
+      if (!response.ok) {
+        setStep5Error(extractApiError(payload, 'No se pudo reenviar el código. Intentá nuevamente.'))
+        return
+      }
+
+      const nextVerificationId = payload?.data?.verificationId
+      if (!nextVerificationId) {
+        setStep5Error('No se pudo iniciar la nueva verificación. Intentá nuevamente.')
+        return
+      }
+
+      const channelLabels = { sms: 'SMS', email: 'email', whatsapp: 'WhatsApp' }
+
+      setVerificationId(nextVerificationId)
+      setVerificationCodeValue('')
+      setDevCode(SHOW_PHONE_VERIFICATION_CODE ? payload?.data?.devCode || '' : '')
+      setStep5Notice(`Te enviamos un nuevo código por ${channelLabels[channel]}.`)
+    } catch {
+      setStep5Error('Error de red. Revisá tu conexión e intentá de nuevo.')
+    } finally {
+      setResendingChannel('')
     }
   }
 
@@ -427,9 +482,9 @@ export default function RegistrationPage() {
                       <p style={{ textAlign: 'center', color: '#22c55e', fontWeight: 600, marginBottom: '1rem', fontSize: '14px' }}>
                         ✓ Código enviado a {phoneValue}
                       </p>
-                      {import.meta.env.DEV && devCode && (
+                      {SHOW_PHONE_VERIFICATION_CODE && devCode && (
                         <div style={{ background: '#fff3ef', border: '1.5px solid var(--color-lixmar-orange, #ff6b35)', borderRadius: '8px', padding: '10px 14px', marginBottom: '1rem', textAlign: 'center' }}>
-                          <p style={{ margin: 0, fontSize: '11px', color: '#e55a2b', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Modo desarrollo — código SMS</p>
+                          <p style={{ margin: 0, fontSize: '11px', color: '#e55a2b', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Modo desarrollo — código de verificación</p>
                           <p style={{ margin: '4px 0 0', fontSize: '26px', fontWeight: 700, letterSpacing: '0.25em', color: '#ff6b35' }}>{devCode}</p>
                         </div>
                       )}
@@ -447,6 +502,7 @@ export default function RegistrationPage() {
                         />
                       </div>
                       {step5Error ? <p className="lixmar-login__field-error">{step5Error}</p> : null}
+                      {step5Notice ? <p className="lixmar-login__verification-notice" role="status">{step5Notice}</p> : null}
                       <button
                         type="button"
                         className="lixmar-login__submit lixmar-login__submit--wide"
@@ -455,10 +511,30 @@ export default function RegistrationPage() {
                       >
                         {isVerifyingCode ? 'VERIFICANDO...' : 'VERIFICAR Y ENTRAR'}
                       </button>
+                      <div className="lixmar-login__resend" aria-label="Opciones para reenviar el código">
+                        <span>¿No recibiste el código?</span>
+                        <div className="lixmar-login__resend-options">
+                          {[
+                            ['sms', 'SMS'],
+                            ['email', 'email'],
+                            ['whatsapp', 'WhatsApp'],
+                          ].map(([channel, label]) => (
+                            <button
+                              key={channel}
+                              type="button"
+                              className="lixmar-login__resend-link"
+                              onClick={() => handleResendCode(channel)}
+                              disabled={Boolean(resendingChannel)}
+                            >
+                              {resendingChannel === channel ? 'Enviando…' : label}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
                       <button
                         type="button"
                         style={{ background: 'none', border: 'none', color: '#6b7280', fontSize: '13px', marginTop: '12px', cursor: 'pointer', textDecoration: 'underline' }}
-                        onClick={() => { setCodeSent(false); setVerificationCodeValue(''); setStep5Error('') }}
+                        onClick={() => { setCodeSent(false); setVerificationCodeValue(''); setStep5Error(''); setStep5Notice(''); setDevCode('') }}
                       >
                         Cambiar número
                       </button>

@@ -3064,6 +3064,47 @@ a.logo {
     padding-left: 18px;
 }
 
+.lixmar-login__verification-notice {
+    margin: 8px 0 12px;
+    color: #166534;
+    font-size: 13px;
+    line-height: 1.45;
+    text-align: center;
+}
+
+.lixmar-login__resend {
+    display: grid;
+    gap: 6px;
+    margin-top: 14px;
+    color: #6b7280;
+    font-size: 13px;
+    text-align: center;
+}
+
+.lixmar-login__resend-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px 12px;
+}
+
+.lixmar-login__resend-link {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: #c95300;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.lixmar-login__resend-link:disabled {
+    cursor: wait;
+    opacity: 0.55;
+}
+
 .lixmar-login__forgot--inline {
     margin: 0;
     text-decoration: none;

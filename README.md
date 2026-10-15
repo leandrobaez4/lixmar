@@ -33,6 +33,10 @@ OpenSearch local escucha en `http://127.0.0.1:9200`. El backend usa `SEARCH_ENAB
 
 Los servicios adicionales del Compose (`soketi`) se necesitan para las funciones en tiempo real del backend; iniciá el conjunto completo con `docker compose -f docker-compose.local.yml up -d` cuando trabajes en ellas. Revisá [deployment/README.md](../lixmar-backoffice-v2/deployment/README.md) y [docs/deployment.md](../lixmar-backoffice-v2/docs/deployment.md) para el despliegue del backend. Los proveedores de pagos, envíos, correo y verificación requieren sus propias credenciales y flujos de prueba antes de usarlos en producción.
 
+### Código de verificación en desarrollo
+
+Para mostrar en `/registro` el código de prueba devuelto por la API, creá `.env.local` con `VITE_SHOW_PHONE_VERIFICATION_CODE=true`. La opción queda desactivada en `.env.example`; mantenela en `false` en previews compartidos y producción. Reiniciá Vite después de cambiarla.
+
 ## Verificación y compilación
 
 ```sh
