@@ -334,7 +334,7 @@ export default function RegistrationPage() {
                       name="password"
                       autoComplete="new-password"
                       aria-invalid={Boolean(passwordErrorMessage)}
-                      aria-describedby={passwordErrorMessage ? 'registration-password-error' : undefined}
+                      aria-describedby={`registration-password-requirements${passwordErrorMessage ? ' registration-password-error' : ''}`}
                       type="password"
                       className={`lixmar-login__input${passwordErrorMessage ? ' lixmar-login__input--error' : ''}`}
                       placeholder="Ingresá contraseña"
@@ -342,6 +342,15 @@ export default function RegistrationPage() {
                       onChange={handleFieldChange}
                       required
                     />
+                    <div id="registration-password-requirements" className="lixmar-login__password-requirements">
+                      <p>La contraseña debe tener:</p>
+                      <ul>
+                        <li>Al menos 8 caracteres.</li>
+                        <li>Una letra minúscula y una mayúscula.</li>
+                        <li>Al menos un número.</li>
+                        <li>Al menos un carácter especial.</li>
+                      </ul>
+                    </div>
                     {passwordErrorMessage ? <p id="registration-password-error" className="lixmar-login__field-error" role="alert">{passwordErrorMessage}</p> : null}
                   </div>
 
