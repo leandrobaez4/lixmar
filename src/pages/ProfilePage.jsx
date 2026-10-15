@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
+import { accountRequest } from '@/account/accountApi'
 import { clearPublicSession, getPublicSession, setPublicSession } from '@/auth/publicSession'
 
 const PROFILE_ENDPOINT = '/api/v1/profile'
@@ -41,21 +42,9 @@ export default function ProfilePage() {
         setIsLoadingProfile(true)
         const currentSession = getPublicSession()
 
-        const response = await fetch(PROFILE_ENDPOINT, {
-          headers: { Accept: 'application/json' },
-          credentials: 'same-origin',
-          signal: abortController.signal,
-        })
+        const payload = await accountRequest('/profile', { signal: abortController.signal })
 
-        const payload = await response.json().catch(() => ({}))
-
-        if (response.status === 401 || response.status === 403) {
-          clearPublicSession()
-          setSessionExpired(true)
-          return
-        }
-
-        if (!response.ok || !payload?.data) {
+        if (!payload?.data) {
           setSaveTone('error')
           setSaveMessage(payload?.message || 'No pudimos cargar tu perfil real.')
           return
@@ -96,7 +85,10 @@ export default function ProfilePage() {
           setPublicSession(nextSession)
         }
       } catch (error) {
-        if (error.name !== 'AbortError') {
+        if (error.status === 401 || error.status === 403) {
+          clearPublicSession()
+          setSessionExpired(true)
+        } else if (error.name !== 'AbortError') {
           setSaveTone('error')
           setSaveMessage('No pudimos cargar tu perfil real.')
         }

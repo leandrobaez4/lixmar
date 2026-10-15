@@ -43,3 +43,22 @@ test('expired account session is surfaced before rendering orders', async () => 
   globalThis.fetch = async () => jsonResponse({}, 401)
   await assert.rejects(accountRequest('/orders'), (error) => error.status === 401 && /sesión venció/.test(error.message))
 })
+
+test('concurrent account reads share one request without letting an aborted consumer cancel it', async () => {
+  let resolveFetch
+  let fetchCount = 0
+  globalThis.fetch = () => {
+    fetchCount += 1
+    return new Promise((resolve) => { resolveFetch = resolve })
+  }
+
+  const controller = new AbortController()
+  const abandoned = accountRequest('/catalog/products/mine?page=1', { signal: controller.signal })
+  const active = accountRequest('/catalog/products/mine?page=1')
+  controller.abort()
+  resolveFetch(jsonResponse({ data: [] }))
+
+  await assert.rejects(abandoned, (error) => error.name === 'AbortError')
+  assert.deepEqual(await active, { data: [] })
+  assert.equal(fetchCount, 1)
+})

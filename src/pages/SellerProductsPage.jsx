@@ -23,7 +23,9 @@ export default function SellerProductsPage() {
     setError('')
     const query = new URLSearchParams({ page: String(page) })
     if (status) query.set('status', status)
-    accountRequest(`/catalog/products/mine?${query}`, { signal: controller.signal }).then((payload) => {
+    const path = `/catalog/products/mine?${query}`
+
+    accountRequest(path, { signal: controller.signal }).then((payload) => {
       if (controller.signal.aborted) return
       setProducts(Array.isArray(payload.data) ? payload.data : [])
       setMeta({ current_page: payload.current_page || 1, last_page: payload.last_page || 1, total: payload.total || 0 })

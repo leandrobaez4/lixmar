@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, Navigate } from 'react-router-dom'
+import { accountRequest } from '@/account/accountApi'
 import { clearPublicSession } from '@/auth/publicSession'
 
 export default function VerificationPage() {
@@ -13,19 +14,14 @@ export default function VerificationPage() {
     const controller = new AbortController()
     setLoading(true)
     setError('')
-    fetch('/api/v1/profile', {
-      headers: { Accept: 'application/json' }, credentials: 'same-origin', signal: controller.signal,
-    }).then(async (response) => {
-      if (response.status === 401 || response.status === 403) {
-        clearPublicSession()
-        setExpired(true)
-        return
-      }
-      const payload = await response.json().catch(() => ({}))
-      if (!response.ok || !payload.data) throw new Error(payload.message || 'No pudimos consultar tu verificación.')
+    accountRequest('/profile', { signal: controller.signal }).then((payload) => {
+      if (!payload.data) throw new Error(payload.message || 'No pudimos consultar tu verificación.')
       if (!controller.signal.aborted) setProfile(payload.data)
     }).catch((failure) => {
-      if (!controller.signal.aborted) setError(failure.message)
+      if (failure.status === 401 || failure.status === 403) {
+        clearPublicSession()
+        setExpired(true)
+      } else if (!controller.signal.aborted) setError(failure.message)
     }).finally(() => {
       if (!controller.signal.aborted) setLoading(false)
     })

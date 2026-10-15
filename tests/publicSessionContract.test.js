@@ -59,3 +59,32 @@ test('rejects an unverified user and an unauthorized session', async () => {
   assert.equal(await verifyPublicSession(), false)
   assert.equal(getPublicSession(), null)
 })
+
+test('concurrent session checks share one request', async () => {
+  let resolveFetch
+  let fetchCount = 0
+  globalThis.fetch = () => {
+    fetchCount += 1
+    return new Promise((resolve) => { resolveFetch = resolve })
+  }
+
+  const first = verifyPublicSession()
+  const second = verifyPublicSession()
+  resolveFetch(response({ success: true, data: validProfile, expires_in: 3600 }))
+
+  assert.equal(await first, true)
+  assert.equal(await second, true)
+  assert.equal(fetchCount, 1)
+})
+
+test('clearing the session prevents an older verification response from restoring it', async () => {
+  let resolveFetch
+  globalThis.fetch = () => new Promise((resolve) => { resolveFetch = resolve })
+
+  const pending = verifyPublicSession()
+  clearPublicSession()
+  resolveFetch(response({ success: true, data: validProfile, expires_in: 3600 }))
+
+  assert.equal(await pending, false)
+  assert.equal(getPublicSession(), null)
+})

@@ -1,25 +1,29 @@
 import { useEffect, useState } from 'react'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
-import { verifyPublicSession } from './publicSession'
+import { getPublicSession, verifyPublicSession } from './publicSession'
 
 export default function RequirePublicSession() {
   const location = useLocation()
-  const [verifiedPath, setVerifiedPath] = useState(null)
+  const [verified, setVerified] = useState(() => Boolean(getPublicSession()))
 
   useEffect(() => {
+    if (getPublicSession()) {
+      setVerified(true)
+      return undefined
+    }
+
     const controller = new AbortController()
-    setVerifiedPath(null)
     verifyPublicSession(controller.signal).then((valid) => {
-      if (!controller.signal.aborted) setVerifiedPath(valid ? location.pathname : false)
+      if (!controller.signal.aborted) setVerified(valid)
     })
     return () => controller.abort()
-  }, [location.pathname])
+  }, [])
 
-  if (verifiedPath === false) {
+  if (verified === false) {
     return <Navigate to="/login" replace state={{ from: location.pathname }} />
   }
 
-  if (verifiedPath !== location.pathname) return null
+  if (verified !== true) return null
 
   return <Outlet />
 }
