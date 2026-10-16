@@ -240,17 +240,7 @@ export default function CategoriesMenu({ variant = 'desktop', onNavigate = () =>
               {activeCategory ? (
                 <section className="categories-menu__subcategories" aria-labelledby="categories-menu-active-title">
                   <div className="categories-menu__subcategories-head">
-                    <div>
-                      <h2 id="categories-menu-active-title">{activeCategory.name}</h2>
-                    </div>
-                    <Link
-                      to={buildCategoryHref(activeCategory.id)}
-                      className="categories-menu__view-all"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Ver todo
-                      <FaChevronRight aria-hidden="true" size={10} />
-                    </Link>
+                    <h2 id="categories-menu-active-title">{activeCategory.name}</h2>
                   </div>
 
                   {activeCategory.children?.length ? (

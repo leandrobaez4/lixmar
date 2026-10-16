@@ -129,18 +129,6 @@
   }
 }
 
-.categories-menu__view-all {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  flex: 0 0 auto;
-  padding-top: 6px;
-  color: #c95300;
-  font-size: 13px;
-  font-weight: 700;
-  text-decoration: none;
-}
-
 .categories-menu__subcategory-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
