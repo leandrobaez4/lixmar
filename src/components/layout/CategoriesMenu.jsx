@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FaBars, FaChevronDown } from 'react-icons/fa6'
+import { FaBars, FaChevronDown, FaChevronRight } from 'react-icons/fa6'
 import '@/scss/components/layout/CategoriesMenu.scss'
 
 const CATEGORIES_ENDPOINT = '/api/v1/public/catalog/categories'
@@ -9,35 +9,27 @@ function buildCategoryHref(id) {
   return `/productos?category_id=${encodeURIComponent(id)}`
 }
 
-function DesktopCategoryGroup({ category, onNavigate }) {
+function DesktopSubcategoryBranch({ category, onNavigate }) {
   const hasChildren = Array.isArray(category.children) && category.children.length > 0
 
   return (
-    <div className="categories-menu__group">
+    <li className="categories-menu__subcategory-item">
       <Link
         to={buildCategoryHref(category.id)}
-        className="categories-menu__group-title"
+        className="categories-menu__subcategory-link"
         onClick={onNavigate}
       >
         {category.name}
       </Link>
 
       {hasChildren ? (
-        <ul className="categories-menu__group-list">
+        <ul className="categories-menu__subcategory-children">
           {category.children.map((child) => (
-            <li key={child.id} className="categories-menu__group-item">
-              <Link
-                to={buildCategoryHref(child.id)}
-                className="categories-menu__group-link"
-                onClick={onNavigate}
-              >
-                {child.name}
-              </Link>
-            </li>
+            <DesktopSubcategoryBranch key={child.id} category={child} onNavigate={onNavigate} />
           ))}
         </ul>
       ) : null}
-    </div>
+    </li>
   )
 }
 
@@ -98,6 +90,7 @@ export default function CategoriesMenu({ variant = 'desktop', onNavigate = () =>
   const [isOpen, setIsOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState('')
+  const [activeCategoryId, setActiveCategoryId] = useState(null)
   const containerRef = useRef(null)
   const triggerRef = useRef(null)
   const isMobile = variant === 'mobile'
@@ -122,7 +115,11 @@ export default function CategoriesMenu({ variant = 'desktop', onNavigate = () =>
         }
 
         const payload = await response.json()
-        setCategories(Array.isArray(payload.data) ? payload.data : [])
+        const nextCategories = Array.isArray(payload.data) ? payload.data : []
+        const firstCategoryWithChildren = nextCategories.find((category) => category.children?.length)
+
+        setCategories(nextCategories)
+        setActiveCategoryId(firstCategoryWithChildren?.id ?? nextCategories[0]?.id ?? null)
       } catch (fetchError) {
         if (fetchError.name === 'AbortError') {
           return
@@ -165,6 +162,8 @@ export default function CategoriesMenu({ variant = 'desktop', onNavigate = () =>
       document.removeEventListener('keydown', handleKeyDown)
     }
   }, [isMobile])
+
+  const activeCategory = categories.find((category) => category.id === activeCategoryId) ?? categories[0]
 
   if (isMobile) {
     return (
@@ -213,14 +212,68 @@ export default function CategoriesMenu({ variant = 'desktop', onNavigate = () =>
           ) : null}
 
           {!isLoading && !error && categories.length > 0 ? (
-            <div className="categories-menu__grid">
-              {categories.map((category) => (
-                <DesktopCategoryGroup
-                  key={category.id}
-                  category={category}
-                  onNavigate={() => setIsOpen(false)}
-                />
-              ))}
+            <div className="categories-menu__browser">
+              <nav className="categories-menu__parents" aria-label="Categorías principales">
+                <ul className="categories-menu__parent-list">
+                  {categories.map((category) => {
+                    const hasChildren = Array.isArray(category.children) && category.children.length > 0
+                    const isActive = category.id === activeCategory?.id
+
+                    return (
+                      <li key={category.id}>
+                        <Link
+                          to={buildCategoryHref(category.id)}
+                          className={`categories-menu__parent-link${isActive ? ' categories-menu__parent-link--active' : ''}`}
+                          onMouseEnter={() => setActiveCategoryId(category.id)}
+                          onFocus={() => setActiveCategoryId(category.id)}
+                          onClick={() => setIsOpen(false)}
+                        >
+                          <span>{category.name}</span>
+                          {hasChildren ? <FaChevronRight aria-hidden="true" size={10} /> : null}
+                        </Link>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </nav>
+
+              {activeCategory ? (
+                <section className="categories-menu__subcategories" aria-labelledby="categories-menu-active-title">
+                  <div className="categories-menu__subcategories-head">
+                    <div>
+                      <span className="categories-menu__eyebrow">Subcategorías</span>
+                      <h2 id="categories-menu-active-title">{activeCategory.name}</h2>
+                    </div>
+                    <Link
+                      to={buildCategoryHref(activeCategory.id)}
+                      className="categories-menu__view-all"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Ver todo
+                      <FaChevronRight aria-hidden="true" size={10} />
+                    </Link>
+                  </div>
+
+                  {activeCategory.children?.length ? (
+                    <ul className="categories-menu__subcategory-list">
+                      {activeCategory.children.map((child) => (
+                        <DesktopSubcategoryBranch
+                          key={child.id}
+                          category={child}
+                          onNavigate={() => setIsOpen(false)}
+                        />
+                      ))}
+                    </ul>
+                  ) : (
+                    <div className="categories-menu__empty-children">
+                      <p>Esta categoría no tiene subcategorías.</p>
+                      <Link to={buildCategoryHref(activeCategory.id)} onClick={() => setIsOpen(false)}>
+                        Explorar {activeCategory.name}
+                      </Link>
+                    </div>
+                  )}
+                </section>
+              ) : null}
             </div>
           ) : null}
         </div>
