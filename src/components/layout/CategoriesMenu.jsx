@@ -241,7 +241,6 @@ export default function CategoriesMenu({ variant = 'desktop', onNavigate = () =>
                 <section className="categories-menu__subcategories" aria-labelledby="categories-menu-active-title">
                   <div className="categories-menu__subcategories-head">
                     <div>
-                      <span className="categories-menu__eyebrow">Subcategorías</span>
                       <h2 id="categories-menu-active-title">{activeCategory.name}</h2>
                     </div>
                     <Link
