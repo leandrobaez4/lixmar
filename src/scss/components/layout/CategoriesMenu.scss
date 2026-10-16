@@ -29,8 +29,8 @@
   top: calc(100% + 10px);
   left: 50%;
   width: min(1120px, calc(100vw - 32px));
-  min-height: 420px;
-  max-height: min(70vh, 620px);
+  height: min(620px, calc(100vh - 120px));
+  min-height: min(420px, calc(100vh - 120px));
   overflow: hidden;
   transform: translateX(-50%);
   background: #fff;
@@ -44,16 +44,34 @@
 .categories-menu__browser {
   display: grid;
   grid-template-columns: minmax(250px, 31%) 1fr;
-  min-height: 420px;
-  max-height: min(70vh, 620px);
+  height: 100%;
+  min-height: 0;
 }
 
 .categories-menu__parents {
+  min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
+  scrollbar-color: rgba(201, 83, 0, 0.48) transparent;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
   padding: 12px;
   background: #f8fafc;
   border-right: 1px solid rgba(15, 23, 42, 0.08);
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border: 2px solid #f8fafc;
+    border-radius: 999px;
+    background: rgba(201, 83, 0, 0.48);
+  }
 }
 
 .categories-menu__parent-list,
@@ -89,6 +107,7 @@
 }
 
 .categories-menu__subcategories {
+  min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
   padding: 28px 32px 32px;
